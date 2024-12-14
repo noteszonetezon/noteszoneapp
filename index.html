@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes Zone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-sky-500 to-blue-900 text-white min-h-screen">
+
+  <!-- Navigation Bar -->
+  <header class="py-6 px-8 bg-opacity-0 sticky top-0">
+    <div class="container mx-auto flex justify-between items-center">
+      <!-- Logo -->
+      <div>
+        <a href="#">
+          <img src="img/logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+        </a>
+      </div>
+      <!-- Navigation Links -->
+      <nav class="space-x-6 text-lg hidden sm:flex">
+        <a href="#features" class="hover:text-gray-200 transition duration-300">Features</a>
+        <a href="#contact" class="hover:text-gray-200 transition duration-300">Contact</a>
+      </nav>
+      <!-- Mobile Menu Icon -->
+      <div class="sm:hidden">
+        <button id="menuToggle" class="text-2xl focus:outline-none">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Centered) -->
+  <section class="flex items-center justify-center text-center py-20 px-4 min-h-screen">
+    <div class="container mx-auto">
+      <h1 class="text-4xl sm:text-6xl font-extrabold mb-4">
+        Welcome to <span class="text-yellow-300">Notes Zone</span>
+      </h1>
+      <p class="text-lg sm:text-2xl mb-6">
+        Your ultimate destination for handwritten notes for Class 12, IIT-JEE, and NEET.
+      </p>
+      <a href="#features" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg text-lg font-bold shadow-md hover:bg-yellow-400 transition-all">
+        Explore Features
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-16 bg-white text-blue-900">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Our Features</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-2xl font-bold mb-4">Class 12 Notes</h3>
+          <p>Get handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
+        </div>
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-2xl font-bold mb-4">IIT-JEE Preparation</h3>
+          <p>Access precise and concise notes designed to ace competitive exams.</p>
+        </div>
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-2xl font-bold mb-4">NEET Preparation</h3>
+          <p>Find biology, physics, and chemistry notes made for medical entrance exams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-gradient-to-r from-sky-500 to-blue-900 text-white">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Contact Us</h2>
+      <p class="mb-6">Reach out to us for any questions or assistance.</p>
+      <form class="max-w-md mx-auto grid grid-cols-1 gap-4">
+        <input type="text" placeholder="Your Name" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
+        <input type="email" placeholder="Your Email" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
+        <textarea placeholder="Your Message" rows="4" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"></textarea>
+        <button type="submit" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg shadow-md hover:bg-yellow-400 transition-all">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 bg-black text-center text-gray-300">
+    <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu -->
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    menuToggle.addEventListener("click", () => {
+      alert("Mobile menu toggle functionality can be added here.");
+    });
+  </script>
+</body>
+</html>
