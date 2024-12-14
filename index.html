@@ -18,7 +18,7 @@
         </a>
       </div>
       <!-- Navigation Links -->
-      <nav class="space-x-6 text-lg hidden sm:flex">
+      <nav id="navLinks" class="space-x-6 text-lg hidden sm:flex">
         <a href="#features" class="hover:text-gray-200 transition duration-300">Features</a>
         <a href="#contact" class="hover:text-gray-200 transition duration-300">Contact</a>
       </nav>
@@ -89,8 +89,13 @@
   <!-- JavaScript for Mobile Menu -->
   <script>
     const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
     menuToggle.addEventListener("click", () => {
-      alert("Mobile menu toggle functionality can be added here.");
+      // Toggle the visibility of the navigation links in a column
+      navLinks.classList.toggle("hidden");
+      navLinks.classList.toggle("flex-col");
+      navLinks.classList.toggle("items-center"); // Center-align the links in the column
     });
   </script>
 </body>
