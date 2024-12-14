@@ -14,7 +14,7 @@
       <!-- Logo -->
       <div>
         <a href="#">
-          <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+          <img src="img/logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
         </a>
       </div>
       <!-- Navigation Links -->
@@ -86,17 +86,60 @@
     <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
   </footer>
 
-  <!-- JavaScript for Mobile Menu -->
-  <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
+  <!-- Chatbot -->
+  <div id="chatbot" class="fixed bottom-4 right-4 z-50">
+    <button onclick="toggleChat()" class="bg-yellow-300 text-blue-900 rounded-full p-4 shadow-lg hover:bg-yellow-400 transition duration-300">
+      💬
+    </button>
+    <div id="chatWindow" class="hidden fixed bottom-16 right-4 bg-white text-blue-900 w-80 h-96 p-4 rounded-lg shadow-lg">
+      <div class="flex justify-between items-center">
+        <h3 class="font-bold">Chat with Us</h3>
+        <button onclick="toggleChat()" class="text-gray-500 text-xl">×</button>
+      </div>
+      <div class="mt-4">
+        <div class="space-y-4 h-60 overflow-y-auto">
+          <!-- Chat messages will go here -->
+        </div>
+        <input type="text" id="userInput" placeholder="Type a message..." class="w-full p-3 mt-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
+        <button onclick="sendMessage()" class="bg-yellow-300 text-blue-900 py-2 px-4 rounded-lg mt-2 w-full">Send</button>
+      </div>
+    </div>
+  </div>
 
-    menuToggle.addEventListener("click", () => {
-      // Toggle the visibility of the navigation links in a column
-      navLinks.classList.toggle("hidden");
-      navLinks.classList.toggle("flex-col");
-      navLinks.classList.toggle("items-center"); // Center-align the links in the column
-    });
+  <!-- JavaScript for Chatbot -->
+  <script>
+    // Toggle the chatbot window
+    function toggleChat() {
+      const chatWindow = document.getElementById("chatWindow");
+      chatWindow.classList.toggle("hidden");
+    }
+
+    // Send message function
+    function sendMessage() {
+      const userInput = document.getElementById("userInput").value;
+      if (userInput.trim() === "") return;  // Ignore empty messages
+
+      const chatContainer = document.querySelector("#chatWindow .space-y-4");
+      const message = document.createElement("div");
+      message.classList.add("bg-gray-100", "p-3", "rounded-lg", "text-sm", "self-end");
+      message.textContent = userInput;
+      chatContainer.appendChild(message);
+
+      // Clear input field
+      document.getElementById("userInput").value = "";
+
+      // Simulate a bot response (can be replaced with real bot logic)
+      setTimeout(() => {
+        const botResponse = document.createElement("div");
+        botResponse.classList.add("bg-blue-100", "p-3", "rounded-lg", "text-sm", "self-start");
+        botResponse.textContent = "Bot: I am here to assist you with notes! How can I help you?";
+        chatContainer.appendChild(botResponse);
+
+        // Scroll to the bottom of the chat
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }, 1000);
+    }
   </script>
+
 </body>
 </html>
