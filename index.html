@@ -29,9 +29,11 @@
     </div>
   </header>
 
-  <!-- Hero Section (Centered) -->
-  <section class="flex items-center justify-center text-center py-20 px-4 min-h-screen">
-    <div class="container mx-auto">
+   <!-- Hero Section -->
+<section class="flex items-center justify-center text-center py-20 px-4 min-h-screen">
+  <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+    <!-- Left Column: Text Content -->
+    <div>
       <h1 class="text-4xl sm:text-6xl font-extrabold mb-4">
         Welcome to <span class="text-yellow-300">Notes Zone</span>
       </h1>
@@ -42,7 +44,17 @@
         Explore Features
       </a>
     </div>
-  </section>
+    
+    <!-- Right Column: Mobile PNG -->
+    <div class="flex justify-center">
+      <img 
+        src="phone.png" 
+        alt="Modern Mobile Image" 
+        class="max-w-full h-auto drop-shadow-lg transform hover:scale-105 transition duration-300"
+      />
+    </div>
+  </div>
+</section>
 
   <!-- Features Section -->
   <section id="features" class="py-16 bg-white text-blue-900">
