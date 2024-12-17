@@ -7,13 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
     <link rel="icon" href="logo.ico.ico" type="image/x-icon">
-  </head>
-  
+    <style>
+        /* Transition for the navigation menu */
+        #navLinks {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-r from-sky-500 to-blue-900 text-white min-h-screen">
 
   <!-- Navigation Bar -->
-  <header class="py-6 px-8 bg-opacity-0 sticky top-0">
+  <header class="py-6 px-8 sticky top-0 z-50 bg-opacity-0">
     <div class="container mx-auto flex justify-between items-center">
       <!-- Logo -->
       <div>
@@ -22,9 +26,11 @@
         </a>
       </div>
       <!-- Navigation Links -->
-      <nav id="navLinks" class="space-x-6 text-lg hidden sm:flex">
+      <nav id="navLinks" class="max-h-0 opacity-0 overflow-hidden sm:overflow-visible sm:max-h-full sm:opacity-100 sm:flex flex-col sm:flex-row space-x-0 sm:space-x-6 text-lg bg-white sm:bg-transparent text-blue-900 sm:text-white p-6 sm:p-0 sm:static absolute top-16 right-4 sm:right-0 rounded-lg sm:rounded-none shadow-lg sm:shadow-none z-50">
         <a href="#features" class="hover:text-gray-200 transition duration-300">Features</a>
         <a href="#contact" class="hover:text-gray-200 transition duration-300">Contact</a>
+        <a href="developer.html" class="hover:text-gray-200 transition duration-300">Developer</a>
+        <a href="contribute.html" class="hover:text-gray-200 transition duration-300">Contribute</a>
       </nav>
       <!-- Mobile Menu Icon -->
       <div class="sm:hidden">
@@ -34,55 +40,54 @@
   </header>
 
   <!-- Hero Section -->
-<section class="flex items-center justify-center text-center py-20 px-4 min-h-screen">
-  <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-    <!-- Left Column: Text Content -->
-    <div>
-      <h1 class="text-4xl sm:text-6xl font-extrabold mb-4">
-        Welcome to <span class="text-yellow-300">Notes Zone</span>
-      </h1>
-      <p class="text-lg sm:text-2xl mb-6">
-        Your ultimate destination for handwritten notes.
-      </p>
-      <a href="#features" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg text-lg font-bold shadow-md hover:bg-yellow-400 transition-all">
-        Explore Features
-      </a>
-    </div>
-    
-    <!-- Right Column: Mobile PNG -->
-    <div class="flex justify-center">
-      <img 
-        src="phone.png" 
-        alt="Modern Mobile Image" 
-        class="max-w-full h-auto drop-shadow-lg transform hover:scale-105 transition duration-300"
-      />
-    </div>
-  </div>
-</section>
-
-
-<section id="features" class="py-16 bg-white text-blue-900">
-  <div class="container mx-auto text-center">
-    <h2 class="text-3xl sm:text-4xl font-bold mb-6">Our Features</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-      <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
-        <h3 class="text-2xl font-bold mb-4">
-          <a href="class12-notes.html" class="hover:text-blue-700 transition-all">Class 12 Notes</a>
-        </h3>
-        <p>Get handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
+  <section class="flex items-center justify-center text-center py-20 px-4 min-h-screen">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+      <!-- Left Column: Text Content -->
+      <div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold mb-4">
+          Welcome to <span class="text-yellow-300">Notes Zone</span>
+        </h1>
+        <p class="text-lg sm:text-2xl mb-6">
+          Your ultimate destination for handwritten notes.
+        </p>
+        <a href="#features" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg text-lg font-bold shadow-md hover:bg-yellow-400 transition-all">
+          Explore Features
+        </a>
       </div>
-      <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
-        <h3 class="text-2xl font-bold mb-4">IIT-JEE Preparation</h3>
-        <p>Access precise and concise notes designed to ace competitive exams.</p>
-      </div>
-      <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
-        <h3 class="text-2xl font-bold mb-4">NEET Preparation</h3>
-        <p>Find biology, physics, and chemistry notes made for medical entrance exams.</p>
+      
+      <!-- Right Column: Mobile PNG -->
+      <div class="flex justify-center">
+        <img 
+          src="phone.png" 
+          alt="Modern Mobile Image" 
+          class="max-w-full h-auto drop-shadow-lg transform hover:scale-105 transition duration-300"
+        />
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- Features Section -->
+  <section id="features" class="py-16 bg-white text-blue-900">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Our Features</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-2xl font-bold mb-4">
+            <a href="class12-notes.html" class="hover:text-blue-700 transition-all">Class 12 Notes</a>
+          </h3>
+          <p>Get handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
+        </div>
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-2xl font-bold mb-4">College Notes</h3>
+          <p>Access precise and concise notes designed to ace semester exams.</p>
+        </div>
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+          <h3 class="text-2xl font-bold mb-4">Competition Notes</h3>
+          <p>Find Mathematics, biology, physics, and chemistry notes made for entrance exams.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Contact Section -->
   <section id="contact" class="py-16 bg-gradient-to-r from-sky-500 to-blue-900 text-white">
@@ -105,60 +110,20 @@
     <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
   </footer>
 
-  <!-- Chatbot -->
-  <div id="chatbot" class="fixed bottom-4 right-4 z-50">
-    <button onclick="toggleChat()" class="bg-yellow-300 text-blue-900 rounded-full p-4 shadow-lg hover:bg-yellow-400 transition duration-300">
-      💬
-    </button>
-    <div id="chatWindow" class="hidden fixed bottom-16 right-4 bg-white text-blue-900 w-80 h-96 p-4 rounded-lg shadow-lg">
-      <div class="flex justify-between items-center">
-        <h3 class="font-bold">Chat with Us</h3>
-        <button onclick="toggleChat()" class="text-gray-500 text-xl">×</button>
-      </div>
-      <div class="mt-4">
-        <div class="space-y-4 h-60 overflow-y-auto">
-          <!-- Chat messages will go here -->
-        </div>
-        <input type="text" id="userInput" placeholder="Type a message..." class="w-full p-3 mt-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
-        <button onclick="sendMessage()" class="bg-yellow-300 text-blue-900 py-2 px-4 rounded-lg mt-2 w-full">Send</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- JavaScript for Chatbot -->
+  <!-- JavaScript for Navigation Toggle -->
   <script>
-    // Toggle the chatbot window
-    function toggleChat() {
-      const chatWindow = document.getElementById("chatWindow");
-      chatWindow.classList.toggle("hidden");
-    }
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
 
-    // Send message function
-    function sendMessage() {
-      const userInput = document.getElementById("userInput").value;
-      if (userInput.trim() === "") return;  // Ignore empty messages
-
-      const chatContainer = document.querySelector("#chatWindow .space-y-4");
-      const message = document.createElement("div");
-      message.classList.add("bg-gray-100", "p-3", "rounded-lg", "text-sm", "self-end");
-      message.textContent = userInput;
-      chatContainer.appendChild(message);
-
-      // Clear input field
-      document.getElementById("userInput").value = "";
-
-      // Simulate a bot response (can be replaced with real bot logic)
-      setTimeout(() => {
-        const botResponse = document.createElement("div");
-        botResponse.classList.add("bg-blue-100", "p-3", "rounded-lg", "text-sm", "self-start");
-        botResponse.textContent = "Bot: I am here to assist you with notes! How can I help you?";
-        chatContainer.appendChild(botResponse);
-
-        // Scroll to the bottom of the chat
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-      }, 1000);
-    }
+    menuToggle.addEventListener("click", () => {
+      if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
+        navLinks.style.maxHeight = "300px"; // Adjust height to fit the menu items
+        navLinks.style.opacity = "1";
+      } else {
+        navLinks.style.maxHeight = "0px";
+        navLinks.style.opacity = "0";
+      }
+    });
   </script>
-
 </body>
 </html>
