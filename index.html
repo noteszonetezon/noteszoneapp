@@ -6,11 +6,16 @@
     <title>Notes Zone</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
-    <link rel="icon" href="logo.ico.ico" type="image/x-icon">
+    <link rel="icon" href="img/logo.ico.ico" type="image/x-icon">
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable class-based dark mode
+        };
+    </script>
     <style>
-        /* Transition for the navigation menu */
-        #navLinks {
-            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        /* Transition for dark mode toggle */
+        body {
+            transition: background-color 0.3s, color 0.3s;
         }
     </style>
 </head>
@@ -22,11 +27,11 @@
       <!-- Logo -->
       <div>
         <a href="#">
-          <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+          <img src="img/logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
         </a>
       </div>
       <!-- Navigation Links -->
-      <nav id="navLinks" class="max-h-0 opacity-0 overflow-hidden sm:overflow-visible sm:max-h-full sm:opacity-100 sm:flex flex-col sm:flex-row space-x-0 sm:space-x-6 text-lg bg-white sm:bg-transparent text-blue-900 sm:text-white p-6 sm:p-0 sm:static absolute top-16 right-4 sm:right-0 rounded-lg sm:rounded-none shadow-lg sm:shadow-none z-50">
+      <nav id="navLinks" class="max-h-0 opacity-0 overflow-hidden sm:overflow-visible sm:max-h-full sm:opacity-100 sm:flex flex-col sm:flex-row space-y-4 sm:space-x-6 sm:space-y-0 text-lg bg-white sm:bg-transparent text-blue-900 sm:text-white p-6 sm:p-0 sm:static absolute top-16 right-4 sm:right-0 rounded-lg sm:rounded-none shadow-lg sm:shadow-none z-50">
         <a href="#features" class="hover:text-gray-200 transition duration-300">Features</a>
         <a href="#contact" class="hover:text-gray-200 transition duration-300">Contact</a>
         <a href="developer.html" class="hover:text-gray-200 transition duration-300">Developer</a>
@@ -36,6 +41,10 @@
       <div class="sm:hidden">
         <button id="menuToggle" class="text-2xl focus:outline-none">☰</button>
       </div>
+      <!-- Dark Mode Toggle -->
+      <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
+        🌙
+      </button>
     </div>
   </header>
 
@@ -58,7 +67,7 @@
       <!-- Right Column: Mobile PNG -->
       <div class="flex justify-center">
         <img 
-          src="phone.png" 
+          src="img/phone.png" 
           alt="Modern Mobile Image" 
           class="max-w-full h-auto drop-shadow-lg transform hover:scale-105 transition duration-300"
         />
@@ -67,21 +76,21 @@
   </section>
 
   <!-- Features Section -->
-  <section id="features" class="py-16 bg-white text-blue-900">
+  <section id="features" class="py-16 bg-white dark:bg-gray-900 text-blue-900 dark:text-gray-200">
     <div class="container mx-auto text-center">
       <h2 class="text-3xl sm:text-4xl font-bold mb-6">Our Features</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+        <div class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
           <h3 class="text-2xl font-bold mb-4">
             <a href="class12-notes.html" class="hover:text-blue-700 transition-all">Class 12 Notes</a>
           </h3>
           <p>Get handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
         </div>
-        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+        <div class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
           <h3 class="text-2xl font-bold mb-4">College Notes</h3>
           <p>Access precise and concise notes designed to ace semester exams.</p>
         </div>
-        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all">
+        <div class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
           <h3 class="text-2xl font-bold mb-4">Competition Notes</h3>
           <p>Find Mathematics, biology, physics, and chemistry notes made for entrance exams.</p>
         </div>
@@ -110,8 +119,9 @@
     <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
   </footer>
 
-  <!-- JavaScript for Navigation Toggle -->
+  <!-- JavaScript for Navigation Toggle and Dark Mode -->
   <script>
+    // Navigation Toggle
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
 
@@ -122,6 +132,20 @@
       } else {
         navLinks.style.maxHeight = "0px";
         navLinks.style.opacity = "0";
+      }
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const htmlElement = document.documentElement;
+
+    darkModeToggle.addEventListener("click", () => {
+      if (htmlElement.classList.contains("dark")) {
+        htmlElement.classList.remove("dark");
+        darkModeToggle.textContent = "🌙"; // Light mode icon
+      } else {
+        htmlElement.classList.add("dark");
+        darkModeToggle.textContent = "☀️"; // Dark mode icon
       }
     });
   </script>
