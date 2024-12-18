@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contribute to Notes Zone</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
 </head>
-<body class="bg-white text-blue-900">
+<body class="bg-white text-blue-900 dark:bg-gray-900 dark:text-white">
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
   <section class="py-20 px-4">
     <div class="container mx-auto text-center">
       <h1 class="text-4xl font-bold mb-6">Contribute to Notes Zone</h1>
@@ -18,5 +25,53 @@
       </a>
     </div>
   </section>
+
+  <!-- JavaScript -->
+  <script>
+    // Load Navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const htmlElement = document.documentElement;
+
+        // Check localStorage for theme preference
+        if (localStorage.getItem("theme") === "dark") {
+          htmlElement.classList.add("dark");
+          darkModeToggle.textContent = "☀️"; // Switch to dark mode icon
+        } else {
+          htmlElement.classList.remove("dark");
+          darkModeToggle.textContent = "🌙"; // Switch to light mode icon
+        }
+
+        // Navigation Toggle
+        menuToggle.addEventListener("click", () => {
+          if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
+            navLinks.style.maxHeight = "300px";
+            navLinks.style.opacity = "1";
+          } else {
+            navLinks.style.maxHeight = "0px";
+            navLinks.style.opacity = "0";
+          }
+        });
+
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener("click", () => {
+          if (htmlElement.classList.contains("dark")) {
+            htmlElement.classList.remove("dark");
+            darkModeToggle.textContent = "🌙"; // Light mode icon
+            localStorage.setItem("theme", "light"); // Save theme preference
+          } else {
+            htmlElement.classList.add("dark");
+            darkModeToggle.textContent = "☀️"; // Dark mode icon
+            localStorage.setItem("theme", "dark"); // Save theme preference
+          }
+        });
+      });
+  </script>
 </body>
 </html>
