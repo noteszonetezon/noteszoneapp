@@ -17,12 +17,21 @@
         body {
             transition: background-color 0.3s, color 0.3s;
         }
+
+        /* Dark Mode Styles */
+        .dark header {
+            background: linear-gradient(to right, #1e293b, #0f172a); /* Gradient for dark mode header */
+        }
+
+        .dark .hero {
+            background: linear-gradient(to right, #0f172a, #1e293b); /* Dark gradient for hero */
+        }
     </style>
 </head>
-<body class="bg-gradient-to-r from-sky-500 to-blue-900 text-white min-h-screen">
+<body class="bg-white text-blue-900 min-h-screen">
 
   <!-- Navigation Bar -->
-  <header class="py-6 px-8 sticky top-0 z-50 bg-opacity-0">
+  <header class="py-2 px-8 sticky top-0 z-50 bg-transparent">
     <div class="container mx-auto flex justify-between items-center">
       <!-- Logo -->
       <div>
@@ -31,11 +40,11 @@
         </a>
       </div>
       <!-- Navigation Links -->
-      <nav id="navLinks" class="max-h-0 opacity-0 overflow-hidden sm:overflow-visible sm:max-h-full sm:opacity-100 sm:flex flex-col sm:flex-row space-y-4 sm:space-x-6 sm:space-y-0 text-lg bg-white sm:bg-transparent text-blue-900 sm:text-white p-6 sm:p-0 sm:static absolute top-16 right-4 sm:right-0 rounded-lg sm:rounded-none shadow-lg sm:shadow-none z-50">
-        <a href="#features" class="hover:text-gray-200 transition duration-300">Features</a>
-        <a href="#contact" class="hover:text-gray-200 transition duration-300">Contact</a>
-        <a href="developer.html" class="hover:text-gray-200 transition duration-300">Developer</a>
-        <a href="contribute.html" class="hover:text-gray-200 transition duration-300">Contribute</a>
+      <nav id="navLinks" class="max-h-0 opacity-0 overflow-hidden sm:overflow-visible sm:max-h-full sm:opacity-100 sm:flex flex-col sm:flex-row space-y-4 sm:space-x-6 sm:space-y-0 text-lg text-blue-900 sm:text-blue-900 p-6 sm:p-0 sm:static absolute top-16 right-4 sm:right-0 rounded-lg sm:rounded-none shadow-lg sm:shadow-none z-50 transition-all">
+        <a href="#features" class="hover:text-yellow-500 transition duration-300">Features</a>
+        <a href="#contact" class="hover:text-yellow-500 transition duration-300">Contact</a>
+        <a href="developer.html" class="hover:text-yellow-500 transition duration-300">Developer</a>
+        <a href="contribute.html" class="hover:text-yellow-500 transition duration-300">Contribute</a>
       </nav>
       <!-- Mobile Menu Icon -->
       <div class="sm:hidden">
@@ -48,8 +57,9 @@
     </div>
   </header>
 
+
   <!-- Hero Section -->
-  <section class="flex items-center justify-center text-center py-20 px-4 min-h-screen">
+  <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-screen bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
       <!-- Left Column: Text Content -->
       <div>
@@ -63,7 +73,7 @@
           Explore Features
         </a>
       </div>
-      
+
       <!-- Right Column: Mobile PNG -->
       <div class="flex justify-center">
         <img 
@@ -76,41 +86,25 @@
   </section>
 
   <!-- Features Section -->
-  <section id="features" class="py-16 bg-white dark:bg-gray-900 text-blue-900 dark:text-gray-200">
+  <section id="features" class="py-16 bg-white text-blue-900 dark:bg-gray-900 dark:text-gray-100">
     <div class="container mx-auto text-center">
       <h2 class="text-3xl sm:text-4xl font-bold mb-6">Our Features</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
           <h3 class="text-2xl font-bold mb-4">
             <a href="class12-notes.html" class="hover:text-blue-700 transition-all">Class 12 Notes</a>
           </h3>
           <p>Get handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
         </div>
-        <div class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
           <h3 class="text-2xl font-bold mb-4">College Notes</h3>
           <p>Access precise and concise notes designed to ace semester exams.</p>
         </div>
-        <div class="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all">
+        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
           <h3 class="text-2xl font-bold mb-4">Competition Notes</h3>
           <p>Find Mathematics, biology, physics, and chemistry notes made for entrance exams.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-16 bg-gradient-to-r from-sky-500 to-blue-900 text-white">
-    <div class="container mx-auto text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Contact Us</h2>
-      <p class="mb-6">Reach out to us for any questions or assistance.</p>
-      <form class="max-w-md mx-auto grid grid-cols-1 gap-4">
-        <input type="text" placeholder="Your Name" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
-        <input type="email" placeholder="Your Email" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300">
-        <textarea placeholder="Your Message" rows="4" class="w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300"></textarea>
-        <button type="submit" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg shadow-md hover:bg-yellow-400 transition-all">
-          Send Message
-        </button>
-      </form>
     </div>
   </section>
 
@@ -124,11 +118,19 @@
     // Navigation Toggle
     const menuToggle = document.getElementById("menuToggle");
     const navLinks = document.getElementById("navLinks");
+    const htmlElement = document.documentElement;
 
     menuToggle.addEventListener("click", () => {
       if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
         navLinks.style.maxHeight = "300px"; // Adjust height to fit the menu items
         navLinks.style.opacity = "1";
+
+        // Change background color based on the theme
+        if (htmlElement.classList.contains("dark")) {
+          navLinks.style.backgroundColor = "#1f2937"; // Dark background for dark mode
+        } else {
+          navLinks.style.backgroundColor = "white"; // White background for light mode
+        }
       } else {
         navLinks.style.maxHeight = "0px";
         navLinks.style.opacity = "0";
@@ -137,7 +139,6 @@
 
     // Dark Mode Toggle
     const darkModeToggle = document.getElementById("darkModeToggle");
-    const htmlElement = document.documentElement;
 
     darkModeToggle.addEventListener("click", () => {
       if (htmlElement.classList.contains("dark")) {
