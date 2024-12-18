@@ -3,65 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class 12 Notes</title>
+  <title>Meet the Developer</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // Use class-based dark mode for toggling
+    };
+  </script>
 </head>
-<body class="bg-gray-50 text-blue-900 min-h-screen">
 
-  <!-- Header -->
-  <header class="py-6 px-8 bg-blue-900 text-white shadow-lg">
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-3xl font-bold">Class 12 Notes</h1>
-      <a href="index.html" class="hover:text-gray-300 transition-all text-lg">Back to Home</a>
-    </div>
-  </header>
+<body class="bg-gray-200 text-blue-900 min-h-screen dark:bg-gray-900 dark:text-gray-200">
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
 
-  <!-- Notes Section -->
-  <section class="py-16">
-    <div class="container mx-auto text-center mb-12">
-      <h2 class="text-4xl font-bold mb-4">Select Your Subject</h2>
-      <p class="text-lg text-gray-600">Explore our curated Class 12 notes and view chapters instantly.</p>
-    </div>
+  <!-- Main Content Block -->
+  <section class="pt-24 pb-16 px-4">
+    <div class="container mx-auto bg-white rounded-lg shadow-lg p-8 dark:bg-gray-800">
+      <h2 class="text-4xl font-bold mb-8 text-center">Class 12 Notes</h2>
+      <p class="text-lg text-gray-600 text-center mb-8 dark:text-gray-300">Explore our curated Class 12 notes and view chapters instantly.</p>
 
-    <!-- Notes Grid -->
-    <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-      
-      <!-- Math Notes -->
-      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all text-center">
-        <div class="text-blue-500 text-6xl mb-4">
-          <i class="fas fa-calculator"></i> <!-- FontAwesome Icon for Math -->
+      <!-- Notes Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Math Notes -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all text-center dark:bg-gray-700">
+          <div class="text-blue-500 text-6xl mb-4">
+            <i class="fas fa-calculator"></i> <!-- FontAwesome Icon for Math -->
+          </div>
+          <h3 class="text-xl font-bold mb-2">Math Notes</h3>
+          <p class="text-sm text-gray-600 mb-4 dark:text-gray-300">CBSE Class 12 Mathematics</p>
+          <a href="math-chapters.html" class="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition-all">
+            Open
+          </a>
         </div>
-        <h3 class="text-xl font-bold mb-2">Math Notes</h3>
-        <p class="text-sm text-gray-600 mb-4">CBSE Class 12 Mathematics</p>
-        <a href="math-chapters.html" class="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition-all">
-          Open
-        </a>
-      </div>
 
-      <!-- Physics Notes -->
-      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all text-center">
-        <div class="text-yellow-500 text-6xl mb-4">
-          <i class="fas fa-atom"></i> <!-- FontAwesome Icon for Physics -->
+        <!-- Physics Notes -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all text-center dark:bg-gray-700">
+          <div class="text-yellow-500 text-6xl mb-4">
+            <i class="fas fa-atom"></i> <!-- FontAwesome Icon for Physics -->
+          </div>
+          <h3 class="text-xl font-bold mb-2">Physics Notes</h3>
+          <p class="text-sm text-gray-600 mb-4 dark:text-gray-300">CBSE Class 12 Physics</p>
+          <a href="physics-chapters.html" class="bg-yellow-500 text-white py-2 px-4 rounded-lg shadow hover:bg-yellow-600 transition-all">
+            Open
+          </a>
         </div>
-        <h3 class="text-xl font-bold mb-2">Physics Notes</h3>
-        <p class="text-sm text-gray-600 mb-4">CBSE Class 12 Physics</p>
-        <a href="physics-chapters.html" class="bg-yellow-500 text-white py-2 px-4 rounded-lg shadow hover:bg-yellow-600 transition-all">
-          Open
-        </a>
-      </div>
 
-      <!-- Chemistry Notes -->
-      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all text-center">
-        <div class="text-green-500 text-6xl mb-4">
-          <i class="fas fa-flask"></i> <!-- FontAwesome Icon for Chemistry -->
+        <!-- Chemistry Notes -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all text-center dark:bg-gray-700">
+          <div class="text-green-500 text-6xl mb-4">
+            <i class="fas fa-flask"></i> <!-- FontAwesome Icon for Chemistry -->
+          </div>
+          <h3 class="text-xl font-bold mb-2">Chemistry Notes</h3>
+          <p class="text-sm text-gray-600 mb-4 dark:text-gray-300">CBSE Class 12 Chemistry</p>
+          <a href="chemistry-chapters.html" class="bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-green-600 transition-all">
+            Open
+          </a>
         </div>
-        <h3 class="text-xl font-bold mb-2">Chemistry Notes</h3>
-        <p class="text-sm text-gray-600 mb-4">CBSE Class 12 Chemistry</p>
-        <a href="chemistry-chapters.html" class="bg-green-500 text-white py-2 px-4 rounded-lg shadow hover:bg-green-600 transition-all">
-          Open
-        </a>
-      </div>
 
+      </div>
     </div>
   </section>
 
@@ -70,7 +69,54 @@
     <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
   </footer>
 
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+   <!-- JavaScript -->
+   <script>
+    // Load Navbar
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+
+        // Re-attach event listeners for dark mode and menu toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const htmlElement = document.documentElement;
+
+        // Set dark mode initially based on localStorage or default to light mode
+        if (localStorage.getItem("theme") === "dark") {
+          htmlElement.classList.add("dark");
+          darkModeToggle.textContent = "☀️";  // Dark mode icon
+        } else {
+          htmlElement.classList.remove("dark");
+          darkModeToggle.textContent = "🌙";  // Light mode icon
+        }
+
+        // Navigation Toggle
+        menuToggle.addEventListener("click", () => {
+          if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
+            navLinks.style.maxHeight = "300px";
+            navLinks.style.opacity = "1";
+          } else {
+            navLinks.style.maxHeight = "0px";
+            navLinks.style.opacity = "0";
+          }
+        });
+
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener("click", () => {
+          if (htmlElement.classList.contains("dark")) {
+            htmlElement.classList.remove("dark");
+            darkModeToggle.textContent = "🌙";  // Light mode icon
+            localStorage.setItem("theme", "light");
+          } else {
+            htmlElement.classList.add("dark");
+            darkModeToggle.textContent = "☀️";  // Dark mode icon
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      });
+  </script>
+
 </body>
 </html>
