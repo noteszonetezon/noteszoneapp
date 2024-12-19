@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School of Business and Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+</head>
+
+<body class="bg-gray-200 text-blue-900 min-h-screen dark:bg-gray-900 dark:text-gray-200">
+
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <section class="py-20 px-4">
+        <div class="container mx-auto text-center bg-white shadow-lg rounded-lg p-10 max-w-3xl dark:bg-gray-800">
+            <!-- Section Title -->
+            <h1 class="text-4xl font-bold mb-6 text-blue-800 dark:text-yellow-300">
+                School of Business and Management
+            </h1>
+
+            <!-- Courses Offered -->
+            <div>
+                <h2 class="text-3xl font-semibold mb-8 text-blue-700 dark:text-yellow-400"></h2>
+                <div class="space-y-6">
+                    <a href="#" 
+                       class="block bg-blue-700 text-white py-4 px-6 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500">
+                        1. BBA(Honours/Honours with Research)
+                    </a>
+                    <a href="#" 
+                       class="block bg-blue-700 text-white py-4 px-6 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500">
+                        2. BBA (Strategy and Business Analytics)
+                    </a>
+                    <a href="#" 
+                       class="block bg-blue-700 text-white py-4 px-6 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500">
+                        3. BBA (Fintech)
+                    </a>
+                    <a href="#" 
+                       class="block bg-blue-700 text-white py-4 px-6 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500">
+                        2. BBA (Finance and Marketing Analytics)
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Back to Schools -->
+            <div class="mt-8">
+                <a href="christ-university.html" 
+                   class="text-blue-600 hover:text-blue-800 underline dark:text-yellow-400 dark:hover:text-yellow-500">
+                    Back to Schools
+                </a>
+            </div>
+        </div>
+    </section>
+
+  
+
+ <!-- JavaScript -->
+    <script>
+        // Load Navbar
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+
+                // Re-attach event listeners for dark mode and menu toggle
+                const menuToggle = document.getElementById("menuToggle");
+                const navLinks = document.getElementById("navLinks");
+                const darkModeToggle = document.getElementById("darkModeToggle");
+                const htmlElement = document.documentElement;
+
+                // Navigation Toggle
+                menuToggle.addEventListener("click", () => {
+                    if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
+                        navLinks.style.maxHeight = "300px";
+                        navLinks.style.opacity = "1";
+                    } else {
+                        navLinks.style.maxHeight = "0px";
+                        navLinks.style.opacity = "0";
+                    }
+                });
+
+                // Dark Mode Toggle
+                darkModeToggle.addEventListener("click", () => {
+                    if (htmlElement.classList.contains("dark")) {
+                        htmlElement.classList.remove("dark");
+                        darkModeToggle.textContent = "🌙";
+                    } else {
+                        htmlElement.classList.add("dark");
+                        darkModeToggle.textContent = "☀️";
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
