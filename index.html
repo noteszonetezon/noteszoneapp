@@ -6,7 +6,7 @@
     <title>Notes Zone</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
-    <link rel="icon" href="img/logo.ico.ico" type="image/x-icon">
+    <link rel="icon" href="logo.ico.ico" type="image/x-icon">
     <script>
         tailwind.config = {
             darkMode: 'class', // Enable class-based dark mode
@@ -97,7 +97,9 @@
           <p>Get handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
         </div>
         <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
-          <h3 class="text-2xl font-bold mb-4">College Notes</h3>
+          <h3 class="text-2xl font-bold mb-4">
+            <a href="college-notes.html" class="hover:text-blue-700 transition-all">College Notes</a>
+          </h3>
           <p>Access precise and concise notes designed to ace semester exams.</p>
         </div>
         <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
@@ -107,10 +109,18 @@
       </div>
     </div>
   </section>
+ 
+<!-- Donate Us Button -->
+<!--<button id="donateToggle" class="fixed bottom-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg text-sm font-bold">
+  Donate Us
+</button>
 
-  <!-- Footer -->
+
+  <! -- Footer -->
   <footer class="py-6 bg-black text-center text-gray-300">
+    <a href="donate.html" class="hover:text-yellow-500 transition duration-300">Donate Us</a>
     <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
+    
   </footer>
 
   <!-- JavaScript for Navigation Toggle and Dark Mode -->
@@ -149,6 +159,13 @@
         darkModeToggle.textContent = "☀️"; // Dark mode icon
       }
     });
+
+    // Redirect to Donate Page
+    const donateToggle = document.getElementById("donateToggle");
+    donateToggle.addEventListener("click", () => {
+      window.location.href = "donate.html"; // Replace with your "Donate Us" page URL
+    });
   </script>
+  
 </body>
 </html>
