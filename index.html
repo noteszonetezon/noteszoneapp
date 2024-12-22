@@ -6,7 +6,7 @@
     <title>Notes Zone</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
-    <link rel="icon" href="logo.ico.ico" type="image/x-icon">
+    <link rel="icon" href="logo.ico" type="image/x-icon">
     <script>
         tailwind.config = {
             darkMode: 'class', // Enable class-based dark mode
@@ -26,6 +26,23 @@
         .dark .hero {
             background: linear-gradient(to right, #0f172a, #1e293b); /* Dark gradient for hero */
         }
+
+        /* Hero Phone Image Transition */
+        .phone-container img {
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .phone-container img.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            position: absolute;
+        }
+
+        .phone-container img.visible {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+        }
     </style>
 </head>
 <body class="bg-white text-blue-900 min-h-screen">
@@ -36,7 +53,7 @@
       <!-- Logo -->
       <div>
         <a href="#">
-          <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+          <img src="img/logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
         </a>
       </div>
       <!-- Navigation Links -->
@@ -57,7 +74,6 @@
     </div>
   </header>
 
-
   <!-- Hero Section -->
   <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-screen bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
@@ -74,12 +90,22 @@
         </a>
       </div>
 
-      <!-- Right Column: Mobile PNG -->
-      <div class="flex justify-center">
+      <!-- Right Column: Phone Image -->
+      <div class="phone-container relative flex justify-center">
         <img 
           src="phone.png" 
-          alt="Modern Mobile Image" 
-          class="max-w-full h-auto drop-shadow-lg transform hover:scale-105 transition duration-300"
+          alt="Phone Image 1" 
+          class="visible max-w-full h-auto drop-shadow-lg"
+        />
+        <img 
+          src="phone1.png" 
+          alt="Phone Image 2" 
+          class="hidden max-w-full h-auto drop-shadow-lg"
+        />
+        <img 
+          src="phone2.png" 
+          alt="Phone Image 3" 
+          class="hidden max-w-full h-auto drop-shadow-lg"
         />
       </div>
     </div>
@@ -109,21 +135,14 @@
       </div>
     </div>
   </section>
- 
-<!-- Donate Us Button -->
-<!--<button id="donateToggle" class="fixed bottom-4 right-4 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg text-sm font-bold">
-  Donate Us
-</button>
 
-
-  <! -- Footer -->
+  <!-- Footer -->
   <footer class="py-6 bg-black text-center text-gray-300">
     <a href="donate.html" class="hover:text-yellow-500 transition duration-300">Donate Us</a>
     <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
-    
   </footer>
 
-  <!-- JavaScript for Navigation Toggle and Dark Mode -->
+  <!-- JavaScript for Navigation Toggle, Dark Mode, and Phone Image Transition -->
   <script>
     // Navigation Toggle
     const menuToggle = document.getElementById("menuToggle");
@@ -160,12 +179,21 @@
       }
     });
 
-    // Redirect to Donate Page
-    const donateToggle = document.getElementById("donateToggle");
-    donateToggle.addEventListener("click", () => {
-      window.location.href = "donate.html"; // Replace with your "Donate Us" page URL
-    });
+    // Phone Image Transition
+    const phoneImages = document.querySelectorAll(".phone-container img");
+    let currentImage = 0;
+
+    function changePhoneImage() {
+      phoneImages[currentImage].classList.remove("visible");
+      phoneImages[currentImage].classList.add("hidden");
+
+      currentImage = (currentImage + 1) % phoneImages.length;
+
+      phoneImages[currentImage].classList.remove("hidden");
+      phoneImages[currentImage].classList.add("visible");
+    }
+
+    setInterval(changePhoneImage, 2000); // Change image every 2 seconds
   </script>
-  
 </body>
 </html>
