@@ -43,13 +43,6 @@
             transform: scale(1);
             position: relative;
         }
-
-        /* Hero section height adjustment for mobile */
-        @media (max-width: 640px) {
-            .hero {
-                min-height: 70vh;
-            }
-        }
     </style>
 </head>
 <body class="bg-white text-blue-900 min-h-screen">
@@ -82,7 +75,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[80vh] bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
+  <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-screen bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
       <!-- Left Column: Text Content -->
       <div>
@@ -119,29 +112,57 @@
   </section>
 
   <!-- Features Section -->
-  <section id="features" class="py-16 bg-white text-blue-900 dark:bg-gray-900 dark:text-gray-100">
-    <div class="container mx-auto text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Our Features</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
-          <h3 class="text-2xl font-bold mb-4">
-            <a href="class12-notes.html" class="hover:text-blue-700 transition-all">Class 12 Notes</a>
-          </h3>
-          <p>Get handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
+  <section id="features" class="py-16 bg-gray-100 text-blue-900 dark:bg-gray-900 dark:text-gray-100">
+    <div class="container mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-8">Our Features</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            
+            <!-- Feature Card 1 -->
+            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105">
+                <img src="cbse notes.jpg" alt="Class 12 Notes" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-2">Class 12 Notes</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        Get handwritten notes for all subjects tailored for CBSE Class 12 students.
+                    </p>
+                    <a href="class12-notes.html" class="inline-block bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Feature Card 2 -->
+            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105">
+                <img src="" alt="College Notes" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-2">College Notes</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        Access precise and concise notes designed to ace semester exams.
+                    </p>
+                    <a href="college-notes.html" class="inline-block bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Feature Card 3 -->
+            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105">
+                <img src="img/competition-notes.jpg" alt="Competition Notes" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-2">Competition Notes</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        Find Mathematics, Biology, Physics, and Chemistry notes made for entrance exams.
+                    </p>
+                    <a href="competition-notes.html" class="inline-block bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+
         </div>
-        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
-          <h3 class="text-2xl font-bold mb-4">
-            <a href="college-notes.html" class="hover:text-blue-700 transition-all">College Notes</a>
-          </h3>
-          <p>Access precise and concise notes designed to ace semester exams.</p>
-        </div>
-        <div class="p-6 bg-gray-100 rounded-lg shadow-lg hover:shadow-xl transition-all dark:bg-gray-800">
-          <h3 class="text-2xl font-bold mb-4">Competition Notes</h3>
-          <p>Find Mathematics, biology, physics, and chemistry notes made for entrance exams.</p>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
+
 
   <!-- Footer -->
   <footer class="py-6 bg-black text-center text-gray-300">
