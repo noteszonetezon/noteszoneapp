@@ -43,6 +43,13 @@
             transform: scale(1);
             position: relative;
         }
+
+        /* Hero section height adjustment for mobile */
+        @media (max-width: 640px) {
+            .hero {
+                min-height: 70vh;
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-blue-900 min-h-screen">
@@ -75,7 +82,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-screen bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
+  <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[80vh] bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
       <!-- Left Column: Text Content -->
       <div>
