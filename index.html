@@ -9,42 +9,41 @@
     <link rel="icon" href="logo.ico.ico" type="image/x-icon">
     <script>
         tailwind.config = {
-            darkMode: 'class', // Enable class-based dark mode
+            darkMode: 'class',
         };
     </script>
     <style>
-        /* Transition for dark mode toggle */
+        /* Smooth transitions */
         body {
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Dark Mode Styles */
-        .dark header {
-            background: linear-gradient(to right, #1e293b, #0f172a); /* Gradient for dark mode header */
+        header {
+            transition: background-color 0.3s;
         }
 
-        .dark .hero {
-            background: linear-gradient(to right, #0f172a, #1e293b); /* Dark gradient for hero */
-        }
-
-        /* Hero Phone Image Transition */
-        .phone-container img {
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-        }
-
-        .phone-container img.hidden {
-            opacity: 0;
-            transform: scale(0.95);
-            position: absolute;
-        }
-
-        .phone-container img.visible {
-            opacity: 1;
-            transform: scale(1);
+        /* Custom styling for the navigation links */
+        .nav-link {
             position: relative;
         }
 
-        /* Hero section height adjustment for mobile */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: #facc15; /* Yellow underline */
+            transition: width 0.3s, left 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero section responsiveness */
         @media (max-width: 640px) {
             .hero {
                 min-height: 70vh;
@@ -55,69 +54,85 @@
 <body class="bg-white text-blue-900 min-h-screen">
 
   <!-- Navigation Bar -->
-  <header class="py-2 px-8 sticky top-0 z-50 bg-transparent">
+  <header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
     <div class="container mx-auto flex justify-between items-center">
-      <!-- Logo -->
-      <div>
+        <!-- Logo -->
         <a href="#">
-          <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+            <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
         </a>
-      </div>
-      <!-- Navigation Links -->
-      <nav id="navLinks" class="max-h-0 opacity-0 overflow-hidden sm:overflow-visible sm:max-h-full sm:opacity-100 sm:flex flex-col sm:flex-row space-y-4 sm:space-x-6 sm:space-y-0 text-lg text-blue-900 sm:text-blue-900 p-6 sm:p-0 sm:static absolute top-16 right-4 sm:right-0 rounded-lg sm:rounded-none shadow-lg sm:shadow-none z-50 transition-all">
-        <a href="#features" class="hover:text-yellow-500 transition duration-300">Features</a>
-        <a href="#contact" class="hover:text-yellow-500 transition duration-300">Contact</a>
-        <a href="developer.html" class="hover:text-yellow-500 transition duration-300">Developer</a>
-        <a href="contribute.html" class="hover:text-yellow-500 transition duration-300">Contribute</a>
-      </nav>
-      <!-- Mobile Menu Icon -->
-      <div class="sm:hidden">
-        <button id="menuToggle" class="text-2xl focus:outline-none">☰</button>
-      </div>
-      <!-- Dark Mode Toggle -->
-      <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
-        🌙
-      </button>
+        <!-- Navigation Links -->
+        <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
+            <a href="#features" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                Features
+            </a>
+            <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                Contact
+            </a>
+            <a href="developer.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                Developer
+            </a>
+            <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                Contribute
+            </a>
+        </nav>
+        <!-- Mobile Menu Icon -->
+        <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">
+            ☰
+        </button>
+        <!-- Dark Mode Toggle -->
+        <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
+            🌙
+        </button>
     </div>
-  </header>
+    <!-- Mobile Dropdown Menu -->
+    <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
+        <ul class="flex flex-col space-y-4 p-6">
+            <li><a href="#features" class="block nav-link hover:text-yellow-500 transition">Features</a></li>
+            <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
+            <li><a href="developer.html" class="block nav-link hover:text-yellow-500 transition">Developer</a></li>
+            <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 transition">Contribute</a></li>
+        </ul>
+    </nav>
+</header>
 
-  <!-- Hero Section -->
-  <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[80vh] bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-      <!-- Left Column: Text Content -->
-      <div>
-        <h1 class="text-4xl sm:text-6xl font-extrabold mb-4">
-          Welcome to <span class="text-yellow-300">Notes Zone</span>
-        </h1>
-        <p class="text-lg sm:text-2xl mb-6">
-          Your ultimate destination for handwritten notes.
-        </p>
-        <a href="#features" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg text-lg font-bold shadow-md hover:bg-yellow-400 transition-all">
-          Explore Features
-        </a>
-      </div>
 
-      <!-- Right Column: Phone Image -->
-      <div class="phone-container relative flex justify-center">
-        <img 
-          src="phone.png" 
-          alt="Phone Image 1" 
-          class="visible max-w-full h-auto drop-shadow-lg"
-        />
-        <img 
-          src="phone1.png" 
-          alt="Phone Image 2" 
-          class="hidden max-w-full h-auto drop-shadow-lg"
-        />
-        <img 
-          src="phone2.png" 
-          alt="Phone Image 3" 
-          class="hidden max-w-full h-auto drop-shadow-lg"
-        />
-      </div>
+ <!-- Hero Section -->
+ <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[80vh] bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
+  <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+    <!-- Left Column: Text Content -->
+    <div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold mb-4">
+        Welcome to <span class="text-yellow-300">Notes Zone</span>
+      </h1>
+      <p class="text-lg sm:text-2xl mb-6">
+        Your ultimate destination for handwritten notes.
+      </p>
+      <a href="#features" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg text-lg font-bold shadow-md hover:bg-yellow-400 transition-all">
+        Explore Features
+      </a>
     </div>
+
+    <!-- Right Column: Phone Image -->
+    <div class="phone-container relative flex justify-center">
+      <img 
+        src="phone.png" 
+        alt="Phone Image 1" 
+        class="visible max-w-full h-auto drop-shadow-lg"
+      />
+      <img 
+        src="phone1.png" 
+        alt="Phone Image 2" 
+        class="hidden max-w-full h-auto drop-shadow-lg"
+      />
+      <img 
+        src="phone2.png" 
+        alt="Phone Image 3" 
+        class="hidden max-w-full h-auto drop-shadow-lg"
+      />
+    </div>
+  </div>
+</section>
   </section>
-
   <!-- Features Section -->
   <section id="features" class="py-16 bg-gray-100 text-blue-900 dark:bg-gray-900 dark:text-gray-100">
     <div class="container mx-auto text-center px-4 sm:px-6 lg:px-8">
@@ -170,39 +185,25 @@
     </div>
 </section>
 
-
   <!-- Footer -->
   <footer class="py-6 bg-black text-center text-gray-300">
     <a href="donate.html" class="hover:text-yellow-500 transition duration-300">Donate Us</a>
     <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
   </footer>
 
-  <!-- JavaScript for Navigation Toggle, Dark Mode, and Phone Image Transition -->
+  <!-- JavaScript -->
   <script>
-    // Navigation Toggle
+    // Mobile Navigation Toggle
     const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-    const htmlElement = document.documentElement;
+    const mobileMenu = document.getElementById("mobileMenu");
 
     menuToggle.addEventListener("click", () => {
-      if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
-        navLinks.style.maxHeight = "300px"; // Adjust height to fit the menu items
-        navLinks.style.opacity = "1";
-
-        // Change background color based on the theme
-        if (htmlElement.classList.contains("dark")) {
-          navLinks.style.backgroundColor = "#1f2937"; // Dark background for dark mode
-        } else {
-          navLinks.style.backgroundColor = "white"; // White background for light mode
-        }
-      } else {
-        navLinks.style.maxHeight = "0px";
-        navLinks.style.opacity = "0";
-      }
+      mobileMenu.classList.toggle("hidden");
     });
 
     // Dark Mode Toggle
     const darkModeToggle = document.getElementById("darkModeToggle");
+    const htmlElement = document.documentElement;
 
     darkModeToggle.addEventListener("click", () => {
       if (htmlElement.classList.contains("dark")) {
@@ -213,9 +214,8 @@
         darkModeToggle.textContent = "☀️"; // Dark mode icon
       }
     });
-
-    // Phone Image Transition
-    const phoneImages = document.querySelectorAll(".phone-container img");
+     // Phone Image Transition
+     const phoneImages = document.querySelectorAll(".phone-container img");
     let currentImage = 0;
 
     function changePhoneImage() {
