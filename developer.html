@@ -10,12 +10,86 @@
       darkMode: 'class',
     };
   </script>
+  <style>
+    /* Smooth transitions */
+    body {
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+        transition: background-color 0.3s;
+    }
+
+    /* Custom styling for the navigation links */
+    .nav-link {
+        position: relative;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: #facc15; /* Yellow underline */
+        transition: width 0.3s, left 0.3s;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+        left: 0;
+    }
+
+    /* Hero section responsiveness */
+    @media (max-width: 640px) {
+        .hero {
+            min-height: 70vh;
+        }
+    }
+</style>
 </head>
 
 <body class="bg-gray-200 text-blue-900 min-h-screen dark:bg-gray-900 dark:text-gray-200">
   
-  <!-- Navbar Placeholder -->
-  <div id="navbar-placeholder"></div>
+<!-- Navigation Bar -->
+<header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
+  <div class="container mx-auto flex justify-between items-center">
+      <!-- Logo -->
+      <a href="index.html">
+          <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+      </a>
+      <!-- Navigation Links -->
+      <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
+          <a href="index.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+              Home
+          </a>
+          <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+              Contact
+          </a>
+        
+          <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+              Contribute
+          </a>
+      </nav>
+      <!-- Mobile Menu Icon -->
+      <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">
+          ☰
+      </button>
+      <!-- Dark Mode Toggle -->
+      <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
+          🌙
+      </button>
+  </div>
+  <!-- Mobile Dropdown Menu -->
+  <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
+      <ul class="flex flex-col space-y-4 p-6">
+          <li><a href="index.html" class="block nav-link hover:text-yellow-500 transition">Home</a></li>
+          <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
+          <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 transition">Contribute</a></li>
+      </ul>
+  </nav>
+</header>
 
   <section class="py-20 px-4">
     <div class="container mx-auto text-center bg-white shadow-lg rounded-lg p-10 max-w-3xl dark:bg-gray-800">
@@ -24,7 +98,7 @@
       
       <!-- Developer Photo -->
       <div class="flex justify-center">
-        <img src="developerog.jpg" alt="Developer Photo" 
+        <img src="img/developer.jpg" alt="Developer Photo" 
              class="rounded-full w-40 h-40 shadow-md transform hover:scale-105 transition duration-300">
       </div>
       
@@ -49,7 +123,7 @@
         </a>
         <a href="https://github.com/Tejaskashyap2005" 
            class="text-gray-800 hover:text-gray-900 transition duration-300 flex items-center dark:text-yellow-400 dark:hover:text-yellow-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" viewBox="0 0 24 24" fill="currentColor">
+           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" viewBox="0 0 24 24" fill="currentColor">
             <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.41 2.865 8.166 6.839 9.49.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.705-2.782.605-3.369-1.343-3.369-1.343-.454-1.153-1.11-1.46-1.11-1.46-.907-.62.068-.607.068-.607 1.004.07 1.531 1.033 1.531 1.033.891 1.528 2.341 1.087 2.91.831.092-.646.349-1.087.635-1.337-2.22-.253-4.555-1.111-4.555-4.945 0-1.092.39-1.985 1.031-2.683-.104-.254-.447-1.277.097-2.66 0 0 .84-.27 2.75 1.026A9.552 9.552 0 0 1 12 6.804c.852.004 1.709.115 2.511.338 1.91-1.296 2.75-1.026 2.75-1.026.545 1.383.202 2.406.099 2.66.643.698 1.031 1.591 1.031 2.683 0 3.844-2.337 4.687-4.566 4.935.359.31.678.922.678 1.855 0 1.338-.012 2.419-.012 2.746 0 .268.181.58.688.482A10.005 10.005 0 0 0 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
           </svg>
           GitHub
@@ -58,42 +132,31 @@
     </div>
   </section>
 
+  
+   
   <!-- JavaScript -->
   <script>
-    // Load Navbar
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-placeholder').innerHTML = data;
+    // Mobile Navigation Toggle
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
 
-        // Re-attach event listeners for dark mode and menu toggle
-        const menuToggle = document.getElementById("menuToggle");
-        const navLinks = document.getElementById("navLinks");
-        const darkModeToggle = document.getElementById("darkModeToggle");
-        const htmlElement = document.documentElement;
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
 
-        // Navigation Toggle
-        menuToggle.addEventListener("click", () => {
-          if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
-            navLinks.style.maxHeight = "300px";
-            navLinks.style.opacity = "1";
-          } else {
-            navLinks.style.maxHeight = "0px";
-            navLinks.style.opacity = "0";
-          }
-        });
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const htmlElement = document.documentElement;
 
-        // Dark Mode Toggle
-        darkModeToggle.addEventListener("click", () => {
-          if (htmlElement.classList.contains("dark")) {
-            htmlElement.classList.remove("dark");
-            darkModeToggle.textContent = "🌙";
-          } else {
-            htmlElement.classList.add("dark");
-            darkModeToggle.textContent = "☀️";
-          }
-        });
-      });
-  </script>
+    darkModeToggle.addEventListener("click", () => {
+      if (htmlElement.classList.contains("dark")) {
+        htmlElement.classList.remove("dark");
+        darkModeToggle.textContent = "🌙"; // Light mode icon
+      } else {
+        htmlElement.classList.add("dark");
+        darkModeToggle.textContent = "☀️"; // Dark mode icon
+      }
+    });
+    </script>
 </body>
 </html>
