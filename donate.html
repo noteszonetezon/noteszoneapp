@@ -15,15 +15,10 @@
 <body class="bg-gray-200 text-blue-900 min-h-screen dark:bg-gray-900 dark:text-gray-200">
 <!-- Navbar Placeholder -->
 <div id="navbar-placeholder"></div>
-    <!-- Header -->
-    
 
     <!-- Donate Section -->
     <section class="py-20 px-4">
         <div class="container mx-auto text-center bg-white shadow-lg rounded-lg p-10 max-w-3xl dark:bg-gray-800">
-          
-
-            
             <!-- Section Title -->
             <h2 class="text-4xl font-bold mb-6 text-blue-800 dark:text-yellow-300">Support Notes Zone</h2>
             <p class="mb-8 text-lg text-blue-700 dark:text-gray-300 leading-relaxed">
@@ -33,7 +28,7 @@
 
             <!-- QR Code -->
             <div class="flex justify-center mb-6">
-                <img src="qr code.jpeg" alt="Donate QR Code" 
+                <img src="img/qr code.jpeg" alt="Donate QR Code" 
                      class="rounded-lg shadow-md transform hover:scale-105 transition duration-300 w-64 h-64">
             </div>
             <p class="text-lg font-medium mb-6 text-blue-600 dark:text-gray-300">Scan this QR Code with your preferred UPI app to donate.</p>
@@ -46,6 +41,15 @@
                 </p>
             </div>
             <p class="text-sm text-gray-600 dark:text-gray-400">* Ensure that you verify the UPI ID before completing your transaction.</p>
+
+            <!-- UPI Payment Button -->
+            <div class="mt-6">
+                <a href="https://tejaskashyap2005.mojo.page/donate-us" 
+                   class="bg-blue-600 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 inline-block"
+                   target="_blank">
+                    Donate Us
+                </a>
+            </div>
         </div>
     </section>
 
@@ -53,43 +57,44 @@
     <footer class="py-6 bg-black text-gray-300 text-center">
         <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
     </footer>
-     <!-- JavaScript -->
-  <script>
-    // Load Navbar
-    fetch('navbar.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('navbar-placeholder').innerHTML = data;
 
-        // Re-attach event listeners for dark mode and menu toggle
-        const menuToggle = document.getElementById("menuToggle");
-        const navLinks = document.getElementById("navLinks");
-        const darkModeToggle = document.getElementById("darkModeToggle");
-        const htmlElement = document.documentElement;
+    <!-- JavaScript -->
+    <script>
+        // Load Navbar
+        fetch('navbar.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
 
-        // Navigation Toggle
-        menuToggle.addEventListener("click", () => {
-          if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
-            navLinks.style.maxHeight = "300px";
-            navLinks.style.opacity = "1";
-          } else {
-            navLinks.style.maxHeight = "0px";
-            navLinks.style.opacity = "0";
-          }
-        });
+            // Re-attach event listeners for dark mode and menu toggle
+            const menuToggle = document.getElementById("menuToggle");
+            const navLinks = document.getElementById("navLinks");
+            const darkModeToggle = document.getElementById("darkModeToggle");
+            const htmlElement = document.documentElement;
 
-        // Dark Mode Toggle
-        darkModeToggle.addEventListener("click", () => {
-          if (htmlElement.classList.contains("dark")) {
-            htmlElement.classList.remove("dark");
-            darkModeToggle.textContent = "🌙";
-          } else {
-            htmlElement.classList.add("dark");
-            darkModeToggle.textContent = "☀️";
-          }
-        });
-      });
-  </script>
+            // Navigation Toggle
+            menuToggle.addEventListener("click", () => {
+              if (navLinks.style.maxHeight === "0px" || navLinks.style.maxHeight === "") {
+                navLinks.style.maxHeight = "300px";
+                navLinks.style.opacity = "1";
+              } else {
+                navLinks.style.maxHeight = "0px";
+                navLinks.style.opacity = "0";
+              }
+            });
+
+            // Dark Mode Toggle
+            darkModeToggle.addEventListener("click", () => {
+              if (htmlElement.classList.contains("dark")) {
+                htmlElement.classList.remove("dark");
+                darkModeToggle.textContent = "🌙";
+              } else {
+                htmlElement.classList.add("dark");
+                darkModeToggle.textContent = "☀️";
+              }
+            });
+          });
+    </script>
 
 </body>
 </html>
