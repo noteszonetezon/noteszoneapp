@@ -298,10 +298,84 @@
 </style>
 
 <!-- Footer -->
-  <footer class="py-6 bg-black text-center text-gray-300">
-    <a href="donate.html" class="hover:text-yellow-500 transition duration-300">Donate Us</a>
-    <p>&copy; 2024 Notes Zone. All Rights Reserved.</p>
-  </footer>
+<footer class="bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-300 py-10 relative w-full">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <!-- About Section -->
+      <div>
+        <h2 class="text-lg font-bold text-yellow-500 mb-4">About Us</h2>
+        <p class="text-sm text-gray-400">
+          Notes Zone is a platform dedicated to helping learners by providing the best resources, notes, and tools to make their academic journey easier and more efficient.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h2 class="text-lg font-bold text-yellow-500 mb-4">Quick Links</h2>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-yellow-500 transition">Home</a></li>
+          <li><a href="new-arrivals.html" class="hover:text-yellow-500 transition">New Arrivals</a></li>
+          <li><a href="contact.html" class="hover:text-yellow-500 transition">Contact Us</a></li>
+          <li><a href="developer.html" class="hover:text-yellow-500 transition">Developer</a></li>
+        </ul>
+      </div>
+
+      <!-- Donate Us Section -->
+      <div>
+        <h2 class="text-lg font-bold text-yellow-500 mb-4">Support Us</h2>
+        <p class="text-sm text-gray-400 mb-4">
+          Your contribution helps us continue providing high-quality educational resources and tools. Every donation makes a difference!
+        </p>
+        <a href="donate.html" class="bg-yellow-500 text-gray-900 font-bold px-4 py-2 rounded hover:bg-yellow-600 transition inline-block text-center">
+          Donate Us
+        </a>
+        <p class="text-sm text-gray-400 mt-4">
+          Prefer another method? <a href="contact.html" class="text-yellow-500 hover:underline">Contact us</a> for more options.
+        </p>
+      </div>
+
+      <!-- Follow Us -->
+      <div>
+        <h2 class="text-lg font-bold text-yellow-500 mb-4">Follow Us</h2>
+        <p class="text-sm text-gray-400 mb-4">Connect with us on social media:</p>
+        <div class="flex space-x-4">
+          <!-- LinkedIn Icon -->
+          <a href="https://www.linkedin.com/company/notes-zone/" target="_blank" class="group hover:text-yellow-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 48 48">
+              <path d="M42,4H6A2.006,2.006,0,0,0,4,6V42a2.006,2.006,0,0,0,2,2H42a2.006,2.006,0,0,0,2-2V6A2.006,2.006,0,0,0,42,4ZM16.338,38.133H9.88V20.279h6.458ZM13.11,17.729a3.734,3.734,0,1,1,3.733-3.734A3.733,3.733,0,0,1,13.11,17.729Zm25.05,20.4H31.7V28.628c0-2.269-.044-5.189-3.163-5.189-3.168,0-3.654,2.475-3.654,5.038v9.655H18.428V20.279h6.2v2.431h.089a6.8,6.8,0,0,1,6.122-3.363c6.542,0,7.744,4.31,7.744,9.9Z" />
+            </svg>
+          </a>
+          <!-- YouTube Icon -->
+          <a href="https://youtube.com/@noteszonebotservice?feature=shared" target="_blank" class="group hover:text-yellow-500 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 48 48">
+              <path d="M42.8,12.2c-0.5-1.9-1.9-3.3-3.7-3.7c-3.3-0.9-16.1-0.9-16.1-0.9s-12.8,0-16.1,0.9c-1.9,0.5-3.3,1.9-3.7,3.7 C3.3,15.5,3.3,24,3.3,24s0,8.5,0.9,11.8c0.5,1.9,1.9,3.3,3.7,3.7c3.3,0.9,16.1,0.9,16.1,0.9s12.8,0,16.1-0.9c1.9-0.5,3.3-1.9,3.7-3.7 c0.9-3.3,0.9-11.8,0.9-11.8S43.7,15.5,42.8,12.2z M19.7,31.4v-14l11.3,7L19.7,31.4z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="mt-8 border-t border-gray-700 pt-4 flex flex-col sm:flex-row justify-between items-center">
+      <p class="text-sm text-gray-400 text-center">&copy; <span id="currentYear"></span> Notes Zone. All rights reserved.</p>
+      <button onclick="scrollToTop()" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded mt-4 sm:mt-0 hover:bg-yellow-600 transition">
+        Scroll to Top
+      </button>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Set current year dynamically
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  // Scroll to top functionality
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 
   <!-- JavaScript -->
   <script>
@@ -350,6 +424,7 @@
   </script>
    
     <script>
+    
     // Select all navigation links and the loading screen
     const links = document.querySelectorAll('a');
     const loadingScreen = document.getElementById('loadingScreen');
@@ -372,7 +447,7 @@
         });
     });
 
-    // Optional: Hide loader on page load and handle back/forward navigation
+   // Optional: Hide loader on page load and handle back/forward navigation
 window.addEventListener('pageshow', (event) => {
     // Check if the navigation type is "back_forward" (i.e., browser's back/forward button)
     if (event.persisted) {
