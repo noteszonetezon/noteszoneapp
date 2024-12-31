@@ -372,10 +372,32 @@
         });
     });
 
-    // Optional: Hide loader on page load
-    window.addEventListener('load', () => {
-        loadingScreen.style.display = 'none';
+    // Optional: Hide loader on page load and handle back/forward navigation
+window.addEventListener('pageshow', (event) => {
+    // Check if the navigation type is "back_forward" (i.e., browser's back/forward button)
+    if (event.persisted) {
+        loadingScreen.style.display = 'none'; // Ensure the loading screen is hidden
+    }
+});
+
+// Show the loader when any link is clicked
+links.forEach(link => {
+    link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        
+        // Ensure the link is internal
+        if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+            event.preventDefault(); // Prevent immediate navigation
+            loadingScreen.style.display = 'flex'; // Show the loading screen
+
+            // Simulate a delay, then navigate (remove the setTimeout for real navigation)
+            setTimeout(() => {
+                window.location.href = href; // Navigate to the clicked link
+            }, 1000); // Simulate a 1-second delay
+        }
     });
+});
+
 </script>
   
 </body>
