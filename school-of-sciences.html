@@ -108,39 +108,57 @@
                 });
             });
     </script>
-    <script>
-        // Select all navigation links and the loading screen
-        const links = document.querySelectorAll('a'); // Select all <a> tags
-        const loadingScreen = document.getElementById('loadingScreen'); // Loading screen div
+   <script>
     
-        // Show the loader when any link is clicked
-        links.forEach((link) => {
-            link.addEventListener('click', (event) => {
-                const href = link.getAttribute('href'); // Get the href of the clicked link
-    
-                // Check if the link is internal and valid
-                if (
-                    href &&
-                    !href.startsWith('#') && // Exclude anchor links
-                    !href.startsWith('mailto:') && // Exclude mailto links
-                    !href.startsWith('tel:') // Exclude telephone links
-                ) {
-                    event.preventDefault(); // Prevent immediate navigation
-                    loadingScreen.style.display = 'flex'; // Show the loading screen
-    
-                    // Simulate a delay, then navigate to the link
-                    setTimeout(() => {
-                        window.location.href = href; // Navigate to the clicked link
-                    }, 1000); // Simulate a 1-second delay
-                }
-            });
+    // Select all navigation links and the loading screen
+    const links = document.querySelectorAll('a');
+    const loadingScreen = document.getElementById('loadingScreen');
+
+    // Show the loader when any link is clicked
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            const href = link.getAttribute('href');
+            
+            // Ensure the link is internal
+            if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                event.preventDefault(); // Prevent immediate navigation
+                loadingScreen.style.display = 'flex'; // Show the loading screen
+
+                // Simulate a delay, then navigate (remove the setTimeout for real navigation)
+                setTimeout(() => {
+                    window.location.href = href; // Navigate to the clicked link
+                }, 1000); // Simulate a 1-second delay
+            }
         });
-    
-        // Hide the loader on page load
-        window.addEventListener('load', () => {
-            loadingScreen.style.display = 'none'; // Hide the loading screen after the page loads
-        });
-    </script>
+    });
+
+   // Optional: Hide loader on page load and handle back/forward navigation
+window.addEventListener('pageshow', (event) => {
+    // Check if the navigation type is "back_forward" (i.e., browser's back/forward button)
+    if (event.persisted) {
+        loadingScreen.style.display = 'none'; // Ensure the loading screen is hidden
+    }
+});
+
+// Show the loader when any link is clicked
+links.forEach(link => {
+    link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        
+        // Ensure the link is internal
+        if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+            event.preventDefault(); // Prevent immediate navigation
+            loadingScreen.style.display = 'flex'; // Show the loading screen
+
+            // Simulate a delay, then navigate (remove the setTimeout for real navigation)
+            setTimeout(() => {
+                window.location.href = href; // Navigate to the clicked link
+            }, 1000); // Simulate a 1-second delay
+        }
+    });
+});
+
+</script>
     
 </body>
 </html>
