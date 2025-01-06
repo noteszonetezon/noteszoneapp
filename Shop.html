@@ -164,10 +164,10 @@
 
                         <!-- Buttons -->
                         <div class="flex justify-between items-center">
-                            <button onclick="scrollToBuyForm()"
-                                    class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition">
-                                Buy Now
-                            </button>
+                            button onclick="scrollToBuyForm()"
+        class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition">
+    Buy Now
+</button>
                         </div>
                     </div>
                 </div>
@@ -207,6 +207,13 @@
             </form>
         </section>
     </main>
+    <script>
+        // Function to scroll to the purchase form
+        function scrollToBuyForm() {
+            const buyFormSection = document.getElementById('buyForm');
+            buyFormSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 
     <!-- JavaScript -->
   <script>
