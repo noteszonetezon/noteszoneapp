@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Programme Notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 text-blue-900 min-h-screen dark:bg-gray-900 dark:text-gray-200">
+     <!-- Loading Logo -->
+<div id="loadingScreen" class="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-50 hidden">
+    <video autoplay loop muted playsinline class="h-32 w-32">
+        <source src="video/logowebm.webm" type="video/webm">
+        <source src="video/logogif.gif" type="video/mp4">
+        <img src="img/logo.png" alt="Loading..." class="h-32 w-32">
+        Your browser does not support the video tag.
+    </video>
+</div>
+    <!-- Navigation Bar -->
+    <header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html">
+                <img src="img/logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+            </a>
+            <!-- Navigation Links -->
+            <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
+                <a href="index.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Features</a>
+                <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Contact</a>
+                <a href="developer.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Developer</a>
+                <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Contribute</a>
+            </nav>
+            <!-- Mobile Menu Icon -->
+            <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">☰</button>
+            <!-- Dark Mode Toggle -->
+            <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">🌙</button>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
+            <ul class="flex flex-col space-y-4 p-6">
+                <li><a href="index.html" class="block nav-link hover:text-yellow-500 transition">Features</a></li>
+                <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
+                <li><a href="developer.html" class="block nav-link hover:text-yellow-500 transition">Developer</a></li>
+                <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 transition">Contribute</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <h1 class="text-3xl font-bold text-center text-blue-800 dark:text-yellow-300 mb-8">Select Semester and Subject</h1>
+
+        <!-- Semester Dropdown -->
+        <div class="mb-8 text-center">
+            <label for="semesterSelect" class="block text-lg font-medium mb-2">Choose Semester:</label>
+            <select id="semesterSelect" class="w-full max-w-sm mx-auto px-4 py-2 border border-gray-400 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600">
+                <option value="">Select a Semester</option>
+                <option value="semester1">Semester 1</option>
+                <option value="semester2">Semester 2</option>
+                <option value="semester3">Semester 3</option>
+                <option value="semester4">Semester 4</option>
+                <option value="semester5">Semester 5</option>
+                <option value="semester6">Semester 6</option>
+            </select>
+        </div>
+
+        <!-- Subject Cards -->
+        <div id="subjectsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        const semesterSelect = document.getElementById("semesterSelect");
+        const subjectsContainer = document.getElementById("subjectsContainer");
+
+        // Subjects data
+        const subjectsData = {
+            semester1: [
+                { name: "Foundational Mathematics", link: "https://drive.google.com/folder1" },
+                { name: "Object Oriented Programming Using C++", link: "https://drive.google.com/folder2" },
+                { name: "DBMS (Database Management System)", link: "https://drive.google.com/folder2" },
+                { name: "Software Engineering", link: "https://drive.google.com/folder2" },
+                { name: "Academic Writing", link: "https://drive.google.com/folder2" },
+                { name: "Introduction To Web Technology", link: "https://drive.google.com/folder2" },
+            ],
+            semester2: [
+                {
+                    name: "Data Structures Using C++",
+                    options: {
+                        notes: "https://stellar-mooncake-27c82d.netlify.app/", 
+                        classroom: "https://drive.google.com/drive/folders/1Wv-CNYZvcQajVMUAU05iLkuXMwGFFNuA",
+                    },
+                },
+                {
+                    name: "Java Programming",
+                    options: {
+                        notes: "https://stellar-mooncake-27c82d.netlify.app/",
+                        classroom: "https://drive.google.com/drive/folders/1RLV3opjhRnglVxApmkxdwwg5aOK2B1sG",
+                    },
+                },
+                   {
+                     name: "Discrete Mathematics",
+                    options: {
+                        notes: "https://stellar-mooncake-27c82d.netlify.app/",
+                        classroom: "https://classroom.google.com/folder_dm",
+                    },
+                    
+                },
+                {
+                     name: "Full Stack Development",
+                    options: {
+                        notes: "https://stellar-mooncake-27c82d.netlify.app/",
+                        classroom: "https://drive.google.com/drive/folders/1VvgzoXh6SNU40e0i-8F-rzE09PmxdTxq",
+                    },
+                    
+                },
+                {
+                     name: "Professional English",
+                    options: {
+                        notes: "https://stellar-mooncake-27c82d.netlify.app/",
+                        classroom: "https://classroom.google.com/folder_dm",
+                    },
+                    
+                },
+
+            ],
+            semester3: [
+                { name: "Operating Systems", link: "https://drive.google.com/folder_os" },
+            ],
+            semester4: [
+                { name: "Web Technologies", link: "https://drive.google.com/folder_webtech" },
+            ],
+            semester5: [
+                { name: "Data Science", link: "https://drive.google.com/folder_ds" },
+            ],
+            semester6: [
+                { name: "Cloud Computing", link: "https://drive.google.com/folder_cloud" },
+            ],
+        };
+
+        semesterSelect.addEventListener("change", () => {
+            const selectedSemester = semesterSelect.value;
+            subjectsContainer.innerHTML = "";
+
+            if (subjectsData[selectedSemester]) {
+                subjectsContainer.classList.remove("hidden");
+
+                subjectsData[selectedSemester].forEach(subject => {
+                    const subjectCard = document.createElement("div");
+                    subjectCard.className = "subject-card bg-white dark:bg-gray-700 rounded-lg shadow-lg p-4 text-center";
+
+                    if (selectedSemester === "semester2") {
+                        subjectCard.innerHTML = `
+                            <h3 class="text-xl font-bold mb-4 text-blue-800 dark:text-yellow-300">${subject.name}</h3>
+                            <select class="w-full px-4 py-2 border border-gray-400 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-800 dark:border-gray-600 subject-dropdown">
+                                <option value="">Select Option</option>
+                                <option value="classroom">GC Assignments</option>
+                                <option value="notes">Class Notes</option>
+                                
+                            </select>
+                            <a
+                                href="#"
+                                target="_blank"
+                                class="inline-block bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all mt-4 dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500 hidden view-link"
+                            >
+                                View
+                            </a>
+                        `;
+
+                        const dropdown = subjectCard.querySelector(".subject-dropdown");
+                        const viewLink = subjectCard.querySelector(".view-link");
+
+                        dropdown.addEventListener("change", () => {
+                            const selectedOption = dropdown.value;
+                            if (selectedOption && subject.options[selectedOption]) {
+                                viewLink.href = subject.options[selectedOption];
+                                viewLink.classList.remove("hidden");
+                            } else {
+                                viewLink.classList.add("hidden");
+                            }
+                        });
+                    } else {
+                        subjectCard.innerHTML = `
+                            <h3 class="text-xl font-bold mb-4 text-blue-800 dark:text-yellow-300">${subject.name}</h3>
+                            <a
+                                href="${subject.link}"
+                                target="_blank"
+                                class="inline-block bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all mt-4 dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500"
+                            >
+                                View Notes
+                            </a>
+                        `;
+                    }
+
+                    subjectsContainer.appendChild(subjectCard);
+                });
+            } else {
+                subjectsContainer.classList.add("hidden");
+            }
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const htmlElement = document.documentElement;
+
+        darkModeToggle.addEventListener("click", () => {
+            if (htmlElement.classList.contains("dark")) {
+                htmlElement.classList.remove("dark");
+                darkModeToggle.textContent = "🌙";
+            } else {
+                htmlElement.classList.add("dark");
+                darkModeToggle.textContent = "☀️";
+            }
+        });
+
+        // Mobile Navigation Toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+        // Select all navigation links and the loading screen
+    const links = document.querySelectorAll('a');
+    const loadingScreen = document.getElementById('loadingScreen');
+
+    // Show the loader when any link is clicked
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            const href = link.getAttribute('href');
+            
+            // Ensure the link is internal
+            if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                event.preventDefault(); // Prevent immediate navigation
+                loadingScreen.style.display = 'flex'; // Show the loading screen
+
+                // Simulate a delay, then navigate (remove the setTimeout for real navigation)
+                setTimeout(() => {
+                    window.location.href = href; // Navigate to the clicked link
+                }, 1000); // Simulate a 1-second delay
+            }
+        });
+    });
+
+   // Optional: Hide loader on page load and handle back/forward navigation
+window.addEventListener('pageshow', (event) => {
+    // Check if the navigation type is "back_forward" (i.e., browser's back/forward button)
+    if (event.persisted) {
+        loadingScreen.style.display = 'none'; // Ensure the loading screen is hidden
+    }
+});
+
+// Show the loader when any link is clicked
+links.forEach(link => {
+    link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        
+        // Ensure the link is internal
+        if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+            event.preventDefault(); // Prevent immediate navigation
+            loadingScreen.style.display = 'flex'; // Show the loading screen
+
+            // Simulate a delay, then navigate (remove the setTimeout for real navigation)
+            setTimeout(() => {
+                window.location.href = href; // Navigate to the clicked link
+            }, 1000); // Simulate a 1-second delay
+        }
+    });
+});
+    </script>
+</body>
+</html>
