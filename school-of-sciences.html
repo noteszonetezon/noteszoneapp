@@ -298,9 +298,22 @@ links.forEach(link => {
         }
     });
 });
+       // Search Feature
+        const searchBar = document.getElementById("searchBar");
+        const universityCards = document.querySelectorAll(".university-card");
+
+        searchBar.addEventListener("input", (event) => {
+            const query = event.target.value.toLowerCase();
+            universityCards.forEach((card) => {
+                const name = card.getAttribute("data-name").toLowerCase();
+                if (name.includes(query)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
 
 </script>
-
-  
 </body>
 </html>
