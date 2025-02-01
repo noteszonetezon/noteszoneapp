@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Location & Emails</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .collapsible-content {
+            display: none;
+        }
+        .collapsible-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 text-blue-900 min-h-screen dark:bg-gray-900 dark:text-gray-200">
+    <!-- Loading Logo -->
+    <div id="loadingScreen" class="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-50 hidden">
+        <video autoplay loop muted playsinline class="h-32 w-32">
+            <source src="video/logowebm.webm" type="video/webm">
+            <source src="video/logogif.gif" type="video/mp4">
+            <img src="img/logo.png" alt="Loading..." class="h-32 w-32">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <!-- Navigation Bar -->
+    <header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html">
+                <img src="img/logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+            </a>
+            <!-- Navigation Links -->
+            <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
+                <a href="index.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Features</a>
+                <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Contact</a>
+                <a href="developer.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Developer</a>
+                <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">Contribute</a>
+            </nav>
+            <!-- Mobile Menu Icon -->
+            <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">☰</button>
+            <!-- Dark Mode Toggle -->
+            <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">🌙</button>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
+            <ul class="flex flex-col space-y-4 p-6">
+                <li><a href="index.html" class="block nav-link hover:text-yellow-500 transition">Features</a></li>
+                <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
+                <li><a href="developer.html" class="block nav-link hover:text-yellow-500 transition">Developer</a></li>
+                <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 transition">Contribute</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+        <h1 class="text-3xl font-bold text-center text-blue-800 dark:text-yellow-300 mb-8">Faculty Details</h1>
+
+       <!-- Collapsible Buttons -->
+<div class="flex flex-col space-y-4 mb-8 max-w-[400px] mx-auto">
+    <button id="facultyDetailsBtn" class="collapsible-btn w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500">
+        <i class="fas fa-user-tie mr-2"></i>Faculty Details
+    </button>
+    <button id="labFacultyDetailsBtn" class="collapsible-btn w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500">
+        <i class="fas fa-flask mr-2"></i>Lab Faculty Details
+    </button>
+    <button id="mdcFacultyDetailsBtn" class="collapsible-btn w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition-all dark:bg-yellow-400 dark:text-blue-900 dark:hover:bg-yellow-500">
+        <i class="fas fa-book mr-2"></i>MDC Faculty Details
+    </button>
+</div>
+
+        <!-- Faculty Details Section -->
+        <div id="facultyDetails" class="collapsible-content">
+            <h2 class="text-2xl font-bold text-blue-800 dark:text-yellow-300 mb-6">Faculty Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Example Faculty Member -->
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Mudita Sharan</h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i> 5th Floor, A Block</p>
+                        <a href="mailto:mudita.sharan@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> mudita.sharan@christuniversity.in
+                        </a>
+                        <p>
+                            <a href="tel:+919044980035" class="text-green-600 hover:underline">
+                                <i class="fas fa-phone"></i> +91 9044980035
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Dr. Varuna Gupta
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i> A206-D,SECOND FLOOR Floor,A - BLOCK
+                        </p>
+                        <a href="mailto:varuna.gupta@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> varuna.gupta@christuniversity.in 
+
+                        </a>
+                        <p>
+                            <a href="tel:+91+91 8826009098" class="text-green-600 hover:underline">
+                                <i class="fas fa-phone"></i> +91 8826009098
+
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Vandna Kansal
+
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i>  Christ university, Delhi NCR
+
+                        </p>
+                        <a href="mailto:vandna.kansal@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> vandna.kansal@christuniversity.in
+
+
+                        </a>
+                        <p>
+                            <a href="tel:+91 9999622806" class="text-green-600 hover:underline">
+                                <i class="fas fa-phone"></i> +91 9999622806
+
+
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Dr. Abhinav Singhal
+
+
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i> A 2016H,SECOND FLOOR Floor,A - BLOCK
+
+
+                        </p>
+                        <a href="mailto:abhinav.singhal@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> abhinav.singhal@christuniversity.in
+
+
+
+                        </a>
+                        <p>
+                            <a href="tel:+91 8374479212" class="text-green-600 hover:underline">
+                                <i class="fas fa-phone"></i> +91 8374479212
+
+
+
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Faculty Details Section -->
+        <div id="labFacultyDetails" class="collapsible-content">
+            <h2 class="text-2xl font-bold text-blue-800 dark:text-yellow-300 mb-6">Lab Faculty Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Example Lab Faculty Member -->
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Indu Verma</h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i> A216G, SECOND FLOOR, A - BLOCK</p>
+                        <a href="mailto:indu.verma@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> indu.verma@christuniversity.in
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Dr. Kamal Upreti
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i>A216-I,SECOND FLOOR Floor,A - BLOCK
+                        </p>
+                        <a href="mailto:kamal.upreti@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> kamal.upreti@christuniversity.in 
+
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Garima Anand
+
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i>A 206-E,SECOND Floor,A - BLOCK
+
+                        </p>
+                        <a href="mailto:garima.anand@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> garima.anand@christuniversity.in 
+
+
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Neha Saini
+
+
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i>A-521,FIFTH Floor,A - BLOCK
+
+
+                        </p>
+                        <a href="mailto:neha.saini@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> neha.saini@christuniversity.in </a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Rishabh
+
+
+
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i>A-521,FIFTH Floor,A - BLOCK
+
+
+
+                        </p>
+                        <a href="mailto:rishabh@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> rishabh@christuniversity.in  
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Vandana Mehndiratta
+
+
+
+
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i>A206-A,SECOND FLOOR Floor,A - BLOCK
+
+
+
+
+                        </p>
+                        <a href="mailto:vandana.mehndiratta@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> vandana.mehndiratta@christuniversity.in
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MDC Faculty Details Section -->
+        <div id="mdcFacultyDetails" class="collapsible-content">
+            <h2 class="text-2xl font-bold text-blue-800 dark:text-yellow-300 mb-6">MDC Faculty Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 flex items-center space-x-4">
+                    <i class="fas fa-user-tie text-4xl text-blue-600 dark:text-yellow-400"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 dark:text-yellow-300">Prof. Vandana Mehndiratta</h3>
+                        <p class="text-gray-700 dark:text-gray-200"><i class="fas fa-map-marker-alt text-red-500"></i> A206-A, SECOND FLOOR, A - BLOCK</p>
+                        <a href="mailto:vandana.mehndiratta@christuniversity.in" class="text-blue-500 hover:underline">
+                            <i class="fas fa-paper-plane"></i> vandana.mehndiratta@christuniversity.in
+                        </a>
+                    </div>
+                </div>
+                <!-- Add more MDC faculty members here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Collapsible Functionality
+        const facultyDetailsBtn = document.getElementById("facultyDetailsBtn");
+        const labFacultyDetailsBtn = document.getElementById("labFacultyDetailsBtn");
+        const mdcFacultyDetailsBtn = document.getElementById("mdcFacultyDetailsBtn");
+
+        const facultyDetails = document.getElementById("facultyDetails");
+        const labFacultyDetails = document.getElementById("labFacultyDetails");
+        const mdcFacultyDetails = document.getElementById("mdcFacultyDetails");
+
+        facultyDetailsBtn.addEventListener("click", () => {
+            facultyDetails.classList.toggle("active");
+            labFacultyDetails.classList.remove("active");
+            mdcFacultyDetails.classList.remove("active");
+        });
+
+        labFacultyDetailsBtn.addEventListener("click", () => {
+            labFacultyDetails.classList.toggle("active");
+            facultyDetails.classList.remove("active");
+            mdcFacultyDetails.classList.remove("active");
+        });
+
+        mdcFacultyDetailsBtn.addEventListener("click", () => {
+            mdcFacultyDetails.classList.toggle("active");
+            facultyDetails.classList.remove("active");
+            labFacultyDetails.classList.remove("active");
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const htmlElement = document.documentElement;
+
+        darkModeToggle.addEventListener("click", () => {
+            if (htmlElement.classList.contains("dark")) {
+                htmlElement.classList.remove("dark");
+                darkModeToggle.textContent = "🌙";
+            } else {
+                htmlElement.classList.add("dark");
+                darkModeToggle.textContent = "☀️";
+            }
+        });
+
+        // Mobile Navigation Toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    </script>
+</body>
+</html>
