@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="google-adsense-account" content="ca-pub-2125586648357270">
     <title>Faculty Location & Emails</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -23,14 +24,25 @@
             display: block;
         }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
+    crossorigin="anonymous"></script>
 </head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6V7LPEC5P4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6V7LPEC5P4');
+</script>
 <body class="bg-gray-200 text-blue-900 min-h-screen dark:bg-gray-900 dark:text-gray-200">
     <!-- Loading Logo -->
     <div id="loadingScreen" class="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-50 hidden">
         <video autoplay loop muted playsinline class="h-32 w-32">
-            <source src="video/logowebm.webm" type="video/webm">
-            <source src="video/logogif.gif" type="video/mp4">
-            <img src="img/logo.png" alt="Loading..." class="h-32 w-32">
+            <source src="logowebm.webm" type="video/webm">
+            <source src="logogif.gif" type="video/mp4">
+            <img src="logo.png" alt="Loading..." class="h-32 w-32">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -39,7 +51,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo -->
             <a href="index.html">
-                <img src="img/logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+                <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
             </a>
             <!-- Navigation Links -->
             <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
@@ -343,6 +355,57 @@
         menuToggle.addEventListener("click", () => {
             mobileMenu.classList.toggle("hidden");
         });
-    </script>
+    
+        <script>
+    
+    // Select all navigation links and the loading screen
+    const links = document.querySelectorAll('a');
+    const loadingScreen = document.getElementById('loadingScreen');
+
+    // Show the loader when any link is clicked
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            const href = link.getAttribute('href');
+            
+            // Ensure the link is internal
+            if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                event.preventDefault(); // Prevent immediate navigation
+                loadingScreen.style.display = 'flex'; // Show the loading screen
+
+                // Simulate a delay, then navigate (remove the setTimeout for real navigation)
+                setTimeout(() => {
+                    window.location.href = href; // Navigate to the clicked link
+                }, 1000); // Simulate a 1-second delay
+            }
+        });
+    });
+
+   // Optional: Hide loader on page load and handle back/forward navigation
+window.addEventListener('pageshow', (event) => {
+    // Check if the navigation type is "back_forward" (i.e., browser's back/forward button)
+    if (event.persisted) {
+        loadingScreen.style.display = 'none'; // Ensure the loading screen is hidden
+    }
+});
+
+// Show the loader when any link is clicked
+links.forEach(link => {
+    link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        
+        // Ensure the link is internal
+        if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+            event.preventDefault(); // Prevent immediate navigation
+            loadingScreen.style.display = 'flex'; // Show the loading screen
+
+            // Simulate a delay, then navigate (remove the setTimeout for real navigation)
+            setTimeout(() => {
+                window.location.href = href; // Navigate to the clicked link
+            }, 1000); // Simulate a 1-second delay
+        }
+    });
+});
+
+</script>
 </body>
 </html>
