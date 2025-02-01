@@ -86,7 +86,51 @@
                 <option value="semester6">Semester 6</option>
             </select>
         </div>
-
+<!-- New Arrivals Toggle -->
+<a href="Student Support.html" id="" class="fixed bottom-5 right-5 bg-yellow-400 text-blue-900 font-bold py-2 px-4 rounded-full shadow-lg hover:bg-yellow-500 transition-all">
+    Students Support
+  </a>
+  
+  <script>
+    // Example: Adding a badge to indicate new items
+    const newItems = 1; // Replace with the actual number of new items (can be dynamic)
+    const toggle = document.getElementById("newArrivalsToggle");
+  
+    if (newItems > 0) {
+        const badge = document.createElement("span");
+        badge.textContent = newItems;
+        badge.className = "absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-md";
+        toggle.appendChild(badge);
+    }
+  </script>
+  <style>
+    /* Styling for bounce animation */
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-5px);
+        }
+    }
+  
+    /* Apply bounce animation */
+    .animate-bounce {
+        animation: bounce 1s infinite;
+    }
+  
+    /* Optional: Reduce the size of the toggle button */
+    #newArrivalsToggle {
+        font-size: 0.875rem; /* Smaller font size */
+        padding: 0.5rem 1rem; /* Reduced padding */
+    }
+    /* Fixing badge position and animation */
+    #newArrivalsToggle span {
+        position: absolute;
+        animation: bounce 1s infinite; /* Ensure animation is applied directly */
+    }
+  
+  </style>
         <!-- Subject Cards -->
         <div id="subjectsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
     </main>
