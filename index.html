@@ -101,7 +101,40 @@ section {
   min-height: 70vh; /* Adjust as needed */
   background: linear-gradient(to right, #38bdf8, #1e3a8a);
 }
-            
+      /* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Hero Section */
+.phone-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.phone-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  .phone-container img {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+}
+
+/* Fixed elements */
+#noteszoneAI, #newArrivalsToggle {
+  position: fixed;
+  bottom: 20px;
+  z-index: 1000;
+  max-width: 100%;
+}      
 
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
