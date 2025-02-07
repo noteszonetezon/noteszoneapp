@@ -29,11 +29,12 @@
         };
     </script>
     <style>
-       /* Smooth transitions */
+        /* Smooth transitions */
         body {
   overflow-x: hidden; /* Prevent horizontal scrolling */
   overflow-y: auto; /* Allow vertical scrolling */
 }
+
         header {
             transition: background-color 0.3s;
         }
@@ -58,13 +59,10 @@
             width: 100%;
             left: 0;
         }
+        
 
-        /* Hero section responsiveness */
-        @media (max-width: 640px) {
-            .hero {
-                min-height: 70vh;
-            }
-        }
+
+        
         /* Background video styles */
         .background-video {
             position: absolute;
@@ -74,8 +72,9 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
-
-            /* Ensure body and HTML take full height */
+            
+        }
+        /* Ensure body and HTML take full height */
 html, body {
   height: 100%;
   margin: 0;
@@ -101,42 +100,8 @@ section {
   min-height: 70vh; /* Adjust as needed */
   background: linear-gradient(to right, #38bdf8, #1e3a8a);
 }
-      /* Prevent horizontal overflow */
-body {
-  overflow-x: hidden;
-  width: 100%;
-}
-
-/* Hero Section */
-.phone-container {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-}
-
-.phone-container img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 767px) {
-  .phone-container img {
-    transform: scale(1.2);
-    transform-origin: center;
-  }
-}
-
-/* Fixed elements */
-#noteszoneAI, #newArrivalsToggle {
-  position: fixed;
-  bottom: 20px;
-  z-index: 1000;
-  max-width: 100%;
-}      
-
     </style>
+      
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
     crossorigin="anonymous"></script>
    <script async custom-element="amp-auto-ads"
