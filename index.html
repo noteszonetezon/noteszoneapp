@@ -28,7 +28,7 @@
             darkMode: 'class',
         };
     </script>
-    <style>
+     <style>
         /* Smooth transitions */
         body {
   overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -100,7 +100,7 @@ section {
   min-height: 70vh; /* Adjust as needed */
   background: linear-gradient(to right, #38bdf8, #1e3a8a);
 }
-        .hidden {
+.hidden {
   display: none; /* Hide the element */
 }
 .phone-container img {
@@ -115,7 +115,14 @@ section {
   opacity: 0; /* Hide the image */
   position: absolute; /* Remove from the layout flow */
 }
-    </style>
+.phone-container {
+  position: relative;
+  
+  display: flex;
+  justify-content: center; /* Center the images */
+  align-items: center; /* Center vertically */
+}
+</style>
       
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
     crossorigin="anonymous"></script>
