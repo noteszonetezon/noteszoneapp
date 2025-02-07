@@ -100,6 +100,21 @@ section {
   min-height: 70vh; /* Adjust as needed */
   background: linear-gradient(to right, #38bdf8, #1e3a8a);
 }
+        .hidden {
+  display: none; /* Hide the element */
+}
+.phone-container img {
+  transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+}
+
+.phone-container img.hidden {
+  opacity: 0; /* Hide the image */
+  display: block; /* Ensure the image takes space */
+}
+.phone-container img.hidden {
+  opacity: 0; /* Hide the image */
+  position: absolute; /* Remove from the layout flow */
+}
     </style>
       
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
@@ -208,11 +223,12 @@ section {
       <img 
         src="https://fqgrs15a9ll8kige.public.blob.vercel-storage.com/Handwritten%20Notes%20(7)_page-0001-Zid7gK2BQg3zaOivedvMYBA8x8rmPu.png" 
         alt="Phone Image 2" 
-        class="w-full h-auto drop-shadow-lg"
+        class="w-full h-auto drop-shadow-lg hidden"
       />
-     
     </div>
   </div>
+</section>
+</section>
 
   <!-- Internal CSS -->
   <style>
@@ -220,7 +236,7 @@ section {
     .phone-container img {
       max-width: 100%; /* Ensures the image scales down on desktop */
       height: auto; /* Maintains aspect ratio */
-      
+      transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
     }
 
     /* Mobile-specific styles */
@@ -485,26 +501,34 @@ section {
       }
     });
      // Phone Image Transition
-     const phoneImages = document.querySelectorAll(".phone-container img");
-    let currentImage = 0;
+const phoneImages = document.querySelectorAll(".phone-container img");
+let currentImage = 0;
 
-    function changePhoneImage() {
-      phoneImages[currentImage].classList.remove("visible");
-      phoneImages[currentImage].classList.add("hidden");
+function changePhoneImage() {
+  // Hide the current image
+  phoneImages[currentImage].classList.add("hidden");
 
-      currentImage = (currentImage + 1) % phoneImages.length;
+  // Move to the next image
+  currentImage = (currentImage + 1) % phoneImages.length;
 
-      phoneImages[currentImage].classList.remove("hidden");
-      phoneImages[currentImage].classList.add("visible");
-    }
+  // Show the next image
+  phoneImages[currentImage].classList.remove("hidden");
+}
 
-    setInterval(changePhoneImage, 2000); // Change image every 2 seconds
-  </script>
-  <script>
-    AOS.init({
-      duration: 1000, // Animation duration (1000ms = 1s)
-      once: true, // Whether animation should happen only once while scrolling down
-    });
+// Start the transition after the page loads
+window.addEventListener("load", () => {
+  setInterval(changePhoneImage, 2000); // Change image every 2 seconds
+});
+function changePhoneImage() {
+  // Fade out the current image
+  phoneImages[currentImage].classList.add("hidden");
+
+  // Move to the next image
+  currentImage = (currentImage + 1) % phoneImages.length;
+
+  // Fade in the next image
+  phoneImages[currentImage].classList.remove("hidden");
+}
   </script>
    
     <script>
