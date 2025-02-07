@@ -1,7 +1,7 @@
 /* style.css */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('img/ai.jpg'); /* Add your image path here */
+    background-image: url('ai.jpg'); /* Add your image path here */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
