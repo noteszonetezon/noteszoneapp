@@ -74,8 +74,35 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+
+            /* Ensure body and HTML take full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Ensure footer sticks to the bottom */
+footer {
+  position: relative;
+  margin-top: auto; /* Push footer to the bottom */
+  padding-bottom: 0; /* Remove extra padding */
+}
+
+/* Ensure sections don't have extra margin/padding */
+section {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure hero section doesn't extend unnecessarily */
+.hero {
+  min-height: 70vh; /* Adjust as needed */
+  background: linear-gradient(to right, #38bdf8, #1e3a8a);
+}
             
-        }
+
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
     crossorigin="anonymous"></script>
@@ -171,45 +198,46 @@
 
 </div>
     -->
-
-
- 
- <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[80vh] bg-gradient-to-r from-sky-500 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
-  <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-    
-    <div>
-      <h1 class="text-4xl sm:text-6xl font-extrabold mb-4">
-        Welcome to <span class="text-yellow-300">Notes Zone</span>
-      </h1>
-      <p class="text-lg sm:text-2xl mb-6">
-        Your ultimate destination for handwritten notes.
-      </p>
-      <a href="#features" class="bg-yellow-300 text-blue-900 py-3 px-6 rounded-lg text-lg font-bold shadow-md hover:bg-yellow-400 transition-all">
-        Explore Features
-      </a>
-    </div>
-
-    
-    <div class="phone-container relative flex justify-center">
+<section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[70vh] bg-gradient-to-r from-sky-400 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
+  <div class="container mx-auto flex justify-center">
+    <!-- Phone Container -->
+    <div class="phone-container relative">
       <img 
-        src="phone.png" 
+        src="https://fqgrs15a9ll8kige.public.blob.vercel-storage.com/hero-LPwjGKCZPE1HiGaGNHR92UQ37dxbe6.png" 
         alt="Phone Image 1" 
-        class="visible max-w-full h-auto drop-shadow-lg"
+        class="w-full h-auto drop-shadow-lg"
       />
       <img 
-        src="phone1.png" 
+        src="https://fqgrs15a9ll8kige.public.blob.vercel-storage.com/Handwritten%20Notes%20(7)_page-0001-Zid7gK2BQg3zaOivedvMYBA8x8rmPu.png" 
         alt="Phone Image 2" 
-        class="hidden max-w-full h-auto drop-shadow-lg"
+        class="w-full h-auto drop-shadow-lg"
       />
-      <img 
-        src="phone2.png" 
-        alt="Phone Image 3" 
-        class="hidden max-w-full h-auto drop-shadow-lg"
-      />
+     
     </div>
   </div>
+
+  <!-- Internal CSS -->
+  <style>
+    /* Default styles for desktop */
+    .phone-container img {
+      max-width: 100%; /* Ensures the image scales down on desktop */
+      height: auto; /* Maintains aspect ratio */
+      
+    }
+
+    /* Mobile-specific styles */
+    @media (max-width: 767px) {
+      .phone-container img {
+        max-width: 150%; /* Increase the size of the image on mobile */
+        transform: scale(1.8); /* Alternatively, use transform to scale */
+        transform-origin: center; /* Ensures the image scales from the center */
+      }
+    }
+  </style>
 </section>
-  </section>
+
+ 
+ 
     
   <!-- Features Section -->
   <section id="features" class="py-16 bg-gray-100 text-blue-900 dark:bg-gray-900 dark:text-gray-100">
