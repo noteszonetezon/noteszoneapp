@@ -96,3 +96,33 @@ function replaceLoadingWithResponse(loadingMessage, response) {
   // Add the AI's response to the chat
   addMessageToChat(response, 'ai');
 }
+function addMessageToChat(message, sender) {
+  const messageElement = document.createElement('div');
+  messageElement.className = `message ${sender}-message`;
+  messageElement.textContent = message;
+  chatContainer.appendChild(messageElement);
+
+  // Scroll to the bottom of the chat container
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+function replaceLoadingWithResponse(loadingMessage, response) {
+  // Remove the loading message
+  chatContainer.removeChild(loadingMessage);
+
+  // Add the AI's response to the chat with the ai-message class
+  addMessageToChat(response, 'ai');
+}
+
+function displayAIMessage(response) {
+  // Remove or replace star symbols
+  const cleanedResponse = response.replace(/\*/g, ''); // Removes all '*' characters
+
+  // Create a new message element
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('ai-message');
+  messageElement.textContent = cleanedResponse;
+
+  // Append the message to the chat container
+  const chatContainer = document.getElementById('chatContainer');
+  chatContainer.appendChild(messageElement);
+}
