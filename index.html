@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-adsense-account" content="ca-pub-2125586648357270">
+    <title>Notes Zone</title>
     <title>Notes Zone - Best Handwritten Notes for CBSE & College Students</title>
 <meta name="description" content="Find high-quality handwritten notes for CBSE Class 12, college exams, and competitive exams. Download now and excel in your studies.">
 <meta name="keywords" content="CBSE notes, college notes, competition notes, handwritten notes">
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Notes Zone",
-        "url": "https://noteszone.online/",
-        "description": "Best handwritten notes for CBSE, college, and competitive exams.",
-        "sameAs": [
-          "https://www.linkedin.com/company/notes-zone/"
-        ]
-      }
-      </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Notes Zone",
+    "url": "https://noteszone.online/",
+    "description": "Best handwritten notes for CBSE, college, and competitive exams.",
+    "sameAs": [
+      "https://www.linkedin.com/company/notes-zone/"
+    ]
+  }
+  </script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Favicon -->
     <link rel="icon" href="logo.ico.ico" type="image/x-icon">
     <script>
@@ -28,12 +29,12 @@
             darkMode: 'class',
         };
     </script>
-     <style>
+    <style>
         /* Smooth transitions */
         body {
   overflow-x: hidden; /* Prevent horizontal scrolling */
   overflow-y: auto; /* Allow vertical scrolling */
-  scroll-behavior: smooth; /* Enable smooth scrolling */          
+  scroll-behavior: smooth; /* Enable smooth scrolling */
 }
 
         header {
@@ -99,7 +100,7 @@ section {
 /* Ensure hero section doesn't extend unnecessarily */
 .hero {
   min-height: 70vh; /* Adjust as needed */
-  background: linear-gradient(to right, #38bdf8, #1e3a8a);
+  background: linear-gradient(to right, #38bdf8, #001d6d);
 }
 .hidden {
   display: none; /* Hide the element */
@@ -123,13 +124,177 @@ section {
   justify-content: center; /* Center the images */
   align-items: center; /* Center vertically */
 }
-</style>
-      
+
+/* Floating Hearts Animation */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  font-size: 20px;
+  color: rgba(255, 182, 193, 0.6);
+  animation: float-up 15s linear infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Valentine's Border */
+.valentine-border {
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4) 1;
+  border-radius: 10px;
+}
+
+/* Heartbeat effect for important elements */
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
+}
+
+/* Love-themed card design */
+.love-card {
+  background: linear-gradient(135deg, #fff5f5, #ffe4e6);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+  transition: all 0.3s ease;
+}
+
+.love-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.3);
+}
+
+/* Interactive heart cursor */
+.heart-cursor {
+  cursor: none;
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  font-size: 20px;
+  transform: translate(-50%, -50%);
+}
+
+/* Heart trail effect */
+.heart-trail {
+  position: fixed;
+  pointer-events: none;
+  font-size: 16px;
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-20px) rotate(45deg);
+  }
+}
+
+/* Interactive love cards */
+.love-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.love-card::before {
+  content: '💖';
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2em;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.love-card:hover::before {
+  top: 10px;
+  opacity: 1;
+}
+
+/* Love button effect */
+.love-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.love-button:hover {
+  transform: scale(1.05);
+}
+
+.love-button::after {
+  content: '❤️';
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2em;
+  transition: all 0.3s ease;
+}
+
+.love-button:hover::after {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Double-tap heart effect */
+.double-tap-area {
+  position: relative;
+}
+
+.heart-burst {
+  position: absolute;
+  pointer-events: none;
+  animation: heartBurst 0.8s cubic-bezier(0.1, 0.7, 0.7, 1) forwards;
+}
+
+@keyframes heartBurst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+    </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
     crossorigin="anonymous"></script>
-   <script async custom-element="amp-auto-ads"
+ <script async custom-element="amp-auto-ads"
         src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
 </script>
+   
     
 
 </head>
@@ -142,8 +307,8 @@ section {
 
   gtag('config', 'G-6V7LPEC5P4');
 </script>
-<body class="bg-white text-blue-900 dark:bg-gray-900 dark:text-white">
-    <amp-auto-ads type="adsense"
+<body class="bg-white text-pink-900 dark:bg-gray-900 dark:text-white">
+     <amp-auto-ads type="adsense"
         data-ad-client="ca-pub-2125586648357270">
 </amp-auto-ads>
     <!-- Loading Logo -->
@@ -209,20 +374,29 @@ section {
         </ul>
     </nav>
 </header>
-    <!--
- <div class="relative min-h-screen flex items-center justify-center">
- 
-  <video playsinline autoplay  loop class="background-video">
-      <source src="notes-zone-promo.mp4.mp4" type="video/mp4">
+   
+<!--
+
+<div class="relative min-h-screen flex items-center justify-center">
+  <video playsinline autoplay loop muted class="background-video">
+      <source src="video/notes-zone-promo.webm" type="video/webm">
       Your browser does not support the video tag.
   </video>
-
 </div>
-    -->
-<section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[70vh] bg-gradient-to-r from-sky-400 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
-  <div class="container mx-auto flex justify-center">
+-->
+
+
+<section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[70vh] bg-gradient-to-r from-pink-400 to-pink-900 text-white dark:bg-gradient-to-r dark:from-pink-800 dark:to-pink-900 relative overflow-hidden">
+  <!-- Add decorative hearts -->
+  <div class="absolute top-0 left-0 w-full h-full">
+    <div class="absolute top-5 left-5 heartbeat">❤️</div>
+    <div class="absolute top-20 right-10 heartbeat" style="animation-delay: 0.5s">💝</div>
+    <div class="absolute bottom-10 left-20 heartbeat" style="animation-delay: 1s">💖</div>
+  </div>
+  <div class="container mx-auto flex justify-center relative z-10">
     <!-- Phone Container -->
     <div class="phone-container relative">
+      
       <img 
         src="hero.png" 
         alt="Phone Image 1" 
@@ -251,6 +425,7 @@ section {
       max-width: 100%; /* Ensures the image scales down on desktop */
       height: auto; /* Maintains aspect ratio */
       transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
+    
     }
 
     /* Mobile-specific styles */
@@ -259,24 +434,22 @@ section {
         max-width: 150%; /* Increase the size of the image on mobile */
         transform: scale(1.8); /* Alternatively, use transform to scale */
         transform-origin: center; /* Ensures the image scales from the center */
-          overflow-x: hidden; /* Prevent horizontal scrolling */
-        overflow-y: auto; /* Allow vertical scrolling */
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
       }
+
     }
   </style>
 </section>
 
- 
- 
-    
   <!-- Features Section -->
-  <section id="features" class="py-16 bg-gray-100 text-blue-900 dark:bg-gray-900 dark:text-gray-100">
+  <section id="features" class="py-16 bg-pink-50 text-pink-900 dark:bg-gray-900 dark:text-pink-100">
     <div class="container mx-auto text-center px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl sm:text-4xl font-bold mb-8">Our Features</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             
             <!-- Feature Card 1 -->
-            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105">
+            <div class="love-card p-6 valentine-border">
                 <img src="cbse notes.jpg" alt="Class 12 Notes" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <h3 class="text-2xl font-bold mb-2">CBSE Notes</h3>
@@ -290,7 +463,7 @@ section {
             </div>
             
             <!-- Feature Card 2 -->
-            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105">
+            <div class="love-card p-6 valentine-border">
                 <img src="college notes.jpg" alt="College Notes" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <h3 class="text-2xl font-bold mb-2">College Notes</h3>
@@ -304,7 +477,7 @@ section {
             </div>
             
             <!-- Feature Card 3 -->
-            <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition-all hover:scale-105">
+            <div class="love-card p-6 valentine-border">
                 <img src="competition notes.jpg" alt="Competition Notes" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <h3 class="text-2xl font-bold mb-2">Competition Notes</h3>
@@ -320,7 +493,7 @@ section {
         </div>
     </div>
 </section>
-<section id="contributor" class="py-16 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 text-blue-900 dark:text-white">
+<section id="contributor" class="py-16 bg-gradient-to-r from-pink-50 to-pink-100 dark:from-gray-800 dark:to-gray-900 text-pink-900 dark:text-white">
   <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12 px-6">
     
     <!-- Left Column: Phone Image -->
@@ -355,8 +528,8 @@ section {
   </div>
 </section>
 
-    <!-- Notes Zone AI Toggle as an Icon with Text -->
-<a href="ai.html" id="noteszoneAI" class="fixed bottom-5 left-5 bg-yellow-400 text-blue-900 font-bold py-2 px-4 rounded-full shadow-lg hover:bg-yellow-500 transition-all flex items-center space-x-2" target="_blank">
+<!-- Notes Zone AI Toggle as an Icon with Text -->
+<a href="ai.html" id="noteszoneAI" class="fixed bottom-5 left-5 bg-pink-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-pink-500 transition-all flex items-center space-x-2" target="_blank">
   <i class="fas fa-robot fa-lg"></i> <!-- FontAwesome robot icon -->
   <span>AI</span> <!-- Text "AI" next to the icon -->
   <!-- NEW Sticker -->
@@ -364,9 +537,9 @@ section {
     NEW
   </span>
 </a>
-    
+
 <!-- New Arrivals Toggle -->
-<a href="new-arrivals.html" id="newArrivalsToggle" class="fixed bottom-5 right-5 bg-yellow-400 text-blue-900 font-bold py-2 px-4 rounded-full shadow-lg hover:bg-yellow-500 transition-all">
+<a href="new-arrivals.html" id="newArrivalsToggle" class="fixed bottom-5 right-5 bg-pink-400 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:bg-pink-500 transition-all">
   New Arrivals
 </a>
 
@@ -412,13 +585,13 @@ section {
 </style>
 
 <!-- Footer -->
-<footer class="bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 text-gray-300 py-10 relative w-full">
+<footer class="bg-gradient-to-r from-pink-800 via-pink-900 to-pink-800 text-gray-300 py-10 relative w-full">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
       <!-- About Section -->
       <div>
-        <h2 class="text-lg font-bold text-yellow-500 mb-4">About Us</h2>
+        <h2 class="text-lg font-bold text-pink-300 mb-4">About Us</h2>
         <p class="text-sm text-gray-400">
           Notes Zone is a platform dedicated to helping learners by providing the best resources, notes, and tools to make their academic journey easier and more efficient.
         </p>
@@ -426,42 +599,42 @@ section {
 
       <!-- Quick Links -->
       <div>
-        <h2 class="text-lg font-bold text-yellow-500 mb-4">Quick Links</h2>
+        <h2 class="text-lg font-bold text-pink-300 mb-4">Quick Links</h2>
         <ul class="space-y-2">
-          <li><a href="#" class="hover:text-yellow-500 transition">Home</a></li>
-          <li><a href="new-arrivals.html" class="hover:text-yellow-500 transition">New Arrivals</a></li>
-          <li><a href="contact.html" class="hover:text-yellow-500 transition">Contact Us</a></li>
-          <li><a href="developer.html" class="hover:text-yellow-500 transition">Developer</a></li>
+          <li><a href="#" class="hover:text-pink-500 transition">Home</a></li>
+          <li><a href="new-arrivals.html" class="hover:text-pink-500 transition">New Arrivals</a></li>
+          <li><a href="contact.html" class="hover:text-pink-500 transition">Contact Us</a></li>
+          <li><a href="developer.html" class="hover:text-pink-500 transition">Developer</a></li>
         </ul>
       </div>
 
       <!-- Donate Us Section -->
       <div>
-        <h2 class="text-lg font-bold text-yellow-500 mb-4">Support Us</h2>
+        <h2 class="text-lg font-bold text-pink-300 mb-4">Support Us</h2>
         <p class="text-sm text-gray-400 mb-4">
           Your contribution helps us continue providing high-quality educational resources and tools. Every donation makes a difference!
         </p>
-        <a href="donate.html" class="bg-yellow-500 text-gray-900 font-bold px-4 py-2 rounded hover:bg-yellow-600 transition inline-block text-center">
+        <a href="donate.html" class="bg-pink-500 text-white font-bold px-4 py-2 rounded hover:bg-pink-600 transition inline-block text-center">
           Donate Us
         </a>
         <p class="text-sm text-gray-400 mt-4">
-          Prefer another method? <a href="contact.html" class="text-yellow-500 hover:underline">Contact us</a> for more options.
+          Prefer another method? <a href="contact.html" class="text-pink-500 hover:underline">Contact us</a> for more options.
         </p>
       </div>
 
       <!-- Follow Us -->
       <div>
-        <h2 class="text-lg font-bold text-yellow-500 mb-4">Follow Us</h2>
+        <h2 class="text-lg font-bold text-pink-300 mb-4">Follow Us</h2>
         <p class="text-sm text-gray-400 mb-4">Connect with us on social media:</p>
         <div class="flex space-x-4">
           <!-- LinkedIn Icon -->
-          <a href="https://www.linkedin.com/company/notes-zone/" target="_blank" class="group hover:text-yellow-500 transition">
+          <a href="https://www.linkedin.com/company/notes-zone/" target="_blank" class="group hover:text-pink-500 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 48 48">
               <path d="M42,4H6A2.006,2.006,0,0,0,4,6V42a2.006,2.006,0,0,0,2,2H42a2.006,2.006,0,0,0,2-2V6A2.006,2.006,0,0,0,42,4ZM16.338,38.133H9.88V20.279h6.458ZM13.11,17.729a3.734,3.734,0,1,1,3.733-3.734A3.733,3.733,0,0,1,13.11,17.729Zm25.05,20.4H31.7V28.628c0-2.269-.044-5.189-3.163-5.189-3.168,0-3.654,2.475-3.654,5.038v9.655H18.428V20.279h6.2v2.431h.089a6.8,6.8,0,0,1,6.122-3.363c6.542,0,7.744,4.31,7.744,9.9Z" />
             </svg>
           </a>
           <!-- YouTube Icon -->
-          <a href="https://youtube.com/@noteszonebotservice?feature=shared" target="_blank" class="group hover:text-yellow-500 transition">
+          <a href="https://youtube.com/@noteszonebotservice?feature=shared" target="_blank" class="group hover:text-pink-500 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 48 48">
               <path d="M42.8,12.2c-0.5-1.9-1.9-3.3-3.7-3.7c-3.3-0.9-16.1-0.9-16.1-0.9s-12.8,0-16.1,0.9c-1.9,0.5-3.3,1.9-3.7,3.7 C3.3,15.5,3.3,24,3.3,24s0,8.5,0.9,11.8c0.5,1.9,1.9,3.3,3.7,3.7c3.3,0.9,16.1,0.9,16.1,0.9s12.8,0,16.1-0.9c1.9-0.5,3.3-1.9,3.7-3.7 c0.9-3.3,0.9-11.8,0.9-11.8S43.7,15.5,42.8,12.2z M19.7,31.4v-14l11.3,7L19.7,31.4z" />
             </svg>
@@ -473,7 +646,7 @@ section {
     <!-- Footer Bottom -->
     <div class="mt-8 border-t border-gray-700 pt-4 flex flex-col sm:flex-row justify-between items-center">
       <p class="text-sm text-gray-400 text-center">&copy; <span id="currentYear"></span> Notes Zone. All rights reserved.</p>
-      <button onclick="scrollToTop()" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded mt-4 sm:mt-0 hover:bg-yellow-600 transition">
+      <button onclick="scrollToTop()" class="bg-pink-500 text-white px-4 py-2 rounded mt-4 sm:mt-0 hover:bg-pink-600 transition">
         Scroll to Top
       </button>
     </div>
@@ -528,6 +701,8 @@ function changePhoneImage() {
   // Show the next image
   phoneImages[currentImage].classList.remove("hidden");
 }
+
+
 
 // Start the transition after the page loads
 window.addEventListener("load", () => {
