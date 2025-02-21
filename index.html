@@ -123,6 +123,142 @@ section {
   justify-content: center; /* Center the images */
   align-items: center; /* Center vertically */
 }
+          /* Glassmorphism Effect */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(40px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .dark .glass-nav {
+      background: rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Link Hover Animation */
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #facc15, #f97316);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Full-Screen Mobile Menu */
+    #mobileMenu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      transition: left 0.3s ease;
+    }
+
+    #mobileMenu.open {
+      left: 0;
+    }
+
+    .dark #mobileMenu {
+      background: rgba(0, 0, 0, 0.95);
+    }
+
+    /* Close Button for Mobile Menu */
+    .close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .dark .close-btn {
+      color: #fff;
+    }
+
+    /* Mobile Menu Links */
+    #mobileMenu ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 0;
+      margin: 1 rem;
+    }
+
+    #mobileMenu ul li {
+      margin: 0.75rem 0;
+    }
+
+    #mobileMenu ul li a {
+      font-size: 1.25 rem;
+      font-weight: 500;
+      color: #292828;
+    }
+
+    .dark #mobileMenu ul li a {
+      color: #fff;
+    }
+    .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 600px;
+            background: transparent;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+        .popup img {
+            width: 100%;
+            
+    height: auto;
+            border-radius: 10px;
+        }
+
+        @media (min-width: 768px) {
+    .popup img {
+        max-width: 80%; /* Reduces image size for desktops */
+    }
+}
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 35px;
+            color: rgb(251, 255, 0);
+            cursor: pointer;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
 
 </style>
      
@@ -158,58 +294,87 @@ section {
 </div>
 
   <!-- Navigation Bar -->
-  <header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
+  <header class="py-1 px-8 sticky top-0 z-50 glass-nav shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
-        <!-- Logo -->
-        <a href="#">
-            <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
-        </a>
-        <!-- Navigation Links -->
-        <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
-            <a href="#features" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Features
-            </a>
-            <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Contact
-            </a>
-            <a href="developer.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Developer
-            </a>
-            <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Contribute
-                 <!-- NEW Sticker -->
-        <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-          NEW
-      </span>
-                <a href="Shop.html" class="block nav-link hover:text-yellow-500 transition">Store</a>
-            </a>
-        </nav>
-        <!-- Mobile Menu Icon -->
-        <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">
-            ☰
-        </button>
-        <!-- Dark Mode Toggle -->
-        <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
-            🌙
-        </button>
-    </div>
-    <!-- Mobile Dropdown Menu -->
-    <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
-        <ul class="flex flex-col space-y-4 p-6">
-            <li><a href="#features" class="block nav-link hover:text-yellow-500 transition">Features</a></li>
-            <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
-            <li><a href="developer.html" class="block nav-link hover:text-yellow-500 transition">Developer</a></li>
-            <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 transition">Contribute
-              <!-- NEW Sticker -->
-<span class="absolute top-0 right-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.25 rounded-full">
-  NEW
-</span>
+      <!-- Logo -->
+      <a href="#" class="flex items-center">
+        <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto hover:scale-105 transition-transform">
+        
+      </a>
 
-            </a></li>
-            <li><a href="Shop.html" class="block nav-link hover:text-yellow-500 transition">Store</a></li>
-        </ul>
+      <!-- Desktop Navigation Links -->
+      <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
+        <a href="#features" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500">
+          Features
+        </a>
+        <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500">
+          Contact
+        </a>
+        <a href="developer.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500">
+          Developer
+        </a>
+        <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 relative">
+          Contribute
+          <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+            NEW
+          </span>
+        </a>
+        <a href="Shop.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500">
+          Store
+        </a>
+        
+        <a href="login.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 flex items-center">
+          <i class="fas fa-sign-in-alt mr-2"></i> Login
+        </a>
+        <a href="login.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 flex items-center">
+          <i class="fas fa-user-plus mr-2"></i> Signup
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Icon -->
+      <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">
+        ☰
+      </button>
+
+      <!-- Dark Mode Toggle -->
+      <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
+        🌙
+      </button>
+    </div>
+    
+
+    <!-- Mobile Dropdown Menu -->
+    <nav id="mobileMenu" class="sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-transform">
+      <div class="close-btn text-gray-800 dark:text-gray-200" id="closeMenu">✕</div>
+      <ul class="flex flex-col space-y-4 p-6">
+
+        <!-- Logo in Mobile Menu -->
+        <a href="index.html">
+      <div class="menu-logo flex justify-center">
+        <img src="logo.png"  alt="Notes Zone Logo" class="h-12 w-auto">
+      </div>
+    </a>
+
+        <li><a href="#features" class="block nav-link hover:text-yellow-500">Features</a></li>
+        <li><a href="contact.html" class="block nav-link hover:text-yellow-500">Contact</a></li>
+        <li><a href="developer.html" class="block nav-link hover:text-yellow-500">Developer</a></li>
+        <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 relative">
+          Contribute
+          <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+            NEW
+          </span>
+        </a></li>
+        <li><a href="Shop.html" class="block nav-link hover:text-yellow-500">Store</a></li>
+        
+        <li><a href="login.html" class="block nav-link hover:text-yellow-500 flex items-center">
+          <i class="fas fa-sign-in-alt mr-2"></i> Login
+        </a></li>
+        <li><a href="login.html" class="block nav-link hover:text-yellow-500 flex items-center">
+          <i class="fas fa-user-plus mr-2"></i> Signup
+        </a></li>
+      </ul>
     </nav>
-</header>
+  </header>
     <!--
  <div class="relative min-h-screen flex items-center justify-center">
  
@@ -220,6 +385,13 @@ section {
 
 </div>
     -->
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="closePopup()">&times;</button>
+        <img src="img/ads.jpg"Ad Image">
+    </div>
+    
 <section class="hero flex items-center justify-center text-center py-20 px-4 min-h-[70vh] bg-gradient-to-r from-sky-400 to-blue-900 text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-900">
   <div class="container mx-auto flex justify-center">
     <!-- Phone Container -->
@@ -492,7 +664,7 @@ section {
 
 
     
-  // Set current year dynamically
+ // Set current year dynamically
   document.getElementById('currentYear').textContent = new Date().getFullYear();
 
   // Scroll to top functionality
@@ -503,27 +675,7 @@ section {
 
   <!-- JavaScript -->
   <script>
-    // Mobile Navigation Toggle
-    const menuToggle = document.getElementById("menuToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-
-    // Dark Mode Toggle
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    const htmlElement = document.documentElement;
-
-    darkModeToggle.addEventListener("click", () => {
-      if (htmlElement.classList.contains("dark")) {
-        htmlElement.classList.remove("dark");
-        darkModeToggle.textContent = "🌙"; // Light mode icon
-      } else {
-        htmlElement.classList.add("dark");
-        darkModeToggle.textContent = "☀️"; // Dark mode icon
-      }
-    });
+   
      // Phone Image Transition
 const phoneImages = document.querySelectorAll(".phone-container img");
 let currentImage = 0;
@@ -604,8 +756,42 @@ links.forEach(link => {
         }
     });
 });
+ // Mobile Menu Toggle
+ const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
 
-</script>
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const htmlElement = document.documentElement;
+
+    darkModeToggle.addEventListener('click', () => {
+      htmlElement.classList.toggle('dark');
+      darkModeToggle.textContent = htmlElement.classList.contains('dark') ? '☀️' : '🌙';
+    });
+
+    window.onload = function() {
+            setTimeout(showPopup, 3000);
+        };
+        
+        function showPopup() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+        
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
  
 </body>
 </html>
