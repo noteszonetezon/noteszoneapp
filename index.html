@@ -38,10 +38,8 @@
 }
 
         header {
-           
-    
-    transition: background-color 0.3s;
- 
+            padding-top: 60px; /* Adjust based on ad height */
+            transition: background-color 0.3s;
         }
 
         /* Custom styling for the navigation links */
@@ -1027,6 +1025,38 @@ document.addEventListener('DOMContentLoaded', function() {
     return text.replace(regex, '<span class="search-highlight">$1</span>');
   }
 });
+
+        // Adjust header padding and mobile menu position based on ad height
+        window.addEventListener('load', () => {
+            const adWrapper = document.getElementById('adWrapper');
+            const header = document.querySelector('header');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            // Check if the ad is loaded
+            const adElement = adWrapper.querySelector('iframe, img, div');
+            if (adElement) {
+                const adHeight = adElement.offsetHeight;
+                header.style.paddingTop = `${adHeight + 10}px`; // Add 10px extra for spacing
+                mobileMenu.style.top = `${adHeight + 10}px`; // Adjust mobile menu position
+            } else {
+                header.style.paddingTop = '0'; // No ad, reset padding
+                mobileMenu.style.top = '0'; // Reset mobile menu position
+            }
+        });
+
+        // Handle resize events for responsive ads
+        window.addEventListener('resize', () => {
+            const adWrapper = document.getElementById('adWrapper');
+            const header = document.querySelector('header');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            const adElement = adWrapper.querySelector('iframe, img, div');
+            if (adElement) {
+                const adHeight = adElement.offsetHeight;
+                header.style.paddingTop = `${adHeight + 10}px`;
+                mobileMenu.style.top = `${adHeight + 10}px`;
+            }
+        });
        
 
         
