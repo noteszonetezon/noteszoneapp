@@ -34,12 +34,20 @@
         body {
   overflow-x: hidden; /* Prevent horizontal scrolling */
   overflow-y: auto; /* Allow vertical scrolling */
-  scroll-behavior: smooth; /* Enable smooth scrolling */          
+  scroll-behavior: smooth; /* Enable smooth scrolling */ 
+
+    padding-top: 70px; /* Adjust to match header height */
 }
 
         header {
            
             transition: background-color 0.3s;
+             position: fixed;
+ top: 0;
+  width: 100%;
+  height: 60px; /* Adjust as needed */
+  background: #fff; /* Your header background */
+  z-index: 1000;
         }
 
 
@@ -82,7 +90,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding-top: 70px; /* Adjust to match header height */
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
