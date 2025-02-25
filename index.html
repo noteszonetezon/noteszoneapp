@@ -41,8 +41,15 @@
 
         header {
            
-            transition: background-color 0.3s;
-            z-index: 1000;
+            position: fixed; /* Fix the header at the top */
+    top: 0; /* Position it at the top of the viewport */
+    left: 0; /* Align it to the left */
+    width: 100%; /* Make it span the full width */
+    z-index: 1000; /* Ensure it stays above other content */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Add a blur effect */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
         }
 
 
