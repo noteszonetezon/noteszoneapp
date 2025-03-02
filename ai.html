@@ -34,7 +34,7 @@
  <div class="container">
     <!-- Header -->
     <header class="header">
-      <img src="logo.png" alt="Notes Zone AI Logo" class="logo">
+      <img src="img/logo.png" alt="Notes Zone AI Logo" class="logo" />
       <h1>Notes Zone AI</h1>
     </header>
 
@@ -43,18 +43,18 @@
       <!-- Chat messages will appear here -->
     </div>
 
-   <!-- Input Area -->
-<div class="input-group">
-  <textarea id="userInput" placeholder="Type your message here..."></textarea>
-  <button class="send-button" id="sendBtn" onclick="sendMessage()">
-    <i class="fas fa-paper-plane"></i> <!-- Font Awesome send icon -->
-  </button>
-</div>
+    <!-- Input Area -->
+    <div class="input-group">
+      <textarea id="userInput" placeholder="Type your message here..."></textarea>
+      <button class="send-button" id="sendBtn" onclick="sendMessage()">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
 
     <!-- Loading Indicator -->
     <div id="loading" style="display: none;">Loading...</div>
   </div>
-  
+
   <script src="aiscript.js"></script>
 </body>
 </html>
