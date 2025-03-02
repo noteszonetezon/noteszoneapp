@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyBjXV4kuE9wpU9zzyq9OA6DEAYNVXo31RU'; // Replace with your Gemini API key
+const API_KEY = 'AIzaSyA8RVbvbeX52QPj1dcg2jPFMWHLdnTt90s'; // Replace with your Gemini API key
 const chatContainer = document.getElementById('chatContainer');
 const userInput = document.getElementById('userInput');
 const loading = document.getElementById('loading');
@@ -28,7 +28,7 @@ async function sendMessage() {
 
     // Send the conversation history to the API
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
       {
         method: 'POST',
         headers: {
@@ -45,6 +45,12 @@ async function sendMessage() {
     }
 
     const data = await response.json();
+
+    // Validate API response structure
+    if (!data.candidates || !data.candidates[0] || !data.candidates[0].content || !data.candidates[0].content.parts[0]) {
+      throw new Error('Invalid API response structure');
+    }
+
     const aiMessage = data.candidates[0].content.parts[0].text;
 
     // Add AI's response to the conversation history
@@ -95,34 +101,4 @@ function replaceLoadingWithResponse(loadingMessage, response) {
 
   // Add the AI's response to the chat
   addMessageToChat(response, 'ai');
-}
-function addMessageToChat(message, sender) {
-  const messageElement = document.createElement('div');
-  messageElement.className = `message ${sender}-message`;
-  messageElement.textContent = message;
-  chatContainer.appendChild(messageElement);
-
-  // Scroll to the bottom of the chat container
-  chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-function replaceLoadingWithResponse(loadingMessage, response) {
-  // Remove the loading message
-  chatContainer.removeChild(loadingMessage);
-
-  // Add the AI's response to the chat with the ai-message class
-  addMessageToChat(response, 'ai');
-}
-
-function displayAIMessage(response) {
-  // Remove or replace star symbols
-  const cleanedResponse = response.replace(/\*/g, ''); // Removes all '*' characters
-
-  // Create a new message element
-  const messageElement = document.createElement('div');
-  messageElement.classList.add('ai-message');
-  messageElement.textContent = cleanedResponse;
-
-  // Append the message to the chat container
-  const chatContainer = document.getElementById('chatContainer');
-  chatContainer.appendChild(messageElement);
 }
