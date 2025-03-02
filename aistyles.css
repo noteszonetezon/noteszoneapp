@@ -1,7 +1,7 @@
 /* General Styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background-image: url('ai.jpg'); /* Add your image path here */
+background-image: url('img/ai.jpg'); /* Add your image path here */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -138,29 +138,39 @@ button:hover {
 }
 
 .loading-message {
-  max-width: 70%;
-  padding: 10px 15px;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  background: #e5e5ea;
-  align-self: flex-start;
-  border-bottom-left-radius: 5px;
   display: flex;
   align-items: center;
   gap: 8px;
+  color: #666;
+  font-style: italic;
 }
 
 .loading-dots span {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: #0077ff;
+  background-color: #666;
   margin: 0 2px;
   animation: bounce 1.4s infinite ease-in-out;
 }
 
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px);
+  }
+}
 @keyframes bounce {
   0%, 80%, 100% {
     transform: translateY(0);
