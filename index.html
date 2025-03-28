@@ -29,6 +29,54 @@
         };
     </script>
      <style>
+         .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .notes-zone-logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .tezon-container {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .tezon-logo {
+            max-width: 100px;
+            margin-bottom: 5px;
+        }
+        
+        .by-tezon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .by-text {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
          
         /* Smooth transitions */
         body {
@@ -370,6 +418,18 @@ section {
     <amp-auto-ads type="adsense"
         data-ad-client="ca-pub-2125586648357270">
 </amp-auto-ads>
+    <div id="intro-screen" class="intro-screen">
+  <!-- Notes Zone logo -->
+  <img src="logo.png" alt="Notes Zone" class="notes-zone-logo">
+  
+  <!-- Tezon logo with "By" text at bottom -->
+  <div class="tezon-container">
+      <div class="by-tezon">
+          <span class="by-text">By</span>
+          <img src="Tezon logo.png" alt="Tezon" class="tezon-logo">
+      </div>
+  </div>
+</div>
    
     <!-- Loading Logo -->
   <div id="loadingScreen" class="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-50 hidden">
@@ -1069,7 +1129,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
        
-
+ // Hide intro screen after 2 seconds
+    setTimeout(function() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            
+            // Remove the intro screen from the DOM after fade out animation completes
+            setTimeout(function() {
+                document.getElementById('intro-screen').remove();
+            }, 500);
+        }, 2000);
         
         
     </script>
