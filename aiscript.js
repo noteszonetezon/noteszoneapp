@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyA8RVbvbeX52QPj1dcg2jPFMWHLdnTt90s'; // Replace with your actual Gemini API key
+const API_KEY = 'AIzaSyCPC09QvmEnr1mKTOe9Ce2V5KUKCImRzrE'; // Replace with your actual Gemini API key
 const chatContainer = document.getElementById('chatContainer');
 const userInput = document.getElementById('userInput');
 
