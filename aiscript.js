@@ -1,13 +1,12 @@
-const API_KEY = 'AIzaSyA8RVbvbeX52QPj1dcg2jPFMWHLdnTt90s'; // Replace with your Gemini API key
+const API_KEY = 'AIzaSyA8RVbvbeX52QPj1dcg2jPFMWHLdnTt90s'; // Replace with your actual Gemini API key
 const chatContainer = document.getElementById('chatContainer');
 const userInput = document.getElementById('userInput');
-const loading = document.getElementById('loading');
 
 let conversationHistory = [];
 
 async function sendMessage() {
   const userMessage = userInput.value.trim();
-
+  
   if (!userMessage) {
     alert('Please enter a message.');
     return;
@@ -31,38 +30,32 @@ async function sendMessage() {
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contents: conversationHistory,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: conversationHistory }),
       }
     );
 
-    if (!response.ok) {
-      throw new Error('API request failed');
-    }
+    if (!response.ok) throw new Error(`API request failed with status ${response.status}`);
 
     const data = await response.json();
 
     // Validate API response structure
-    if (!data.candidates || !data.candidates[0] || !data.candidates[0].content || !data.candidates[0].content.parts[0]) {
-      throw new Error('Invalid API response structure');
-    }
-
-    const aiMessage = data.candidates[0].content.parts[0].text;
+    const aiResponse = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!aiResponse) throw new Error('Invalid API response format');
 
     // Add AI's response to the conversation history
-    conversationHistory.push({ role: 'model', parts: [{ text: aiMessage }] });
+    conversationHistory.push({ role: 'model', parts: [{ text: aiResponse }] });
 
-    // Replace the loading message with the AI's response
-    replaceLoadingWithResponse(loadingMessage, aiMessage);
+    // Replace loading message with AI response
+    replaceLoadingWithResponse(loadingMessage, aiResponse);
   } catch (error) {
     console.error('Error:', error);
     alert('Error sending message. Please try again.');
-    // Remove the loading message if there's an error
-    chatContainer.removeChild(loadingMessage);
+
+    // Remove the loading message if an error occurs
+    if (loadingMessage && chatContainer.contains(loadingMessage)) {
+      chatContainer.removeChild(loadingMessage);
+    }
   }
 }
 
@@ -71,8 +64,6 @@ function addMessageToChat(message, sender) {
   messageElement.className = `message ${sender}-message`;
   messageElement.textContent = message;
   chatContainer.appendChild(messageElement);
-
-  // Scroll to the bottom of the chat container
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
@@ -88,17 +79,13 @@ function showLoadingInChat() {
     </div>
   `;
   chatContainer.appendChild(loadingMessage);
-
-  // Scroll to the bottom of the chat container
   chatContainer.scrollTop = chatContainer.scrollHeight;
-
   return loadingMessage;
 }
 
 function replaceLoadingWithResponse(loadingMessage, response) {
-  // Remove the loading message
-  chatContainer.removeChild(loadingMessage);
-
-  // Add the AI's response to the chat
+  if (loadingMessage && chatContainer.contains(loadingMessage)) {
+    chatContainer.removeChild(loadingMessage);
+  }
   addMessageToChat(response, 'ai');
 }
