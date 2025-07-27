@@ -215,6 +215,26 @@
         .animate-pulse {
             animation: pulse 2s infinite;
         }
+        footer {
+            margin-top: auto;
+            padding: 20px 0;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
     </style>
      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
      crossorigin="anonymous"></script>
@@ -569,47 +589,8 @@
     </div>
 </main>
 
->
-
-
-
-        <!--
-        <section id="buyForm" class="mt-10 hidden">
-            <h2 class="text-3xl font-bold text-center mb-5">Complete Your Purchase</h2>
-            <form action="https://formspree.io/f/xannbwzb" method="POST" class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-xl mx-auto">
-                <div class="mb-4">
-                    <label for="productName" class="block text-gray-700 dark:text-gray-300">Product</label>
-                    <input type="text" id="productName" name="productName" value="Notes Zone Badge" readonly class="w-full bg-gray-100 dark:bg-gray-700 rounded-lg p-2 mt-2" />
-                </div>
-                <div class="mb-4">
-                    <label for="price" class="block text-gray-700 dark:text-gray-300">Price</label>
-                    <input type="text" id="price" name="price" value="₹129" readonly class="w-full bg-gray-100 dark:bg-gray-700 rounded-lg p-2 mt-2" />
-                </div>
-                <div class="mb-4">
-                    <label for="name" class="block text-gray-700 dark:text-gray-300">Your Name</label>
-                    <input type="text" id="name" name="name" class="w-full bg-gray-100 dark:bg-gray-700 rounded-lg p-2 mt-2" placeholder="Enter your name" required />
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700 dark:text-gray-300">Email</label>
-                    <input type="email" id="email" name="email" class="w-full bg-gray-100 dark:bg-gray-700 rounded-lg p-2 mt-2" placeholder="Enter your email" required />
-                </div>
-                <div class="mb-4">
-                    <label for="payment" class="block text-gray-700 dark:text-gray-300">Payment Method</label>
-                    <input type="text" id="payment" name="payment" value="Cash on Delivery" readonly class="w-full bg-gray-100 dark:bg-gray-700 rounded-lg p-2 mt-2" />
-                </div>
-                <div class="mb-4">
-                    <label for="payment" class="block text-gray-700 dark:text-gray-300">Address</label>
-                    <input type="text" id="payment" name="payment" value="Christ University, Delhi NCR (On Campus Delivery)" readonly class="w-full bg-gray-100 dark:bg-gray-700 rounded-lg p-2 mt-2" />
-                </div>
-                
-                <button type="submit" class="w-full bg-green-600 text-white py-2 px-5 rounded-lg hover:bg-green-700">Submit Order</button>
-            </form>
-        </section>
-    </main>
--->
-    <script>
-
-let currentSlide = 0;
+<script>
+    let currentSlide = 0;
     const slides = document.querySelectorAll('.slider-image');
     const dots = document.querySelectorAll('.slider-dot');
     
@@ -725,7 +706,93 @@ sliderContainers.forEach(container => {
         });
     });
     
+    // Function to handle product selection and authentication
+    function handleProductClick(productType, productName, price, imageUrl) {
+        const user = auth.currentUser;
+        if (!user) {
+            // Save product details to localStorage
+            const productDetails = {
+                type: productType,
+                name: productName,
+                price: price,
+                image: imageUrl
+            };
+            localStorage.setItem('pendingProduct', JSON.stringify(productDetails));
+            
+            // Show authentication modal or redirect to auth page
+            window.location.href = 'auth.html';
+            return;
+        }
 
-    </script>
+        // If logged in, redirect to appropriate product page
+        window.location.href = `${productType}.html`;
+    }
+
+    // Check authentication state and handle pending products
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            const pendingProduct = localStorage.getItem('pendingProduct');
+            if (pendingProduct) {
+                const productDetails = JSON.parse(pendingProduct);
+                window.location.href = `${productDetails.type}.html`;
+                localStorage.removeItem('pendingProduct');
+            }
+        }
+    });
+
+    // Update all product card buttons to use handleProductClick
+    document.querySelectorAll('.product-card .buy-button').forEach(button => {
+        const card = button.closest('.product-card');
+        const productName = card.querySelector('h3').textContent.trim();
+        const priceText = card.querySelector('.text-green-600').textContent;
+        const price = parseInt(priceText.replace('₹', ''));
+        const imageUrl = card.querySelector('.slider-image').src;
+        
+        let productType = '';
+        if (productName.includes('Badge')) {
+            productType = 'badge';
+        } else if (productName.includes('Keychain')) {
+            productType = 'keychain';
+        } else if (productName.includes('Lab Manual')) {
+            productType = 'labmanual';
+        }
+
+        button.onclick = (e) => {
+            e.preventDefault();
+            handleProductClick(productType, productName, price, imageUrl);
+        };
+    });
+</script>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- Firebase Config -->
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyB-XawiwFbCOxyLpgNUIoW7MySWblx5zI8",
+        authDomain: "notes-zone-2005.firebaseapp.com",
+        projectId: "notes-zone-2005",
+        storageBucket: "notes-zone-2005.firebasestorage.app",
+        messagingSenderId: "729445577922",
+        appId: "1:729445577922:web:4d87e4f19c37c32b13775b",
+        measurementId: "G-9TER2ZYDCN"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+</script>
+
+<footer>
+    <div class="footer-links">
+        <a href="T&C.html">Terms & Conditions</a>
+        <a href="refund-policy.html">Refund Policy</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+    </div>
+</footer>
 </body>
 </html>

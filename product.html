@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Product Animation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f0f0f0; /* Studio-like background */
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        #loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #09f;
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loader">
+        <div class="spinner"></div>
+        <p>Loading Animation...</p>
+    </div>
+    <div id="info">
+        <p><strong>Animation Complete!</strong><br>You can now interact with the scene. Drag to rotate.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <script>
+        // --- Basic Scene Setup ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xe8e8e8); // A lighter studio grey
+
+        // Add subtle fog for the "cold vapor" effect near the base
+        scene.fog = new THREE.Fog(0xe8e8e8, 10, 25);
+
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 4, 12); // Start from a slightly elevated angle
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        document.body.appendChild(renderer.domElement);
+        
+        const loaderElement = document.getElementById('loader');
+        const infoElement = document.getElementById('info');
+
+        // --- Lighting ---
+        // Ambient light for general illumination
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        // Directional light for highlights and shadows, simulating a main studio light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(-5, 10, 7.5);
+        directionalLight.castShadow = true;
+        directionalLight.shadow.mapSize.width = 2048;
+        directionalLight.shadow.mapSize.height = 2048;
+        directionalLight.shadow.camera.near = 0.5;
+        directionalLight.shadow.camera.far = 50;
+        scene.add(directionalLight);
+
+        // This spotlight creates the moving glow effect
+        const spotLight = new THREE.SpotLight(0xffffff, 1.5, 20, Math.PI / 4, 0.5, 2);
+        spotLight.position.set(0, 5, 5);
+        scene.add(spotLight);
+        scene.add(spotLight.target);
+        
+        // --- Product Mesh (The Book) ---
+        let bookMesh;
+        const textureLoader = new THREE.TextureLoader();
+
+        // **FIX START**
+        // Use fetch to get the image as a blob, create a local object URL,
+        // and then load it. This is a robust way to bypass CORS issues.
+        const imageUrl = 'https://storage.googleapis.com/gemini-prod-us-west1-assets/user/2024-06-06/uploaded:Untitled%20design%20(1).png-65f28f78-1275-46d9-bfe5-320a0c4bb62f?ns=HACKATHON';
+
+        fetch(imageUrl)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Network response was not ok. Status: ${res.status}`);
+                }
+                return res.blob();
+            })
+            .then(blob => {
+                const objectURL = URL.createObjectURL(blob);
+                // Now load the texture using the local blob URL
+                textureLoader.load(
+                    objectURL,
+                    function(texture) {
+                        // Image successfully loaded
+                        loaderElement.style.display = 'none'; // Hide loader
+                        URL.revokeObjectURL(objectURL); // Clean up memory
+
+                        // Book dimensions (adjust aspect ratio to match image)
+                        const bookWidth = 5;
+                        const bookHeight = bookWidth * (texture.image.height / texture.image.width);
+                        const bookDepth = 0.5;
+
+                        const bookGeometry = new THREE.BoxGeometry(bookWidth, bookHeight, bookDepth);
+
+                        const materials = [
+                            new THREE.MeshStandardMaterial({ color: 0xffffff }), // right
+                            new THREE.MeshStandardMaterial({ color: 0xffffff }), // left
+                            new THREE.MeshStandardMaterial({ color: 0xffffff }), // top
+                            new THREE.MeshStandardMaterial({ color: 0xffffff }), // bottom
+                            new THREE.MeshStandardMaterial({ map: texture, roughness: 0.4, metalness: 0.1 }), // front
+                            new THREE.MeshStandardMaterial({ color: 0xdddddd }), // back
+                        ];
+
+                        bookMesh = new THREE.Mesh(bookGeometry, materials);
+                        bookMesh.position.y = bookHeight / 2 - 1;
+                        bookMesh.castShadow = true;
+                        scene.add(bookMesh);
+                        
+                        spotLight.target = bookMesh;
+
+                        introAnimation();
+                        animate();
+                    },
+                    undefined,
+                    function(err) {
+                        console.error('An error happened while loading the texture from the object URL.', err);
+                        loaderElement.innerHTML = 'Error processing product image.';
+                    }
+                );
+            })
+            .catch(err => {
+                console.error('An error happened while fetching the texture.', err);
+                loaderElement.innerHTML = `Error fetching product image: ${err.message}`;
+            });
+        // **FIX END**
+
+        // --- Ground Plane ---
+        const planeGeometry = new THREE.PlaneGeometry(100, 100);
+        const planeMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
+        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.rotation.x = -Math.PI / 2;
+        plane.position.y = -1; // Positioned slightly below the book
+        plane.receiveShadow = true;
+        scene.add(plane);
+
+        // --- Controls ---
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.screenSpacePanning = false;
+        controls.maxDistance = 50;
+        controls.minDistance = 3;
+        controls.maxPolarAngle = Math.PI / 2;
+        controls.enabled = false; // Disabled until intro animation is finished
+
+        // --- Animation Logic (GSAP) ---
+        function introAnimation() {
+            if (!bookMesh) return;
+            
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    controls.enabled = true; // Enable user interaction after animation
+                    infoElement.style.opacity = '1';
+                    infoElement.style.transform = 'translateY(0)';
+                }
+            });
+
+            tl.to(camera.position, { x: 0, y: 2, z: 8, duration: 2.5, ease: "power2.inOut" }, 0);
+            tl.from(spotLight.position, { x: -5, y: 8, z: 8, duration: 3, ease: "power1.inOut" }, 0.5);
+            tl.to(bookMesh.position, { y: "+=0.1", duration: 2, yoyo: true, repeat: -1, ease: "sine.inOut" }, 0);
+            tl.to(bookMesh.rotation, { y: -Math.PI / 16, duration: 2, ease: "power2.inOut" }, ">-1");
+        }
+
+        // --- Render Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            if (controls.enabled) {
+                controls.update();
+            }
+            renderer.render(scene, camera);
+        }
+
+        // --- Handle Window Resizing ---
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }, false);
+    </script>
+</body>
+</html>

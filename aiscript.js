@@ -2,6 +2,14 @@ const API_KEY = 'AIzaSyCPC09QvmEnr1mKTOe9Ce2V5KUKCImRzrE'; // Replace with your 
 const chatContainer = document.getElementById('chatContainer');
 const userInput = document.getElementById('userInput');
 
+userInput.addEventListener('keydown', (event) => {
+  // Check if Enter is pressed without the Shift key
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault(); // Prevents adding a new line in the textarea
+    sendMessage();
+  }
+});
+
 let conversationHistory = [];
 
 async function sendMessage() {

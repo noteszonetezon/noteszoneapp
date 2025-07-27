@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes Zone – Your Notes. Your Zone.</title>
+  <meta name="description" content="Notes Zone: The best handwritten notes for CBSE, college, and competitive exams. Now with a stunning new look inspired by Apple Liquid Glass UI.">
+  <link rel="icon" href="logo.ico.ico" type="image/x-icon">
+  <link rel="preload" href="logo.png" as="image">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'SF Pro Display', 'Inter', 'San Francisco', system-ui, sans-serif;
+      background: linear-gradient(135deg, #009FFF 0%, #20E3B2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .liquid-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 20% 30%, #009FFF 0%, transparent 70%),
+                  radial-gradient(ellipse at 80% 70%, #20E3B2 0%, transparent 70%),
+                  linear-gradient(135deg, #009FFF 0%, #20E3B2 100%);
+      opacity: 0.7;
+      filter: blur(40px) saturate(120%);
+      animation: moveBg 16s ease-in-out infinite alternate;
+    }
+    @keyframes moveBg {
+      0% { background-position: 0% 0%, 100% 100%, 0% 0%; }
+      100% { background-position: 100% 100%, 0% 0%, 100% 100%; }
+    }
+    .glass {
+      background: rgba(255,255,255,0.18);
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .glass:hover {
+      box-shadow: 0 12px 48px 0 rgba(0,159,255,0.25), 0 2px 8px 0 rgba(32,227,178,0.12);
+      transform: translateY(-2px) scale(1.02);
+    }
+    .glass-btn {
+      background: linear-gradient(90deg, #009FFF 0%, #20E3B2 100%);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 9999px;
+      box-shadow: 0 2px 8px rgba(0,159,255,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      outline: none;
+    }
+    .glass-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 24px rgba(0,159,255,0.25);
+      cursor: pointer;
+    }
+    .glass-card {
+      transition: box-shadow 0.2s, transform 0.2s;
+      border-radius: 1.25rem;
+    }
+    .glass-card:hover {
+      box-shadow: 0 8px 32px 0 rgba(0,159,255,0.18), 0 2px 8px 0 rgba(32,227,178,0.12);
+      transform: translateY(-4px) scale(1.03);
+    }
+    .glass-nav {
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 2px 16px 0 rgba(0,159,255,0.08);
+    }
+    .dark .glass, .dark .glass-nav {
+      background: rgba(30,41,59,0.45);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .parallax {
+      background: linear-gradient(120deg, #009FFF 0%, #20E3B2 100%);
+      filter: blur(32px) brightness(1.1);
+      opacity: 0.5;
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      animation: parallaxMove 20s linear infinite alternate;
+    }
+    @keyframes parallaxMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-40px); }
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .glow {
+      box-shadow: 0 0 16px 4px #20E3B2, 0 0 32px 8px #009FFF;
+      border-radius: 1.25rem;
+    }
+    .glass-icon {
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(16px);
+      border-radius: 50%;
+      box-shadow: 0 2px 12px 0 rgba(0,159,255,0.10);
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .glass-icon:hover {
+      box-shadow: 0 0 24px 4px #009FFF, 0 0 32px 8px #20E3B2;
+      transform: scale(1.08);
+    }
+    .testimonial-glow {
+      box-shadow: 0 0 24px 4px #20E3B2, 0 0 32px 8px #009FFF;
+      border-radius: 1.25rem;
+    }
+    .counter-card {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(18px);
+      border-radius: 1.25rem;
+      box-shadow: 0 2px 16px 0 rgba(0,159,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: 0 0 8px #009FFF, 0 0 16px #20E3B2;
+      margin: 0 1rem;
+      padding: 1.5rem 2.5rem;
+      display: inline-block;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .counter-card:hover {
+      box-shadow: 0 0 32px 8px #009FFF, 0 0 32px 8px #20E3B2;
+      transform: scale(1.05);
+    }
+    .footer-glass {
+      background: rgba(30,41,59,0.65);
+      backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .footer-icon {
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      padding: 0.7rem;
+      margin: 0 0.3rem;
+      box-shadow: 0 0 12px 2px #009FFF, 0 0 16px 4px #20E3B2;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-icon:hover {
+      box-shadow: 0 0 32px 8px #009FFF, 0 0 32px 8px #20E3B2;
+      transform: scale(1.12);
+    }
+    .floating-card {
+      position: absolute;
+      will-change: transform;
+      transition: transform 0.3s cubic-bezier(.23,1.01,.32,1);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .glass-cursor {
+      cursor: pointer;
+      transition: box-shadow 0.2s;
+    }
+    .glass-cursor:hover {
+      box-shadow: 0 0 24px 4px #009FFF, 0 0 32px 8px #20E3B2;
+    }
+  </style>
+</head>
+<body class="text-white dark:bg-gray-900 dark:text-white transition-colors duration-500">
+  <div class="liquid-bg"></div>
+  <!-- Navigation Bar -->
+  <header class="glass-nav sticky top-0 z-50 w-full py-3 px-6 flex items-center justify-between shadow-lg">
+    <div class="flex items-center space-x-3">
+      <img src="logo.png" alt="Notes Zone Logo" class="h-10 w-10 rounded-xl shadow-lg">
+      <span class="text-2xl font-bold tracking-tight">Notes Zone</span>
+    </div>
+    <nav class="hidden md:flex space-x-8 text-lg font-medium">
+      <a href="#features" class="hover:text-teal-300 transition">Features</a>
+      <a href="#about" class="hover:text-teal-300 transition">About</a>
+      <a href="#contribute" class="hover:text-teal-300 transition">Contribute</a>
+      <a href="#explore" class="hover:text-teal-300 transition">Explore</a>
+      <a href="#contact" class="hover:text-teal-300 transition">Contact</a>
+    </nav>
+    <button id="darkModeToggle" class="ml-4 text-2xl focus:outline-none">🌙</button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative flex flex-col items-center justify-center min-h-[70vh] text-center px-4 pt-16">
+    <div class="parallax"></div>
+    <div class="glass max-w-3xl w-full mx-auto p-12 mt-8 mb-8 shadow-2xl relative fade-in">
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-teal-300">Your Notes. Your Zone.</h1>
+      <p class="text-lg md:text-xl mb-8 text-white/80">The best handwritten notes for CBSE, College, and Competitive Exams.<br>Now with a stunning new look inspired by Apple Liquid Glass UI.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-6">
+        <a href="#explore" class="glass-btn px-8 py-3 text-lg mt-2 inline-block glass-cursor">Get Started</a>
+        <a href="https://noteszone.online/contribute.html" class="glass-btn px-8 py-3 text-lg mt-2 inline-block glass-cursor">Contribute Now</a>
+      </div>
+      <!-- Floating 3D-style icons -->
+      <div class="absolute left-[-40px] top-[-40px] floating-card" style="animation: moveBg 8s infinite alternate;">
+        <div class="glass-icon"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#009FFF"/><text x="12" y="17" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial">N</text></svg></div>
+      </div>
+      <div class="absolute right-[-40px] bottom-[-40px] floating-card" style="animation: moveBg 10s infinite alternate-reverse;">
+        <div class="glass-icon"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="8" fill="#20E3B2"/><text x="12" y="17" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial">Z</text></svg></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Notes Zone -->
+  <section id="about" class="py-16">
+    <div class="glass max-w-2xl mx-auto p-10 text-center fade-in">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">What is Notes Zone?</h2>
+      <p class="text-lg text-white/80">Notes Zone provides high-quality handwritten notes for CBSE, college students, and competitive exam preparation. Download free study materials created by experts to boost your academic performance.</p>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-16">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 fade-in">Our Features</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+      <!-- Feature Card 1 -->
+      <div class="glass glass-card p-8 flex flex-col items-center text-center fade-in">
+        <div class="glass-icon mb-4"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#009FFF"/><text x="12" y="17" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial">C</text></svg></div>
+        <h3 class="text-2xl font-bold mb-2">CBSE Notes</h3>
+        <p class="mb-4 text-white/80">Handwritten notes for all subjects tailored for CBSE Class 12 students.</p>
+        <a href="#explore" class="glass-btn px-6 py-2 glass-cursor">Read CBSE Notes</a>
+      </div>
+      <!-- Feature Card 2 -->
+      <div class="glass glass-card p-8 flex flex-col items-center text-center fade-in">
+        <div class="glass-icon mb-4"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="8" fill="#20E3B2"/><text x="12" y="17" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial">U</text></svg></div>
+        <h3 class="text-2xl font-bold mb-2">College Notes</h3>
+        <p class="mb-4 text-white/80">Concise, exam-focused notes for college students to ace semester exams.</p>
+        <a href="#explore" class="glass-btn px-6 py-2 glass-cursor">Explore College Notes</a>
+      </div>
+      <!-- Feature Card 3 -->
+      <div class="glass glass-card p-8 flex flex-col items-center text-center fade-in">
+        <div class="glass-icon mb-4"><svg width="32" height="32" fill="none" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="12" fill="#009FFF"/><text x="12" y="17" text-anchor="middle" font-size="14" fill="#fff" font-family="Arial">E</text></svg></div>
+        <h3 class="text-2xl font-bold mb-2">Competition Notes</h3>
+        <p class="mb-4 text-white/80">Math, Biology, Physics, and Chemistry notes for entrance exams.</p>
+        <a href="#explore" class="glass-btn px-6 py-2 glass-cursor">Coming Soon!</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contribute Section -->
+  <section id="contribute" class="py-16">
+    <div class="relative max-w-5xl mx-auto flex flex-col md:flex-row gap-8 items-center justify-center">
+      <div class="glass glass-card p-10 flex-1 text-center fade-in">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Become a Contributor</h2>
+        <p class="text-lg mb-6 text-white/80">Are you passionate about sharing knowledge? Join our team and contribute handwritten notes, resources, or articles to help students worldwide. Together, we can build a better learning platform!</p>
+        <a href="https://noteszone.online/contribute.html" class="glass-btn px-8 py-3 text-lg glass-cursor">Contribute Now</a>
+      </div>
+      <div class="glass glass-card p-10 flex-1 text-center fade-in">
+        <h3 class="text-2xl font-bold mb-2">Why Contribute?</h3>
+        <ul class="text-white/80 text-lg space-y-2">
+          <li>🌟 Help students succeed</li>
+          <li>✍️ Share your expertise</li>
+          <li>🎓 Build your academic profile</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learn with Us / Explore Notes -->
+  <section id="explore" class="py-16 relative overflow-hidden">
+    <div class="parallax"></div>
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 fade-in">Learn with Us</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto px-4 fade-in">
+      <div class="glass-card glass p-6 flex flex-col items-center text-center glass-cursor">
+        <span class="glass-icon mb-2"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#009FFF"/></svg></span>
+        <span class="font-bold text-lg">Science</span>
+      </div>
+      <div class="glass-card glass p-6 flex flex-col items-center text-center glass-cursor">
+        <span class="glass-icon mb-2"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#20E3B2"/></svg></span>
+        <span class="font-bold text-lg">Math</span>
+      </div>
+      <div class="glass-card glass p-6 flex flex-col items-center text-center glass-cursor">
+        <span class="glass-icon mb-2"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#009FFF"/></svg></span>
+        <span class="font-bold text-lg">English</span>
+      </div>
+      <div class="glass-card glass p-6 flex flex-col items-center text-center glass-cursor">
+        <span class="glass-icon mb-2"><svg width="28" height="28" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#20E3B2"/></svg></span>
+        <span class="font-bold text-lg">Programming</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials / Impact Counter -->
+  <section class="py-16">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 fade-in">Our Impact</h2>
+    <div class="flex flex-wrap justify-center gap-8 fade-in">
+      <div class="counter-card glow">10K+<br><span class="text-lg font-medium">Students</span></div>
+      <div class="counter-card glow">500+<br><span class="text-lg font-medium">Notes</span></div>
+      <div class="counter-card glow">100+<br><span class="text-lg font-medium">Contributors</span></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-glass py-8 mt-16">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+      <div class="flex items-center space-x-3 mb-4 md:mb-0">
+        <img src="logo.png" alt="Notes Zone Logo" class="h-8 w-8 rounded-xl">
+        <span class="font-bold text-lg">Notes Zone</span>
+      </div>
+      <div class="flex space-x-6">
+        <a href="#" class="footer-icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.792 0 0 .771 0 1.723v20.554C0 23.229.792 24 1.77 24h20.46C23.208 24 24 23.229 24 22.277V1.723C24 .771 23.208 0 22.23 0zM7.12 20.452H3.56V9h3.56v11.452zM5.34 7.633a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM20.452 20.452h-3.56v-5.605c0-1.336-.025-3.057-1.865-3.057-1.867 0-2.153 1.457-2.153 2.963v5.699h-3.56V9h3.418v1.561h.049c.477-.902 1.637-1.852 3.37-1.852 3.602 0 4.267 2.37 4.267 5.455v6.288z"/></svg></a>
+        <a href="#" class="footer-icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.112C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.386.574A2.994 2.994 0 0 0 .502 6.186C0 8.072 0 12 0 12s0 3.928.502 5.814a2.994 2.994 0 0 0 2.112 2.112C4.5 20.5 12 20.5 12 20.5s7.5 0 9.386-.574a2.994 2.994 0 0 0 2.112-2.112C24 15.928 24 12 24 12s0-3.928-.502-5.814zM9.545 15.568V8.432l6.545 3.568-6.545 3.568z"/></svg></a>
+        <a href="#" class="footer-icon"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.974.974-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.974-.974 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.012 7.052.07 5.771.128 4.635.334 3.678 1.292 2.72 2.25 2.514 3.386 2.456 4.667.012 8.332 0 8.741 0 12c0 3.259.012 3.668.07 4.948.058 1.281.264 2.417 1.222 3.375.958.958 2.094 1.164 3.375 1.222C8.332 23.988 8.741 24 12 24c3.259 0 3.668-.012 4.948-.07 1.281-.058 2.417-.264 3.375-1.222.958-.958 1.164-2.094 1.222-3.375.058-1.28.07-1.689.07-4.948 0-3.259-.012-3.668-.07-4.948-.058-1.281-.264-2.417-1.222-3.375-.958-.958-2.094-1.164-3.375-1.222C15.668.012 15.259 0 12 0z"/></svg></a>
+      </div>
+      <div class="mt-4 md:mt-0 text-sm text-white/60">&copy; <span id="currentYear"></span> Notes Zone. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const htmlElement = document.documentElement;
+    darkModeToggle.addEventListener('click', () => {
+      htmlElement.classList.toggle('dark');
+      darkModeToggle.textContent = htmlElement.classList.contains('dark') ? '☀️' : '🌙';
+    });
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    // Fade-in on scroll
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const fadeInOnScroll = () => {
+      fadeEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60) {
+          el.style.animationPlayState = 'running';
+        }
+      });
+    };
+    window.addEventListener('scroll', fadeInOnScroll);
+    window.addEventListener('DOMContentLoaded', fadeInOnScroll);
+  </script>
+</body>
+</html>
