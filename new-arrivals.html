@@ -1,619 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-adsense-account" content="ca-pub-2125586648357270">
-    <title>New Arrivals - Notes Zone</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Favicon -->
-    <link rel="icon" href="logo.ico.ico" type="image/x-icon">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        };
-    </script>
-    <style>
-        /* Smooth transitions */
-        body {
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        header {
-            transition: background-color 0.3s;
-        }
-
-        /* Custom styling for the navigation links */
-        .nav-link {
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: #facc15; /* Yellow underline */
-            transition: width 0.3s, left 0.3s;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        /* Hero section responsiveness */
-        @media (max-width: 640px) {
-            .hero {
-                min-height: 70vh;
-            }
-        }
-    </style>
-    <style>
-        /* Customizing the 'Download' Button */
-        .download-btn {
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .download-btn:hover {
-            transform: scale(1.05);
-            background-color: #2563eb;
-        }
-
-        /* Custom Animation */
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Applying the animation */
-        .fade-in {
-            animation: fadeInUp 1s ease-in-out forwards;
-        }
-    </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
-    crossorigin="anonymous"></script>
-    <script async custom-element="amp-auto-ads"
-        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-</script>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6V7LPEC5P4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6V7LPEC5P4');
-</script>
-
-<body class="bg-gradient-to-b from-sky-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-100 relative">
-    <amp-auto-ads type="adsense"
-    data-ad-client="ca-pub-2125586648357270">
-</amp-auto-ads>
-    <!-- Enhanced Grid Overlay -->
-    <div class="fixed inset-0 pointer-events-none">
-        <!-- Primary Grid -->
-        <div class="hero-grid absolute inset-0 opacity-30 dark:opacity-20"></div>
-        <!-- Secondary Grid -->
-        <div class="hero-grid-secondary absolute inset-0 opacity-15 dark:opacity-10"></div>
-    </div>
-
-    
-  
-    <!-- Loading Logo -->
-<div id="loadingScreen" class="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-50 hidden">
-    <video autoplay loop muted playsinline class="h-32 w-32">
-        <source src="logowebm.webm" type="video/webm">
-        <source src="logogif.gif" type="video/mp4">
-        <img src="logo.png" alt="Loading..." class="h-32 w-32">
-        Your browser does not support the video tag.
-    </video>
-</div>
-
-<!-- Navigation Bar -->
-<header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
-    <div class="container mx-auto flex justify-between items-center">
-        <!-- Logo -->
-        <a href="index.html">
-            <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
-        </a>
-        <!-- Navigation Links -->
-        <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
-            <a href="#features" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Features
-            </a>
-            <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Contact
-            </a>
-            <a href="developer.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Developer
-            </a>
-            <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                Contribute
-                 <!-- NEW Sticker -->
-        <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-          NEW
-      </span>
-            </a>
-        </nav>
-        <!-- Mobile Menu Icon -->
-        <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">
-            ☰
-        </button>
-        <!-- Dark Mode Toggle -->
-        <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
-            🌙
-        </button>
-    </div>
-    <!-- Mobile Dropdown Menu -->
-    <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
-        <ul class="flex flex-col space-y-4 p-6">
-            <li><a href="#features" class="block nav-link hover:text-yellow-500 transition">Features</a></li>
-            <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
-            <li><a href="developer.html" class="block nav-link hover:text-yellow-500 transition">Developer</a></li>
-            <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 transition">Contribute
-              <!-- NEW Sticker -->
-<span class="absolute top-0 right-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.25 rounded-full">
-  NEW
-</span>
-
-            </a></li>
-        </ul>
-    </nav>
-</header>
-    <!-- Hero Section - Reduced padding -->
-    <header class="relative py-8 overflow-hidden">
-        <!-- Enhanced Background Elements -->
-        <div class="floating-elements absolute inset-0">
-            <!-- Educational Icons -->
-            <i class="fas fa-book floating-icon" style="top: 8%; left: 15%;"></i>
-            <i class="fas fa-lightbulb floating-icon" style="top: 12%; left: 75%;"></i>
-            <i class="fas fa-graduation-cap floating-icon" style="top: 35%; left: 28%;"></i>
-            <i class="fas fa-atom floating-icon" style="top: 20%; right: 25%;"></i>
-            <i class="fas fa-flask floating-icon" style="bottom: 25%; left: 40%;"></i>
-            <i class="fas fa-microscope floating-icon" style="top: 45%; right: 15%;"></i>
-            
-            <!-- Mathematical Symbols -->
-            <span class="math-symbol" style="top: 30%; left: 65%;">π</span>
-            <span class="math-symbol" style="bottom: 40%; right: 35%;">∑</span>
-            <span class="math-symbol" style="top: 60%; left: 20%;">∞</span>
-            
-            <!-- Decorative Dots -->
-            <div class="floating-dot" style="top: 15%; left: 45%;"></div>
-            <div class="floating-dot" style="top: 55%; right: 25%;"></div>
-            <div class="floating-dot" style="bottom: 35%; left: 30%;"></div>
-        </div>
-
-        <!-- Hero Content - Reduced margin -->
-        <div class="container mx-auto px-4 relative z-10 mb-4">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600 dark:from-sky-400 dark:to-blue-400">
-                New Arrivals
-            </h1>
-            <p class="text-lg md:text-xl text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-                Discover our latest additions to enhance your learning journey 🚀
-            </p>
-        </div>
-    </header>
-
-    <!-- Content Section - Reduced top padding -->
-    <main class="container mx-auto py-8 px-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-
-
-             <!-- Maths Notes Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Python Program 1 lab file</h3>
-                        <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Deadline approaching! Finish it now with Notes Zone.</p>
-                    <a href="cia.html" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Check Now!</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-
-
-            <!-- Intel Unnati Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">CIA-IIIA_Case Study</h3>
-                        <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
-                    </div>
-                 <p class="text-gray-600 dark:text-gray-300 mb-6">Maths Assignment</p>
-                    <a href="https://drive.google.com/file/d/1zFPSsTaGiF-g7zb6DEjJFBd0E8DaX_L1/view?usp=drivesdk" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Download Now!</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-
-
-             <!-- Maths Notes Card -->
-<div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-    <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-    <div class="p-6 relative">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Maths Notes + Questions</h3>
-            <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
-        </div>
-        <p class="text-gray-600 dark:text-gray-300 mb-6">Maths Handwritten Notes and Mid Sem Question Paper for Repeat-Mid Sem</p>
-        
-        <!-- Button Wrapper with Space -->
-        <div class="flex space-x-4">
-            <a href="https://drive.google.com/file/d/1kcuj02bK5GC62sVp1t375Fx18Y7Q9-Lp/view" 
-               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                <span>Notes!</span>
-            </a>
-            <a href="https://drive.google.com/file/d/1pEEdsKOHZvIanh7DBCHQKYddpNil2tCh/view" 
-               class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                <span>Question Paper!</span>
-            </a>
-        </div>
-    </div>
-</div>
-
-
-            
-            
-            <!-- Maths Notes Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">DSA Assignment 9</h3>
-                        <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Dont Miss the Deadline!</p>
-                    <a href="https://drive.google.com/file/d/1rC7y-w8Drxg3xQiN7uXcci-8_kntGzK1/view?usp=drivesdk" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Download Now!</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-
-
-            
-             <!-- Maths Notes Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Java Complete Notes🔥</h3>
-                        <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Complete Digital Notes!</p>
-                    <a href="https://drive.google.com/file/d/1HRmUqC2udeJuA1hoE69ITivHvHPr7JAn/view?usp=drivesdk" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Download Now!</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-
- <!-- Maths Notes Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">All Programming Handwritten Notes🔥</h3>
-                        <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Complete Colourful Handwitten Notes!</p>
-                    <a href="allprog.html" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Visit Site</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-
-        
-            
-            
-          
-            
-             <!-- Maths Notes Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">2 BCA DCN</h3>
-                        <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Your daily class notes are ready for you!</p>
-                    <a href="DCN_2BCA.html" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>View More</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-            
-            
-          
- 
-            <!-- Internshala Resume Guide Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">INTERNSHALA RESUME GUIDE</h3>
-                        <span class="bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full">HOT</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Professional resume building guide for internship seekers</p>
-                    <a href="Internshala_Resume_Guide.pdf" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Download Guide</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Physics Chapters Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Physics Chapters</h3>
-                        <span class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">COMPLETE</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Complete collection of Physics chapters with detailed explanations</p>
-                    <a href="physics-chapters.html" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Explore Chapters</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Chemistry Chapters Card -->
-            <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div class="p-6 relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Chemistry Chapters</h3>
-                        <span class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">COMPLETE</span>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">Comprehensive chemistry chapters with solved examples</p>
-                    <a href="chemistry 12.html" 
-                       class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all group">
-                        <span>Explore Chapters</span>
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <style>
-    /* Primary Grid - Larger Lines */
-    .hero-grid {
-        background-image: 
-            linear-gradient(to right, rgba(56, 189, 248, 0.3) 1.5px, transparent 1.5px),
-            linear-gradient(to bottom, rgba(56, 189, 248, 0.3) 1.5px, transparent 1.5px);
-        background-size: 80px 80px;
-        background-attachment: fixed;
-        z-index: -1;
-    }
-
-    /* Secondary Grid - Smaller Lines */
-    .hero-grid-secondary {
-        background-image: 
-            linear-gradient(to right, rgba(56, 189, 248, 0.2) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(56, 189, 248, 0.2) 1px, transparent 1px);
-        background-size: 20px 20px;
-        background-attachment: fixed;
-        z-index: -1;
-    }
-
-    /* Dark mode adjustments */
-    .dark .hero-grid {
-        background-image: 
-            linear-gradient(to right, rgba(56, 189, 248, 0.1) 1.5px, transparent 1.5px),
-            linear-gradient(to bottom, rgba(56, 189, 248, 0.1) 1.5px, transparent 1.5px);
-    }
-
-    .dark .hero-grid-secondary {
-        background-image: 
-            linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-    }
-
-    /* Ensure content stays above grid */
-    header, main {
-        position: relative;
-        z-index: 1;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .hero-grid {
-            background-size: 40px 40px;
-        }
-        
-        .hero-grid-secondary {
-            background-size: 10px 10px;
-        }
-    }
-
-    /* Enhanced Floating Elements */
-    .floating-icon {
-        font-size: 2.5rem;
-        color: rgba(56, 189, 248, 0.3);
-        position: absolute;
-        animation: float 6s ease-in-out infinite;
-        transition: color 0.3s ease;
-    }
-
-    .floating-icon:hover {
-        color: rgba(56, 189, 248, 0.6);
-    }
-
-    .math-symbol {
-        font-size: 3rem;
-        font-family: 'Times New Roman', serif;
-        color: rgba(56, 189, 248, 0.3);
-        position: absolute;
-        animation: mathFloat 8s ease-in-out infinite;
-    }
-
-    /* Decorative Dots */
-    .floating-dot {
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        background: rgba(56, 189, 248, 0.4);
-        border-radius: 50%;
-        animation: dotFloat 7s ease-in-out infinite;
-    }
-
-    /* Multiple Animation Variations */
-    @keyframes float {
-        0%, 100% { transform: translateY(0) rotate(0); }
-        50% { transform: translateY(-20px) rotate(5deg); }
-    }
-
-    @keyframes mathFloat {
-        0%, 100% { transform: translateY(0) scale(1); }
-        50% { transform: translateY(-15px) scale(1.1); }
-    }
-
-    @keyframes dotFloat {
-        0%, 100% { transform: translate(0, 0); opacity: 0.4; }
-        50% { transform: translate(10px, -10px); opacity: 0.8; }
-    }
-
-    /* Animation Delays */
-    .floating-icon:nth-child(2n) { animation-delay: 1s; }
-    .floating-icon:nth-child(3n) { animation-delay: 2s; }
-    .math-symbol:nth-child(2n) { animation-delay: 1.5s; }
-    .floating-dot:nth-child(2n) { animation-delay: 0.5s; }
-    .floating-dot:nth-child(3n) { animation-delay: 1.5s; }
-
-    /* Dark Mode Adjustments */
-    .dark .floating-icon,
-    .dark .math-symbol {
-        color: rgba(56, 189, 248, 0.2);
-    }
-
-    .dark .floating-dot {
-        background: rgba(56, 189, 248, 0.3);
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-        .floating-icon {
-            font-size: 2rem;
-        }
-        
-        .math-symbol {
-            font-size: 2.5rem;
-        }
-        
-        .floating-dot {
-            width: 6px;
-            height: 6px;
-        }
-    }
-    </style>
-
-    <!-- JavaScript -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Arrivals - Notes Zone App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Mobile Navigation Toggle
-    const menuToggle = document.getElementById("menuToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-
-    menuToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-
-    // Dark Mode Toggle
-    const darkModeToggle = document.getElementById("darkModeToggle");
-    const htmlElement = document.documentElement;
-
-    darkModeToggle.addEventListener("click", () => {
-      if (htmlElement.classList.contains("dark")) {
-        htmlElement.classList.remove("dark");
-        darkModeToggle.textContent = "🌙"; // Light mode icon
-      } else {
-        htmlElement.classList.add("dark");
-        darkModeToggle.textContent = "☀️"; // Dark mode icon
-      }
-    });
-     
-  </script>
-        <script>
-    
-    // Select all navigation links and the loading screen
-    const links = document.querySelectorAll('a');
-    const loadingScreen = document.getElementById('loadingScreen');
-
-    // Show the loader when any link is clicked
-    links.forEach(link => {
-        link.addEventListener('click', (event) => {
-            const href = link.getAttribute('href');
-            
-            // Ensure the link is internal
-            if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
-                event.preventDefault(); // Prevent immediate navigation
-                loadingScreen.style.display = 'flex'; // Show the loading screen
-
-                // Simulate a delay, then navigate (remove the setTimeout for real navigation)
-                setTimeout(() => {
-                    window.location.href = href; // Navigate to the clicked link
-                }, 1000); // Simulate a 1-second delay
-            }
-        });
-    });
-
-   // Optional: Hide loader on page load and handle back/forward navigation
-window.addEventListener('pageshow', (event) => {
-    // Check if the navigation type is "back_forward" (i.e., browser's back/forward button)
-    if (event.persisted) {
-        loadingScreen.style.display = 'none'; // Ensure the loading screen is hidden
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            nblue: '#2563eb',
+            nblue2: '#4fc3f7',
+            nblue3: '#1976d2',
+            nblue4: '#e3f2fd',
+            ngray: '#f5f6fa',
+            ntext: '#222b45',
+            nsub: '#6b7280',
+          },
+        },
+      },
     }
-});
+  </script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
+    .gradient-top {
+      background: linear-gradient(180deg, #4fc3f7 0%, #e3f2fd 100%);
+    }
+    .nav-active { color: #2563eb; }
+    .nav-label { font-size: 0.78rem; font-weight: 700; }
+    .card-img { height: 110px; object-fit: cover; border-radius: 1rem 1rem 0 0; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-ngrays font-poppins">
+  <!-- Top Gradient & Logo -->
+  <div class="gradient-top pb-4">
+    <div class="flex items-center px-4 pt-6 pb-2">
+      <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg">
+    </div>
+    <div class="px-4 mt-2 mb-2">
+      <h1 class="text-2xl font-extrabold text-nblue3">New Arrivals</h1>
+      <p class="text-base text-nsub font-medium">Discover our latest additions to enhance your learning journey 🚀</p>
+    </div>
+  </div>
 
-// Show the loader when any link is clicked
-links.forEach(link => {
-    link.addEventListener('click', (event) => {
-        const href = link.getAttribute('href');
-        
-        // Ensure the link is internal
-        if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
-            event.preventDefault(); // Prevent immediate navigation
-            loadingScreen.style.display = 'flex'; // Show the loading screen
+  <!-- New Arrivals Cards -->
+  <main class="flex-1 px-4 pb-24">
+    <div class="space-y-6">
+      <!-- Example Card 1 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">Python Program 1 lab file</h3>
+          <p class="text-nsub text-sm mb-3">Deadline approaching! Finish it now with Notes Zone.</p>
+          <a href="cia.html" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Check Now!</a>
+        </div>
+      </div>
+      <!-- Example Card 2 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">CIA-IIIA_Case Study</h3>
+          <p class="text-nsub text-sm mb-3">Maths Assignment</p>
+          <a href="https://drive.google.com/file/d/1zFPSsTaGiF-g7zb6DEjJFBd0E8DaX_L1/view?usp=drivesdk" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Download Now!</a>
+        </div>
+      </div>
+      <!-- Example Card 3 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">Maths Notes + Questions</h3>
+          <p class="text-nsub text-sm mb-3">Maths Handwritten Notes and Mid Sem Question Paper for Repeat-Mid Sem</p>
+          <div class="flex space-x-2">
+            <a href="https://drive.google.com/file/d/1kcuj02bK5GC62sVp1t375Fx18Y7Q9-Lp/view" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-3 py-2 text-xs shadow-md text-center">Notes!</a>
+            <a href="https://drive.google.com/file/d/1pEEdsKOHZvIanh7DBCHQKYddpNil2tCh/view" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-3 py-2 text-xs shadow-md text-center">Question Paper!</a>
+          </div>
+        </div>
+      </div>
+      <!-- Example Card 4 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">DSA Assignment 9</h3>
+          <p class="text-nsub text-sm mb-3">Don't Miss the Deadline!</p>
+          <a href="https://drive.google.com/file/d/1rC7y-w8Drxg3xQiN7uXcci-8_kntGzK1/view?usp=drivesdk" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Download Now!</a>
+        </div>
+      </div>
+      <!-- Example Card 5 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">Java Complete Notes🔥</h3>
+          <p class="text-nsub text-sm mb-3">Complete Digital Notes!</p>
+          <a href="https://drive.google.com/file/d/1HRmUqC2udeJuA1hoE69ITivHvHPr7JAn/view?usp=drivesdk" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Download Now!</a>
+        </div>
+      </div>
+      <!-- Example Card 6 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">All Programming Handwritten Notes🔥</h3>
+          <p class="text-nsub text-sm mb-3">Complete Colourful Handwritten Notes!</p>
+          <a href="allprog.html" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Visit Site</a>
+        </div>
+      </div>
+      <!-- Example Card 7 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">2 BCA DCN</h3>
+          <p class="text-nsub text-sm mb-3">Your daily class notes are ready for you!</p>
+          <a href="DCN_2BCA.html" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">View More</a>
+        </div>
+      </div>
+      <!-- Example Card 8 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">INTERNSHALA RESUME GUIDE</h3>
+          <p class="text-nsub text-sm mb-3">Professional resume building guide for internship seekers</p>
+          <a href="Internshala_Resume_Guide.pdf" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Download Guide</a>
+        </div>
+      </div>
+      <!-- Example Card 9 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">Physics Chapters</h3>
+          <p class="text-nsub text-sm mb-3">Complete collection of Physics chapters with detailed explanations</p>
+          <a href="physics-chapters.html" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Explore Chapters</a>
+        </div>
+      </div>
+      <!-- Example Card 10 -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <h3 class="text-lg font-bold text-nblue3 mb-1">Chemistry Chapters</h3>
+          <p class="text-nsub text-sm mb-3">Comprehensive chemistry chapters with solved examples</p>
+          <a href="chemistry 12.html" class="inline-block bg-nblue3 text-white font-bold rounded-xl px-4 py-2 text-sm shadow-md text-center">Explore Chapters</a>
+        </div>
+      </div>
+    </div>
+  </main>
 
-            // Simulate a delay, then navigate (remove the setTimeout for real navigation)
-            setTimeout(() => {
-                window.location.href = href; // Navigate to the clicked link
-            }, 1000); // Simulate a 1-second delay
-        }
-    });
-});
-
-</script>
-  
+  <!-- Bottom Navigation Bar -->
+  <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center h-16 z-20">
+    <a href="homeapp.html" class="flex flex-col items-center">
+      <i class="fas fa-home text-2xl"></i>
+      <span class="nav-label mt-1">Home</span>
+    </a>
+    <a href="newarriapp.html" class="flex flex-col items-center nav-active">
+      <div class="w-10 h-10 bg-nblue3 text-white rounded-full flex items-center justify-center font-bold text-xs mb-1">NEW<br>ARRIVAL</div>
+    </a>
+    <a href="Shop.html" class="flex flex-col items-center">
+      <i class="fas fa-store text-2xl"></i>
+      <span class="nav-label mt-1">Store</span>
+    </a>
+    <a href="auth.html" class="flex flex-col items-center">
+      <i class="fas fa-user text-2xl"></i>
+      <span class="nav-label mt-1">Me</span>
+    </a>
+  </nav>
 </body>
 </html>
