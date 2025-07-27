@@ -7,15 +7,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="img/logo.ico.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        nblue: '#2563eb',
+                        nblue2: '#4fc3f7',
+                        nblue3: '#1976d2',
+                        nblue4: '#e3f2fd',
+                        ngray: '#f5f6fa',
+                        ntext: '#222b45',
+                        nsub: '#6b7280',
+                    },
+                },
+            },
             darkMode: 'class',
-        };
+        }
     </script>
     <style>
         /* Smooth transitions */
-        body {
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: #f8fafc;
             transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .gradient-top {
+            background: linear-gradient(180deg, #4fc3f7 0%, #e3f2fd 100%);
         }
 
         /* Primary Grid */
@@ -85,7 +108,7 @@
             left: 50%;
             width: 0;
             height: 2px;
-            background-color: #facc15;
+            background-color: #1976d2;
             transition: width 0.3s, left 0.3s;
         }
 
@@ -93,63 +116,47 @@
             width: 100%;
             left: 0;
         }
+        
+        /* Bottom navigation styles */
+        .nav-active { color: #2563eb; }
+        .nav-label { font-size: 0.78rem; font-weight: 700; }
     </style>
 </head>
-<body class="bg-gradient-to-b from-sky-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-100 min-h-screen">
-    <!-- Grid Overlay -->
-    <div class="fixed inset-0 pointer-events-none">
-        <div class="hero-grid absolute inset-0 opacity-30 dark:opacity-20"></div>
-        <div class="hero-grid-secondary absolute inset-0 opacity-15 dark:opacity-10"></div>
-    </div>
-
-    <!-- Navigation -->
-    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2">
-                <img src="logo.png" alt="NotesZone Logo" class="h-10 w-auto">
-            </a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-yellow-500 transition">Home</a>
-                <a href="dsa.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-yellow-500 transition">DSA Notes</a>
-                <a href="profile.html" class="nav-link text-yellow-500">Profile</a>
-                <!-- Notification Bell -->
-                <div class="relative">
-                    <button id="notifBell" class="text-2xl focus:outline-none relative">
-                        <i class="fas fa-bell"></i>
-                        <span id="notifBadge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full hidden"></span>
-                    </button>
-                    <!-- Notification Dropdown -->
-                    <div id="notifDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                        <div class="p-4 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
-                            <span class="font-bold text-gray-800 dark:text-gray-100">Connection Requests</span>
-                            <button id="closeNotif" class="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"><i class="fas fa-times"></i></button>
+<body class="min-h-screen flex flex-col bg-white font-poppins pb-16 text-ntext">
+    <!-- Top Gradient & Logo -->
+    <div class="gradient-top pb-4">
+        <div class="flex justify-between items-center px-4 pt-6 pb-2">
+            <div class="flex items-center">
+                <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg mr-3">
+                <h1 class="text-xl font-bold text-nblue3">Profile</h1>
+            </div>
+            <!-- Notification Bell -->
+            <div class="relative">
+                <button id="notifBell" class="text-2xl focus:outline-none relative text-nblue3">
+                    <i class="fas fa-bell"></i>
+                    <span id="notifBadge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full hidden"></span>
+                </button>
+                <!-- Notification Dropdown -->
+                <div id="notifDropdown" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+                        <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+                            <span class="font-bold text-ntext">Connection Requests</span>
+                            <button id="closeNotif" class="text-gray-400 hover:text-nblue3"><i class="fas fa-times"></i></button>
                         </div>
                         <div id="notifList" class="max-h-80 overflow-y-auto">
-                            <!-- Requests will be injected here -->
+                            <!-- Connection requests will be populated here -->
                         </div>
                     </div>
                 </div>
-                <button id="darkModeToggle" class="text-2xl focus:outline-none">🌙</button>
-            </nav>
-            <button id="menuToggle" class="md:hidden text-2xl">☰</button>
-        </div>
-        <!-- Mobile Menu -->
-        <nav id="mobileMenu" class="hidden md:hidden bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
-            <div class="container mx-auto px-4 py-3 space-y-4">
-                <a href="index.html" class="block nav-link text-gray-700 dark:text-gray-300 hover:text-yellow-500">Home</a>
-                <a href="dsa.html" class="block nav-link text-gray-700 dark:text-gray-300 hover:text-yellow-500">DSA Notes</a>
-                <a href="profile.html" class="block nav-link text-yellow-500">Profile</a>
             </div>
-        </nav>
-    </header>
+        </div>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
+    <div class="px-4 py-4">
         <!-- Profile Header -->
-        <div class="glass-card rounded-2xl p-8 mb-8">
-            <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="bg-white rounded-2xl p-6 mb-6 shadow-md">
+            <div class="flex flex-col items-center gap-6">
                 <div class="relative group">
-                    <div class="w-32 h-32 rounded-full overflow-hidden ring-4 ring-sky-500/30 dark:ring-sky-400/30">
+                    <div class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-nblue2/30">
                         <img id="profile-image" alt="Profile Picture" class="w-full h-full object-cover">
                     </div>
                     <!-- Upload Button Overlay -->
@@ -160,25 +167,25 @@
                         <input type="file" id="profile-upload" accept="image/*" class="hidden">
                     </div>
                 </div>
-                <div class="flex-1 text-center md:text-left">
+                <div class="flex-1 text-center">
                     <!-- Editable Name Section -->
                     <div class="relative group">
-                        <h1 id="user-name" class="text-3xl font-bold mb-2 group-hover:opacity-50 transition-opacity">Loading...</h1>
+                        <h1 id="user-name" class="text-2xl font-bold mb-2 group-hover:opacity-50 transition-opacity text-ntext">Loading...</h1>
                         <button id="edit-name-btn" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <i class="fas fa-edit text-sky-500"></i>
+                            <i class="fas fa-edit text-nblue3"></i>
                         </button>
                     </div>
-                    <div class="space-y-2 text-gray-600 dark:text-gray-400">
-                        <p id="user-email-display" class="flex items-center justify-center md:justify-start gap-2">
+                    <div class="space-y-2 text-nsub">
+                        <p id="user-email-display" class="flex items-center justify-center gap-2">
                             <i class="fas fa-envelope"></i>
                             <span>Loading...</span>
                         </p>
-                        <p id="user-joined-display" class="flex items-center justify-center md:justify-start gap-2">
+                        <p id="user-joined-display" class="flex items-center justify-center gap-2">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Loading...</span>
                         </p>
                     </div>
-                    <div class="flex flex-wrap gap-3 mt-4 justify-center md:justify-start" id="user-roles">
+                    <div class="flex flex-wrap gap-3 mt-4 justify-center" id="user-roles">
                         <!-- Roles will be dynamically populated -->
                     </div>
                 </div>
@@ -191,26 +198,26 @@
 
         <!-- Name Edit Modal -->
         <div id="name-edit-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md">
-                <h2 class="text-2xl font-bold mb-4">Edit Name</h2>
+            <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+                <h2 class="text-2xl font-bold mb-4 text-ntext">Edit Name</h2>
                 <form id="name-edit-form" class="space-y-4">
                     <div>
-                        <label for="new-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label for="new-name" class="block text-sm font-medium text-nsub mb-1">
                             New Name
                         </label>
                         <input type="text" id="new-name" 
-                               class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
-                                      bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                                      focus:ring-2 focus:ring-sky-500 focus:border-transparent"
+                               class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                                      bg-white text-ntext 
+                                      focus:ring-2 focus:ring-nblue3 focus:border-transparent"
                                placeholder="Enter your name">
                     </div>
                     <div class="flex justify-end space-x-3">
                         <button type="button" id="cancel-edit-name" 
-                                class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+                                class="px-4 py-2 text-nsub hover:text-ntext">
                             Cancel
                         </button>
                         <button type="submit" 
-                                class="px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors">
+                                class="px-4 py-2 bg-nblue3 text-white rounded-lg hover:bg-nblue2 transition-colors">
                             Save Changes
                         </button>
                     </div>
@@ -220,31 +227,31 @@
 
         <!-- Loading Overlay -->
         <div id="loading-overlay" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
+            <div class="bg-white p-6 rounded-lg shadow-xl">
                 <div class="flex flex-col items-center space-y-3">
-                    <div class="animate-spin rounded-full h-8 w-8 border-4 border-sky-500 border-t-transparent"></div>
-                    <span id="loading-text" class="text-lg">Compressing image...</span>
+                    <div class="animate-spin rounded-full h-8 w-8 border-4 border-nblue3 border-t-transparent"></div>
+                    <span id="loading-text" class="text-lg text-ntext">Compressing image...</span>
                     <div class="w-48 h-1 bg-gray-200 rounded-full overflow-hidden">
-                        <div id="upload-progress" class="h-full bg-sky-500 transition-all duration-300" style="width: 0%"></div>
+                        <div id="upload-progress" class="h-full bg-nblue3 transition-all duration-300" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Profile Details Section -->
-        <div class="glass-card rounded-2xl p-8 mb-8">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 text-transparent bg-clip-text">Profile Details</h2>
-                <button id="edit-profile-btn" class="px-4 py-2 text-yellow-500 hover:text-yellow-600 transition-colors">
+        <div class="bg-white rounded-2xl p-6 mb-6 shadow-md">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-ntext">Profile Details</h2>
+                <button id="edit-profile-btn" class="px-3 py-1 text-nblue3 hover:text-nblue2 transition-colors">
                     <i class="fas fa-edit"></i>
                 </button>
             </div>
 
             <!-- Roles Section -->
-            <div class="mb-6">
+            <div class="mb-5">
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-lg font-semibold">Roles</h3>
-                    <button class="edit-field-btn text-yellow-500 hover:text-yellow-600" data-field="roles">
+                    <h3 class="text-lg font-semibold text-ntext">Roles</h3>
+                    <button class="edit-field-btn text-nblue3 hover:text-nblue2" data-field="roles">
                         <i class="fas fa-pen text-sm"></i>
                     </button>
                 </div>
@@ -254,46 +261,46 @@
             </div>
 
             <!-- Bio Section -->
-            <div class="mb-6">
+            <div class="mb-5">
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-lg font-semibold">Bio</h3>
-                    <button class="edit-field-btn text-yellow-500 hover:text-yellow-600" data-field="bio">
+                    <h3 class="text-lg font-semibold text-ntext">Bio</h3>
+                    <button class="edit-field-btn text-nblue3 hover:text-nblue2" data-field="bio">
                         <i class="fas fa-pen text-sm"></i>
                     </button>
                 </div>
-                <p id="bio-text" class="text-gray-600 dark:text-gray-400">Add a bio to tell others about yourself...</p>
+                <p id="bio-text" class="text-nsub">Add a bio to tell others about yourself...</p>
             </div>
 
             <!-- Education Section -->
-            <div class="mb-6">
+            <div class="mb-5">
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-lg font-semibold">Education</h3>
-                    <button class="edit-field-btn text-yellow-500 hover:text-yellow-600" data-field="education">
+                    <h3 class="text-lg font-semibold text-ntext">Education</h3>
+                    <button class="edit-field-btn text-nblue3 hover:text-nblue2" data-field="education">
                         <i class="fas fa-pen text-sm"></i>
                     </button>
                 </div>
                 <div id="education-details">
-                    <p class="text-gray-600 dark:text-gray-400">Christ University</p>
+                    <p class="text-nsub">Christ University</p>
                     <p class="text-sm text-gray-500">Computer Science • 2021-2025</p>
                 </div>
             </div>
 
             <!-- Skills Section -->
-            <div class="mb-6">
+            <div class="mb-5">
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-lg font-semibold">Skills</h3>
-                    <button class="edit-field-btn text-yellow-500 hover:text-yellow-600" data-field="skills">
+                    <h3 class="text-lg font-semibold text-ntext">Skills</h3>
+                    <button class="edit-field-btn text-nblue3 hover:text-nblue2" data-field="skills">
                         <i class="fas fa-plus text-sm"></i>
                     </button>
                 </div>
                 <div id="skills-container" class="flex flex-wrap gap-2">
-                    <span class="skill-tag px-3 py-1 rounded-full text-sm bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">
+                    <span class="skill-tag px-3 py-1 rounded-full text-sm bg-nblue1/20 text-nblue3">
                         DSA
-                        <button class="ml-2 text-yellow-600 hover:text-yellow-700">&times;</button>
+                        <button class="ml-2 text-nblue3 hover:text-nblue2">&times;</button>
                     </span>
-                    <span class="skill-tag px-3 py-1 rounded-full text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                    <span class="skill-tag px-3 py-1 rounded-full text-sm bg-nblue1/20 text-nblue3">
                         C++
-                        <button class="ml-2 text-purple-600 hover:text-purple-700">&times;</button>
+                        <button class="ml-2 text-nblue3 hover:text-nblue2">&times;</button>
                     </span>
                 </div>
             </div>
@@ -301,17 +308,17 @@
             <!-- Social Links -->
             <div>
                 <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-lg font-semibold">Social Links</h3>
-                    <button class="edit-field-btn text-yellow-500 hover:text-yellow-600" data-field="social">
+                    <h3 class="text-lg font-semibold text-ntext">Social Links</h3>
+                    <button class="edit-field-btn text-nblue3 hover:text-nblue2" data-field="social">
                         <i class="fas fa-plus text-sm"></i>
                     </button>
                 </div>
                 <div id="social-links" class="space-y-3">
-                    <a href="#" class="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-yellow-500 transition-colors">
+                    <a href="#" class="flex items-center gap-3 text-nsub hover:text-nblue3 transition-colors">
                         <i class="fab fa-github text-xl"></i>
                         <span>GitHub</span>
                     </a>
-                    <a href="#" class="flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-yellow-500 transition-colors">
+                    <a href="#" class="flex items-center gap-3 text-nsub hover:text-nblue3 transition-colors">
                         <i class="fab fa-linkedin text-xl"></i>
                         <span>LinkedIn</span>
                     </a>
@@ -320,30 +327,30 @@
         </div>
 
         <!-- My Connections Section -->
-        <div class="glass-card rounded-2xl p-8 mb-8">
-            <h2 class="text-2xl font-bold mb-6 bg-gradient-to-r from-sky-500 to-blue-600 text-transparent bg-clip-text">My Connections</h2>
-            <div id="connectionsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
-            <div id="noConnections" class="text-center text-gray-500 dark:text-gray-400 mt-6 hidden">
-                <i class="fas fa-user-friends text-3xl mb-2"></i>
+        <div class="bg-white rounded-2xl p-6 mb-6 shadow-md">
+            <h2 class="text-xl font-bold mb-4 text-ntext">My Connections</h2>
+            <div id="connectionsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+            <div id="noConnections" class="text-center text-nsub mt-4 hidden">
+                <i class="fas fa-user-friends text-2xl mb-2"></i>
                 <p>No connections yet. Connect with others to grow your network!</p>
             </div>
         </div>
 
         <!-- Edit Field Modal -->
         <div id="edit-field-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden backdrop-blur-sm">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all scale-95 opacity-0">
-                <h2 id="modal-title" class="text-2xl font-bold mb-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-transparent bg-clip-text">Edit Field</h2>
+            <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all scale-95 opacity-0">
+                <h2 id="modal-title" class="text-xl font-bold mb-4 text-ntext">Edit Field</h2>
                 <form id="edit-field-form" class="space-y-4">
                     <div id="modal-content">
                         <!-- Dynamic content will be inserted here -->
                     </div>
                     <div class="flex justify-end space-x-3">
                         <button type="button" id="cancel-edit-field" 
-                                class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+                                class="px-4 py-2 text-nsub hover:text-ntext">
                             Cancel
                         </button>
                         <button type="submit" 
-                                class="px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover-effect">
+                                class="px-4 py-2 bg-nblue3 text-white rounded-lg hover:bg-nblue2 transition-colors">
                             Save Changes
                         </button>
                     </div>
@@ -353,56 +360,56 @@
 
         <!-- Note Upload Modal -->
         <div id="note-upload-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden backdrop-blur-sm">
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all scale-95 opacity-0">
-                <h2 class="text-2xl font-bold mb-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-transparent bg-clip-text">Upload Note</h2>
+            <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md transform transition-all scale-95 opacity-0">
+                <h2 class="text-xl font-bold mb-4 text-ntext">Upload Note</h2>
                 <form id="note-upload-form" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                        <label class="block text-sm font-medium text-nsub mb-1">Title</label>
                         <input type="text" id="note-title" required 
-                               class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
-                                      bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                                      focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                               class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                                      bg-white text-ntext 
+                                      focus:ring-2 focus:ring-nblue3 focus:border-transparent">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                        <label class="block text-sm font-medium text-nsub mb-1">Description</label>
                         <textarea id="note-description" rows="3" 
-                                  class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
-                                         bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                                         focus:ring-2 focus:ring-yellow-500 focus:border-transparent"></textarea>
+                                  class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                                         bg-white text-ntext 
+                                         focus:ring-2 focus:ring-nblue3 focus:border-transparent"></textarea>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tags (comma separated)</label>
+                        <label class="block text-sm font-medium text-nsub mb-1">Tags (comma separated)</label>
                         <input type="text" id="note-tags" 
-                               class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
-                                      bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                                      focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
+                               class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                                      bg-white text-ntext 
+                                      focus:ring-2 focus:ring-nblue3 focus:border-transparent"
                                placeholder="e.g. DSA, Arrays, Sorting">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">File</label>
-                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg">
+                        <label class="block text-sm font-medium text-nsub mb-1">File</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
                             <div class="space-y-1 text-center">
                                 <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <div class="flex text-sm text-gray-600 dark:text-gray-400">
-                                    <label for="note-file" class="relative cursor-pointer rounded-md font-medium text-yellow-500 hover:text-yellow-600">
+                                <div class="flex text-sm text-nsub">
+                                    <label for="note-file" class="relative cursor-pointer rounded-md font-medium text-nblue3 hover:text-nblue2">
                                         <span>Upload a file</span>
                                         <input id="note-file" type="file" class="sr-only" accept=".pdf,.doc,.docx,.txt,.md">
                                     </label>
                                     <p class="pl-1">or drag and drop</p>
                                 </div>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">PDF, DOC, TXT up to 10MB</p>
+                                <p class="text-xs text-gray-500">PDF, DOC, TXT up to 10MB</p>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-end space-x-3">
                         <button type="button" id="cancel-upload" 
-                                class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
+                                class="px-4 py-2 text-nsub hover:text-ntext">
                             Cancel
                         </button>
                         <button type="submit" 
-                                class="px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:shadow-lg transition-all">
+                                class="px-4 py-2 bg-nblue3 text-white rounded-lg hover:bg-nblue2 transition-colors">
                             Upload Note
                         </button>
                     </div>
@@ -411,27 +418,27 @@
         </div>
 
         <!-- Notes Section with Grid View -->
-        <div class="glass-card rounded-2xl p-8">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold">My Notes</h2>
-                <button id="create-note-btn" class="px-4 py-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg hover:shadow-lg transition-all flex items-center gap-2">
+        <div class="bg-white rounded-2xl p-6 mb-6 shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-ntext">My Notes</h2>
+                <button id="create-note-btn" class="px-3 py-1.5 bg-nblue3 text-white rounded-lg hover:bg-nblue2 transition-colors flex items-center gap-2">
                     <i class="fas fa-plus"></i>
                     Create Note
                 </button>
             </div>
             
             <!-- Search and Filter -->
-            <div class="flex flex-wrap gap-4 mb-6">
+            <div class="flex flex-wrap gap-4 mb-4">
                 <div class="flex-1">
                     <input type="text" id="search-notes" placeholder="Search notes..." 
-                           class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
-                                  bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                                  focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                           class="w-full px-4 py-2 rounded-lg border border-gray-300 
+                                  bg-white text-ntext 
+                                  focus:ring-2 focus:ring-nblue3 focus:border-transparent">
                 </div>
                 <select id="sort-notes" 
-                        class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
-                               bg-white dark:bg-gray-700 text-gray-900 dark:text-white 
-                               focus:ring-2 focus:ring-yellow-500 focus:border-transparent">
+                        class="px-4 py-2 rounded-lg border border-gray-300 
+                               bg-white text-ntext 
+                               focus:ring-2 focus:ring-nblue3 focus:border-transparent">
                     <option value="newest">Newest First</option>
                     <option value="oldest">Oldest First</option>
                     <option value="name">Name</option>
@@ -439,14 +446,33 @@
             </div>
 
             <!-- Notes Grid -->
-            <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="notes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-20">
                 <!-- Notes will be dynamically added here -->
-                <div class="flex items-center justify-center text-gray-500 dark:text-gray-400 p-8">
+                <div class="flex items-center justify-center text-nsub p-8">
                     <p>No notes yet. Create your first note!</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center h-16 z-20">
+        <a href="homeapp.html" class="flex flex-col items-center">
+            <i class="fas fa-home text-2xl"></i>
+            <span class="nav-label mt-1">Home</span>
+        </a>
+        <a href="newarriapp.html" class="flex flex-col items-center">
+            <div class="w-10 h-10 bg-nblue3 text-white rounded-full flex items-center justify-center font-bold text-xs mb-1">NEW<br>ARRIVAL</div>
+        </a>
+        <a href="Shop.html" class="flex flex-col items-center">
+            <i class="fas fa-store text-2xl"></i>
+            <span class="nav-label mt-1">Store</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center nav-active">
+            <i class="fas fa-user text-2xl"></i>
+            <span class="nav-label mt-1">Me</span>
+        </a>
+    </nav>
 
     <!-- Add this before your Firebase scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/browser-image-compression/2.0.1/browser-image-compression.min.js"></script>
