@@ -1,761 +1,514 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-adsense-account" content="ca-pub-2125586648357270">
-    <title>Descriptive Statistics and Probability - Notes Zone</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Favicon -->
-    <link rel="icon" href="logo.ico.ico" type="image/x-icon">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        };
-    </script>
-    <!-- FontAwesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Smooth transitions */
-        body {
-            transition: background-color 0.3s, color 0.3s;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notes Zone - Homepage</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    /* CSS Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #70b4ff 0%, #e9f1fc 70%, #ffffff 100%);
+      color: #00328b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .container {
+      padding: 16px 20px 80px; /* leave space for bottom nav */
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+    }
 
-        header {
-            transition: background-color 0.3s;
-        }
+    /* Top Logo */
+    .logo-container {
+      width: 56px;
+      height: 56px;
+      background: #3492ff;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 7px rgba(52, 146, 255, 0.35);
+      user-select: none;
+    }
+    .logo-container span {
+      font-size: 40px;
+      font-weight: 900;
+      color: black;
+      font-style: normal;
+      letter-spacing: -2px;
+      user-select: none;
+    }
 
-        /* Custom styling for the navigation links */
-        .nav-link {
-            position: relative;
-        }
+    /* Search Bar */
+    .search-bar {
+      width: 100%;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .search-bar input[type="search"] {
+      width: 100%;
+      padding: 12px 48px 12px 44px;
+      border-radius: 24px;
+      border: 3px solid #3492ff;
+      font-weight: 600;
+      font-size: 1rem;
+      outline-offset: 2px;
+      outline-color: #3492ff;
+      color: #333;
+      font-family: inherit;
+    }
+    .search-bar input::placeholder {
+      font-weight: 600;
+      color: #888;
+    }
+    .search-bar svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      stroke: #1b1b1b;
+      stroke-width: 2;
+      fill: none;
+    }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: #facc15; /* Yellow underline */
-            transition: width 0.3s, left 0.3s;
-        }
+    /* Headline & Button */
+    .headline {
+      font-weight: 700;
+      font-size: 1.3rem;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      user-select: none;
+    }
+    .headline b {
+      font-weight: 900;
+    }
+    .subheadline {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+      user-select: none;
+    }
+    .btn-primary {
+      display: inline-block;
+      background-color: #00328b;
+      color: white;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      transition: background-color 0.3s ease;
+      border: none;
+      text-align: center;
+    }
+    .btn-primary:hover {
+      background-color: #002267;
+    }
 
-        .nav-link:hover::after {
-            width: 100%;
-            left: 0;
-        }
+    /* Features Section */
+    .section-title {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 28px 0 16px;
+      user-select: none;
+    }
 
-        /* Hero section responsiveness */
-        @media (max-width: 640px) {
-            .hero {
-                min-height: 70vh;
-            }
-        }
+    .features-carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 16px;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .feature-card {
+      min-width: 260px;
+      background: linear-gradient(180deg, #004ab9 0%, #002675 70%);
+      border-radius: 20px;
+      color: white;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+    .feature-header {
+      padding: 18px 24px 14px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(211deg, #3463ca 0%, #002675 63%);
+      cursor: pointer;
+    }
+    .feature-header .arrow {
+      font-weight: 900;
+      font-size: 1.25rem;
+      user-select: none;
+    }
+    .feature-subtext {
+      font-weight: 400;
+      font-size: 0.83rem;
+      padding: 0 20px 16px 20px;
+      color: #c2d0f7cc;
+      line-height: 1.25;
+      user-select: none;
+    }
+    .feature-image {
+      width: 100%;
+      height: 120px;
+      border-radius: 0 0 20px 20px;
+      object-fit: cover;
+      user-select: none;
+    }
 
-        /* PDF Selection Buttons */
-        .pdf-selector {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
+    /* Carousel Dots */
+    .carousel-dots {
+      margin: 8px 0 16px 6px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      user-select: none;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #004ab9;
+      opacity: 0.4;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .dot.active {
+      opacity: 1;
+    }
 
-        .pdf-selector:hover {
-            transform: translateY(-2px);
-            border-color: rgba(56, 189, 248, 0.5);
-        }
+    /* Christ University Resources */
+    .university-resources {
+      user-select: none;
+    }
+    .resource-card {
+      background: linear-gradient(180deg, #70b4ff 0%, #a7d1ff 80%);
+      box-shadow: 6px 8px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      padding: 12px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: box-shadow 0.3s ease;
+    }
+    .resource-card:hover {
+      box-shadow: 8px 12px 10px rgba(0, 0, 0, 0.18);
+    }
+    .resource-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #00328b;
+      user-select: text;
+    }
+    .resource-subtitle {
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      color: #1a2d6b;
+      user-select: text;
+    }
 
-        .pdf-selector::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(56, 189, 248, 0.1), rgba(37, 99, 235, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
+    /* Bottom Navigation */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      box-shadow: 0 -4px 14px rgba(0,0,0,0.07);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 16px;
+      z-index: 100;
+      user-select: none;
+    }
+    nav.bottom-nav button {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: #00328b;
+      font-weight: 700;
+    }
+    nav.bottom-nav button svg,
+    nav.bottom-nav button span {
+      pointer-events: none;
+    }
+    nav.bottom-nav button:focus {
+      outline-offset: 3px;
+      outline-color: #3492ff;
+      outline-style: solid;
+      outline-width: 2px;
+      border-radius: 8px;
+    }
 
-        .pdf-selector:hover::before {
-            opacity: 1;
-        }
+    /* Icon styles */
+    .icon {
+      fill: #00328b;
+      width: 28px;
+      height: 28px;
+      margin-bottom: 4px;
+      user-select: none;
+    }
+    .badge-new {
+      position: relative;
+      background: #00328b;
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      user-drag: none;
+    }
 
-        .pdf-selector i {
-            transition: transform 0.3s ease;
-        }
-
-        .pdf-selector:hover i {
-            transform: scale(1.2);
-        }
-
-        /* PDF Container Styling */
-        .pdf-container {
-            width: 100%;
-            max-width: 600px;
-            aspect-ratio: 9/16;
-            margin: 0 auto;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .dark .pdf-container {
-            border-color: rgba(45, 55, 72, 0.8);
-            background: linear-gradient(to bottom right, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.95));
-        }
-
-        .pdf-container:hover {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transform: translateY(-2px);
-        }
-
-        /* PDF Selection Section */
-        .pdf-selection {
-            background: linear-gradient(to right, rgba(56, 189, 248, 0.1), rgba(37, 99, 235, 0.1));
-            border-radius: 1.5rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            backdrop-filter: blur(8px);
-        }
-
-        .dark .pdf-selection {
-            background: linear-gradient(to right, rgba(56, 189, 248, 0.05), rgba(37, 99, 235, 0.05));
-            border-color: rgba(56, 189, 248, 0.1);
-        }
-
-        /* PDF Title Styling */
-        .pdf-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(to right, #0ea5e9, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .dark .pdf-title {
-            background: linear-gradient(to right, #38bdf8, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Remove download button styling */
-        .download-btn {
-            display: none;
-        }
-
-        /* Loading animation for PDF */
-        .loading-animation {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 5px solid #3498db;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Custom Animation */
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Applying the animation */
-        .fade-in {
-            animation: fadeInUp 1s ease-in-out forwards;
-        }
-
-        /* Primary Grid - Larger Lines */
-        .hero-grid {
-            background-image: 
-                linear-gradient(to right, rgba(56, 189, 248, 0.3) 1.5px, transparent 1.5px),
-                linear-gradient(to bottom, rgba(56, 189, 248, 0.3) 1.5px, transparent 1.5px);
-            background-size: 80px 80px;
-            background-attachment: fixed;
-            z-index: -1;
-        }
-
-        /* Secondary Grid - Smaller Lines */
-        .hero-grid-secondary {
-            background-image: 
-                linear-gradient(to right, rgba(56, 189, 248, 0.2) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(56, 189, 248, 0.2) 1px, transparent 1px);
-            background-size: 20px 20px;
-            background-attachment: fixed;
-            z-index: -1;
-        }
-
-        /* Dark mode adjustments */
-        .dark .hero-grid {
-            background-image: 
-                linear-gradient(to right, rgba(56, 189, 248, 0.1) 1.5px, transparent 1.5px),
-                linear-gradient(to bottom, rgba(56, 189, 248, 0.1) 1.5px, transparent 1.5px);
-        }
-
-        .dark .hero-grid-secondary {
-            background-image: 
-                linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
-        }
-
-        /* Enhanced Dropdown Styling */
-        /* Custom scrollbar for dropdown */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(226, 232, 240, 0.5);
-            border-radius: 10px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.5);
-            border-radius: 10px;
-        }
-        
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(56, 189, 248, 0.7);
-        }
-        
-        /* Dark mode scrollbar */
-        .dark .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(30, 41, 59, 0.5);
-        }
-        
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.3);
-        }
-        
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(56, 189, 248, 0.5);
-        }
-        
-        /* Enhanced dropdown animations */
-        #dropdownMenu {
-            transform-origin: top center;
-            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
-        }
-        
-        #dropdownMenu.hidden {
-            transform: translateY(-10px) scale(0.95);
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        #dropdownMenu:not(.hidden) {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Notification styling */
-        .notification {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            background-color: #0ea5e9;
-            color: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            z-index: 50;
-            transform: translateY(1rem);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .pdf-container {
-                max-width: 100%;
-                aspect-ratio: 9/16;
-                border-radius: 1rem;
-            }
-
-            .pdf-selection {
-                padding: 1.5rem;
-                border-radius: 1rem;
-            }
-
-            .pdf-title {
-                font-size: 1.25rem;
-            }
-        }
-    </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2125586648357270"
-    crossorigin="anonymous"></script>
-    <script async custom-element="amp-auto-ads"
-        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
-    </script>
-    <!-- PDF.js library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        // Initialize PDF.js worker
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    </script>
+    /* Responsive */
+    @media (max-width: 520px) {
+      .feature-card {
+        min-width: 230px;
+      }
+    }
+  </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6V7LPEC5P4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<body>
+  <main class="container" role="main">
+    <header>
+      <div class="logo-container" aria-label="Notes Zone Logo">
+        <span aria-hidden="true">N</span>
+      </div>
 
-  gtag('config', 'G-6V7LPEC5P4');
-</script>
-
-<body class="bg-gradient-to-b from-sky-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-100 relative">
-    <amp-auto-ads type="adsense"
-    data-ad-client="ca-pub-2125586648357270">
-    </amp-auto-ads>
-    <!-- Enhanced Grid Overlay -->
-    <div class="fixed inset-0 pointer-events-none">
-        <!-- Primary Grid -->
-        <div class="hero-grid absolute inset-0 opacity-30 dark:opacity-20"></div>
-        <!-- Secondary Grid -->
-        <div class="hero-grid-secondary absolute inset-0 opacity-15 dark:opacity-10"></div>
-    </div>
-
-    <!-- Loading Logo -->
-    <div id="loadingScreen" class="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-50 hidden">
-        <video autoplay loop muted playsinline class="h-32 w-32">
-            <source src="logowebm.webm" type="video/webm">
-            <source src="logogif.gif" type="video/mp4">
-            <img src="logo.png" alt="Loading..." class="h-32 w-32">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-
-    <!-- Navigation Bar -->
-    <header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html">
-                <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
-            </a>
-            <!-- Navigation Links -->
-            <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
-                <a href="index.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                    Home
-                </a>
-                <a href="new-arrivals.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                    New Arrivals
-                </a>
-                <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
-                    Contact
-                </a>
-            </nav>
-            <!-- Mobile Menu Icon -->
-            <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">
-                ☰
-            </button>
-            <!-- Dark Mode Toggle -->
-            <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
-                🌙
-            </button>
-        </div>
-        <!-- Mobile Dropdown Menu -->
-        <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
-            <ul class="flex flex-col space-y-4 p-6">
-                <li><a href="index.html" class="block nav-link hover:text-yellow-500 transition">Home</a></li>
-                <li><a href="new-arrivals.html" class="block nav-link hover:text-yellow-500 transition">New Arrivals</a></li>
-                <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
-            </ul>
-        </nav>
+      <form class="search-bar" role="search" aria-label="Search notes">
+        <label for="search-input" class="visually-hidden">Search for Notes</label>
+        <input 
+          type="search" 
+          id="search-input" 
+          name="search" 
+          placeholder="Search for Notes" 
+          autocomplete="off"
+          aria-describedby="search-desc" 
+        />
+        <svg aria-hidden="true" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" >
+          <circle cx="10" cy="10" r="7" stroke-width="2"></circle>
+          <line x1="15" y1="15" x2="21" y2="21" stroke-width="2"></line>
+        </svg>
+        <div id="search-desc" class="visually-hidden">Type to search notes by keyword</div>
+      </form>
     </header>
 
-    <!-- Hero Section -->
-    <header class="relative py-8 overflow-hidden">
-        <!-- Hero Content -->
-        <div class="container mx-auto px-4 relative z-10 mb-4">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600 dark:from-sky-400 dark:to-blue-400">
-                Descriptive Statistics and Probability
-            </h1>
-            <p class="text-lg md:text-xl text-center text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-                Master the essential concepts of Descriptive Statistics and Probability with our comprehensive study materials 📚✨
-            </p>
-        </div>
-    </header>
+    <section aria-labelledby="headline-msg">
+      <h1 id="headline-msg" class="headline">
+        No more last-minute panic <br />
+        <span class="subheadline">Notes Zone has your back.</span>
+      </h1>
+      <button class="btn-primary" type="button" aria-label="Start your journey with Notes Zone today">
+        Start your journey with Notes Zone today
+      </button>
+    </section>
 
-    <!-- Enhanced PDF Selection Section -->
-    <main class="container mx-auto py-8 px-4">
-        <div class="pdf-selection bg-gradient-to-r from-blue-50 to-sky-50 dark:from-blue-900/20 dark:to-sky-900/20 rounded-2xl shadow-lg border border-sky-200 dark:border-sky-800 p-6 mb-8">
-            <h2 class="pdf-title text-2xl font-bold mb-6 text-center">Select a PDF Document</h2>
-            
-            <div class="relative w-full max-w-lg mx-auto">
-                <!-- Dropdown Button with Enhanced Styling -->
-                <button id="dropdownButton" class="w-full p-5 bg-gradient-to-r from-sky-200 to-blue-200 dark:from-sky-800 dark:to-blue-800 rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-between border-2 border-transparent hover:border-sky-300 dark:hover:border-sky-700 group">
-                    <div class="flex items-center">
-                        <i class="fas fa-book-open text-sky-600 dark:text-sky-400 mr-3 text-xl group-hover:scale-110 transition-transform"></i>
-                        <span class="font-semibold text-lg text-gray-800 dark:text-gray-100" id="selectedOption">Select Document</span>
-                    </div>
-                    <i class="fas fa-chevron-down text-sky-600 dark:text-sky-400 transition-transform duration-300"></i>
-                </button>
-                
-                <!-- Enhanced Dropdown Menu with Higher z-index -->
-                <div id="dropdownMenu" class="hidden absolute w-full mt-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-xl shadow-xl overflow-hidden transform transition-all duration-300 ease-in-out border border-sky-200 dark:border-sky-800" style="z-index: 9999; position: relative;">
-                    <div class="p-3 space-y-2 max-h-80 overflow-y-auto custom-scrollbar">
-                        
-                        <!-- Option 1 -->
-                        <button onclick="selectOption('Topper\'s Notes', 'https://drive.google.com/file/d/1o7U3S8hi3Y8dk1HaDThGZV6lpvsJe62D/preview')" 
-                                class="w-full p-4 text-left hover:bg-sky-100 dark:hover:bg-sky-800 rounded-lg transition-all flex items-center justify-between group hover:translate-x-1">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-file-pdf text-red-500 dark:text-red-400"></i>
-                                </div>
-                                <div>
-                                    <span class="font-medium text-gray-800 dark:text-gray-200 block">Topper's Notes</span>
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">Comprehensive study materials</span>
-                                </div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </button>
-                        
-                        <!-- Option 2 -->
-                        <button onclick="selectOption('2024 Question Paper', 'https://drive.google.com/file/d/112dF_LpGQg-OJtwNHOxkp8axh5QKe6uy/preview')" 
-                                class="w-full p-4 text-left hover:bg-sky-100 dark:hover:bg-sky-800 rounded-lg transition-all flex items-center justify-between group hover:translate-x-1">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-question-circle text-green-500 dark:text-green-400"></i>
-                                </div>
-                                <div>
-                                    <span class="font-medium text-gray-800 dark:text-gray-200 block">2024 Question Paper</span>
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">Latest exam questions</span>
-                                </div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </button>
-                        
-                        <!-- Option 3 -->
-                        <button onclick="selectOption('Mid Sem Paper', 'https://drive.google.com/file/d/112dF_LpGQg-OJtwNHOxkp8axh5QKe6uy/preview')" 
-                                class="w-full p-4 text-left hover:bg-sky-100 dark:hover:bg-sky-800 rounded-lg transition-all flex items-center justify-between group hover:translate-x-1">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-clipboard-list text-purple-500 dark:text-purple-400"></i>
-                                </div>
-                                <div>
-                                    <span class="font-medium text-gray-800 dark:text-gray-200 block">Mid Sem Paper</span>
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">Mid-semester exam questions</span>
-                                </div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </button>
-                        
-                        <!-- Option 4 -->
-                        <button onclick="selectOption('End Sem Paper', 'https://drive.google.com/file/d/112dF_LpGQg-OJtwNHOxkp8axh5QKe6uy/preview')" 
-                                class="w-full p-4 text-left hover:bg-sky-100 dark:hover:bg-sky-800 rounded-lg transition-all flex items-center justify-between group hover:translate-x-1">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-file-alt text-yellow-500 dark:text-yellow-400"></i>
-                                </div>
-                                <div>
-                                    <span class="font-medium text-gray-800 dark:text-gray-200 block">End Sem Paper</span>
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">Final exam questions</span>
-                                </div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </button>
-                        
-                        <!-- 
-                        <button onclick="selectOption('Book Creation CIA', 'https://drive.google.com/file/d/1TOSEgrJN3q4zYiK2_EL0Y1mVCw9PKGWB/preview')" 
-                                class="w-full p-4 text-left hover:bg-sky-100 dark:hover:bg-sky-800 rounded-lg transition-all flex items-center justify-between group hover:translate-x-1">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-book text-blue-500 dark:text-blue-400"></i>
-                                </div>
-                                <div>
-                                    <span class="font-medium text-gray-800 dark:text-gray-200 block">Book Creation CIA</span>
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">Continuous internal assessment</span>
-                                </div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </button>
-                        
-                        <!-- Option 6 -->
-                        <button onclick="selectOption('Reference Book', 'https://drive.google.com/file/d/112dF_LpGQg-OJtwNHOxkp8axh5QKe6uy/preview')" 
-                                class="w-full p-4 text-left hover:bg-sky-100 dark:hover:bg-sky-800 rounded-lg transition-all flex items-center justify-between group hover:translate-x-1">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-bookmark text-indigo-500 dark:text-indigo-400"></i>
-                                </div>
-                                <div>
-                                    <span class="font-medium text-gray-800 dark:text-gray-200 block">Reference Book</span>
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">Comprehensive reference material</span>
-                                </div>
-                            </div>
-                            <i class="fas fa-arrow-right text-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                        </button>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section aria-labelledby="features-title" class="features-section">
+      <h2 id="features-title" class="section-title">Our Features</h2>
+      <div class="features-carousel" role="list" aria-label="Notes features carousel" tabindex="0">
+        <article class="feature-card" role="listitem" tabindex="0" aria-label="College Notes feature">
+          <div class="feature-header">
+            <span>College Notes</span>
+            <span class="arrow" aria-hidden="true">›</span>
+          </div>
+          <p class="feature-subtext">Concise notes to ace semester exams</p>
+          <img 
+            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/73ba8660-8d34-4727-9152-80349e6137e6.png" 
+            alt="Outdoor view of a large college campus building with green sports field and trees in daylight" 
+            class="feature-image" 
+            loading="lazy"
+            onerror="this.style.display='none';"
+          />
+        </article>
 
-        <!-- Enhanced PDF Viewer Section -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
-            <div class="flex justify-between items-center mb-4">
-                <h2 id="pdf-title" class="pdf-title text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600 dark:from-sky-400 dark:to-blue-400">Select a PDF to view</h2>
-                <div class="text-sm text-gray-500 dark:text-gray-400 flex items-center">
-                    <i class="fas fa-info-circle mr-1"></i>
-                    <span>PDF Viewer</span>
-                </div>
-            </div>
-            <div id="pdf-container" class="pdf-container">
-                <iframe id="pdf-viewer" class="w-full h-full border-0 rounded-xl" src="" frameborder="0" allowfullscreen></iframe>
-                <div id="loading" class="loading-animation hidden"></div>
-            </div>
-            <!-- Update the Download Notes Button -->
-            <div class="text-center mt-6">
-                <a href="https://drive.google.com/file/d/1a-oubPTsHTH3Qe7NbYj1pc06a1e99huT/view" target="_blank" id="download-link"
-                   class="inline-flex items-center px-6 py-3 text-white bg-gradient-to-r from-blue-500 to-sky-500 hover:from-blue-600 hover:to-sky-600 rounded-lg shadow-md hover:shadow-lg transition-all">
-                    <i class="fas fa-cloud-download-alt mr-2"></i>
-                    <span>Download Notes</span>
-                </a>
-            </div>
-        </div>
-    </main>
+        <article class="feature-card" role="listitem" tabindex="0" aria-label="CBSE Notes feature">
+          <div class="feature-header">
+            <span>CBSE Notes</span>
+            <span class="arrow" aria-hidden="true">›</span>
+          </div>
+          <p class="feature-subtext">Handwritten notes for CBSE Class 12, 11</p>
+          <img 
+            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/19709a86-13a3-465a-af1c-47752a121cbc.png" 
+            alt="Photo showing a large red and white multi-storey City Montessori School building exterior" 
+            class="feature-image" 
+            loading="lazy"
+            onerror="this.style.display='none';"
+          />
+        </article>
 
-    <!-- Footer and other sections remain unchanged -->
+        <article class="feature-card" role="listitem" tabindex="0" aria-label="Competitive Exam Notes feature">
+          <div class="feature-header">
+            <span>Competitive Exam Notes</span>
+            <span class="arrow" aria-hidden="true">›</span>
+          </div>
+          <p class="feature-subtext">PCMB Notes for Common Entrance Exams</p>
+          <img 
+            src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1d95ca0e-7491-41fc-a3aa-124d6b8601f3.png" 
+            alt="Photo of a university administrative building under construction with scaffolding and cranes" 
+            class="feature-image" 
+            loading="lazy"
+            onerror="this.style.display='none';"
+          />
+        </article>
+      </div>
+      <div class="carousel-dots" role="tablist" aria-label="Feature navigation dots">
+        <button class="dot active" role="tab" aria-selected="true" aria-controls="feature1" tabindex="0" aria-label="Select College Notes feature"></button>
+        <button class="dot" role="tab" aria-selected="false" aria-controls="feature2" tabindex="-1" aria-label="Select CBSE Notes feature"></button>
+        <button class="dot" role="tab" aria-selected="false" aria-controls="feature3" tabindex="-1" aria-label="Select Competitive Exam Notes feature"></button>
+      </div>
+    </section>
 
-    <!-- Notification Container for toast messages -->
-    <div id="notification-container"></div>
+    <section aria-labelledby="university-resources-title" class="university-resources">
+      <h2 id="university-resources-title" class="section-title">Christ University Resources</h2>
+      <article class="resource-card" tabindex="0" aria-label="BCA Bachelor of Computer Applications resource">
+        <p class="resource-title">BCA (Bachelor of Computer Applications)</p>
+        <p class="resource-subtitle">Complete Material for BCA Program, Semester-wise</p>
+      </article>
 
-    <script>
-        // Dark mode toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const html = document.documentElement;
-        
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'true' || 
-            (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-            darkModeToggle.textContent = '☀️';
+      <article class="resource-card" tabindex="0" aria-label="BBA Finance and Marketing Analytics resource">
+        <p class="resource-title">BBA (Finance and Marketing Analytics)</p>
+        <p class="resource-subtitle">Complete Material for BBAFMA Program, Semester-wise</p>
+      </article>
+
+      <article class="resource-card" tabindex="0" aria-label="BSc Psychology/Honour resource">
+        <p class="resource-title">BSc (Psychology/Honour)</p>
+        <p class="resource-subtitle">Complete Material for BSc(Pshcyo) Program, Semester-wise</p>
+      </article>
+
+      <article class="resource-card" tabindex="0" aria-label="BCom Honours resource">
+        <p class="resource-title">BCom (Honours)</p>
+        <p class="resource-subtitle">Complete notes for BCom Program, Semester-wise</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+
+    <button type="button" aria-label="Home page" title="Home">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 10.5L12 3l9 7.5v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20.5v-10z" stroke="#00328b" stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <path d="M9 20.5v-7h6v7" stroke="#00328b" stroke-width="2" fill="none" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <button type="button" aria-label="New arrivals" title="New Arrival">
+      <span class="badge-new" aria-hidden="true">NEW ARRIVAL</span>
+    </button>
+
+    <button type="button" aria-label="Marketplace" title="Marketplace">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 7h18v12H3z" stroke="#00328b" stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <path d="M16 7V5a4 4 0 0 0-8 0v2" stroke="#00328b" stroke-width="2" fill="none" stroke-linejoin="round"/>
+        <path d="M3 7l2-2h14l2 2" stroke="#00328b" stroke-width="2" fill="none" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <button type="button" aria-label="User profile" title="Profile">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="7" r="4" stroke="#00328b" stroke-width="2" fill="none"/>
+        <path d="M6 21v-2a5 5 0 0 1 10 0v2" stroke="#00328b" stroke-width="2" fill="none" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    // Carousel dots interaction for accessibility and scroll control
+    const carousel = document.querySelector('.features-carousel');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+    const featureCards = Array.from(document.querySelectorAll('.feature-card'));
+
+    function updateActiveDot(index) {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        dot.tabIndex = i === index ? 0 : -1;
+      });
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        featureCards[index].scrollIntoView({behavior: 'smooth', inline: 'start'});
+      });
+      // Keyboard support for dots
+      dot.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = (index + 1) % dots.length;
+          dots[next].focus();
+          dots[next].click();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = (index - 1 + dots.length) % dots.length;
+          dots[prev].focus();
+          dots[prev].click();
         }
+      });
+    });
 
-        darkModeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            const isDark = html.classList.contains('dark');
-            localStorage.setItem('darkMode', isDark);
-            darkModeToggle.textContent = isDark ? '☀️' : '🌙';
-        });
+    // Sync active dot on scroll
+    carousel.addEventListener('scroll', () => {
+      const scrollLeft = carousel.scrollLeft;
+      const cardWidth = featureCards[0].offsetWidth + 16; // card width + gap
+      const index = Math.round(scrollLeft / cardWidth);
+      updateActiveDot(index);
+    });
 
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
+    // Initial update
+    updateActiveDot(0);
 
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // PDF dropdown and selection functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownButton = document.getElementById('dropdownButton');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-            const selectedOption = document.getElementById('selectedOption');
-            const chevronIcon = dropdownButton.querySelector('i.fa-chevron-down');
-            const pdfViewer = document.getElementById('pdf-viewer');
-            const pdfTitle = document.getElementById('pdf-title');
-            const loading = document.getElementById('loading');
-            const downloadLink = document.getElementById('download-link');
-
-            // Show loading animation when PDF is loading
-            pdfViewer.addEventListener('load', function() {
-                loading.classList.add('hidden');
-            });
-
-            // Function to select a PDF option
-            window.selectOption = function(title, pdfUrl) {
-                selectedOption.textContent = title;
-                pdfTitle.textContent = title;
-                
-                // Show loading animation
-                loading.classList.remove('hidden');
-                
-                // Set PDF viewer source
-                pdfViewer.src = pdfUrl;
-                
-                // Update download link based on the PDF selected
-                updateDownloadLink(title, pdfUrl);
-                
-                // Hide dropdown
-                dropdownMenu.classList.add('hidden');
-                
-                // Reset chevron icon
-                chevronIcon.style.transform = '';
-                
-                // Show notification
-                showNotification(`${title} selected! Loading document...`);
-            };
-
-            // Function to update download link based on selected PDF
-            function updateDownloadLink(title, pdfUrl) {
-                // Convert preview URL to direct download URL by replacing /preview with /view
-                const downloadUrl = pdfUrl.replace('/preview', '/view');
-                downloadLink.href = downloadUrl;
-            }
-
-            // Toggle dropdown on button click
-            dropdownButton.addEventListener('click', function() {
-                dropdownMenu.classList.toggle('hidden');
-                
-                // Rotate chevron icon
-                if (dropdownMenu.classList.contains('hidden')) {
-                    chevronIcon.style.transform = '';
-                } else {
-                    chevronIcon.style.transform = 'rotate(180deg)';
-                }
-            });
-
-            // Close dropdown if clicked outside
-            document.addEventListener('click', function(event) {
-                if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.classList.add('hidden');
-                    chevronIcon.style.transform = '';
-                }
-            });
-
-            // Function to show notification toast
-            function showNotification(message) {
-                const container = document.getElementById('notification-container');
-                
-                // Create notification element
-                const notification = document.createElement('div');
-                notification.className = 'notification flex items-center';
-                notification.innerHTML = `
-                    <i class="fas fa-info-circle mr-2"></i>
-                    <span>${message}</span>
-                `;
-                
-                // Add to container
-                container.appendChild(notification);
-                
-                // Show notification with animation
-                setTimeout(() => {
-                    notification.classList.add('show');
-                }, 10);
-                
-                // Hide and remove after 3 seconds
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                    setTimeout(() => {
-                        container.removeChild(notification);
-                    }, 300);
-                }, 3000);
-            }
-
-            // Initialize with default selection if needed
-            // Uncomment the following line to set a default PDF on page load
-            // selectOption('Topper\'s Notes', 'https://drive.google.com/file/d/1a-oubPTsHTH3Qe7NbYj1pc06a1e99huT/preview');
-        });
-
-        // Loading screen animation
-        window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            loadingScreen.classList.remove('hidden');
-            
-            setTimeout(function() {
-                loadingScreen.style.opacity = '0';
-                setTimeout(function() {
-                    loadingScreen.classList.add('hidden');
-                    loadingScreen.style.opacity = '1';
-                }, 300);
-            }, 1500);
-        });
-
-        // Fade-in animation for elements as they come into view
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            // Observe all sections
-            document.querySelectorAll('main > div, header > div').forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </script>
-
-    <!-- Footer Section -->
-    <footer class="bg-gradient-to-r from-blue-100 to-sky-100 dark:from-blue-900/30 dark:to-sky-900/30 py-10 border-t border-blue-200 dark:border-blue-800">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <!-- Logo and Description -->
-                <div class="mb-6 md:mb-0 text-center md:text-left">
-                    <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto mx-auto md:mx-0 mb-2">
-                    <p class="text-gray-600 dark:text-gray-300 max-w-md">
-                        Your ultimate resource for academic excellence. Free study materials, question papers and notes.
-                    </p>
-                </div>
-                
-                <!-- Quick Links -->
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="text-center md:text-left">
-                        <h3 class="text-lg font-semibold mb-3 text-sky-700 dark:text-sky-400">Quick Links</h3>
-                        <ul class="space-y-2">
-                            <li><a href="index.html" class="text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition">Home</a></li>
-                            <li><a href="new-arrivals.html" class="text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition">New Arrivals</a></li>
-                            <li><a href="contact.html" class="text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition">Contact</a></li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Connect -->
-                    <div class="text-center md:text-left">
-                        <h3 class="text-lg font-semibold mb-3 text-sky-700 dark:text-sky-400">Connect With Us</h3>
-                        <div class="flex space-x-4 justify-center md:justify-start">
-                            <a href="https://www.instagram.com/noteszone.online/" class="text-2xl text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/company/notes-zone/" class="text-2xl text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://www.youtube.com/@noteszonebotservice" class="text-2xl text-gray-600 dark:text-gray-300 hover:text-sky-600 dark:hover:text-sky-400 transition">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Copyright -->
-            <div class="mt-8 text-center text-gray-500 dark:text-gray-400 text-sm">
-                <p>&copy; 2024 Notes Zone. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    // Accessibility: hide visually labels (used for screen readers only)
+    // Insert CSS for .visually-hidden class
+    const style = document.createElement('style');
+    style.textContent = `
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
-
 </html>
+
