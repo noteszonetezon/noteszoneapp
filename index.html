@@ -4,12 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notes Zone App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            nblue: '#2563eb',
+            nblue2: '#4fc3f7',
+            nblue3: '#1976d2',
+            nblue4: '#e3f2fd',
+            ngray: '#f5f6fa',
+            ntext: '#222b45',
+            nsub: '#6b7280',
+          },
+        },
+      },
+    }
+  </script>
   <style>
-    body { background: #f8fafc; }
+    body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
     .gradient-top {
-      background: linear-gradient(180deg, #4fc3f7 0%, #ffffff 100%);
+      background: linear-gradient(180deg, #4fc3f7 0%, #e3f2fd 100%);
     }
     .feature-scroll::-webkit-scrollbar { display: none; }
     .feature-scroll { -ms-overflow-style: none; scrollbar-width: none; }
@@ -19,121 +42,265 @@
     }
     .resource-card h3 { font-size: 1.1rem; }
     .nav-active { color: #2563eb; }
+    .nav-label { font-size: 0.78rem; font-weight: 700; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 9999px; display: inline-block; }
+    /* Search overlay styles */
+    #searchOverlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.98); z-index: 50; }
+    #searchOverlay.active { display: block; }
+    #searchResults { max-height: 60vh; overflow-y: auto; }
+    .search-result-item { background: #f5f6fa; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.5rem; transition: background 0.2s; cursor: pointer; }
+    .search-result-item:hover { background: #e3f2fd; }
+    .search-highlight { background: #4fc3f7; color: #1976d2; border-radius: 0.2em; padding: 0 0.2em; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-gray-50">
+<body class="min-h-screen flex flex-col bg-ngrays font-poppins">
+  <!-- Search Overlay -->
+  <div id="searchOverlay">
+    <div class="flex flex-col h-full">
+      <div class="flex items-center px-4 py-4 border-b border-gray-200">
+        <input id="searchInput" type="text" placeholder="Search for notes..." class="flex-1 bg-gray-100 rounded-lg px-4 py-2 text-lg focus:outline-none" autofocus>
+        <button id="closeSearch" class="ml-3 text-2xl text-gray-500 hover:text-nblue3"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="searchResults" class="p-4 flex-1 overflow-y-auto"></div>
+    </div>
+  </div>
+
   <!-- Top Gradient & Logo -->
   <div class="gradient-top pb-4">
-    <div class="flex items-center px-4 pt-6 pb-2">
-      <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg shadow-md">
-    </div>
-    <!-- Search Bar -->
-    <div class="px-4">
-      <div class="flex items-center bg-white rounded-2xl shadow-md px-4 py-3 border border-blue-200">
-        <i class="fas fa-search text-gray-400 mr-2"></i>
-        <input type="text" placeholder="Search for Notes" class="bg-transparent outline-none flex-1 text-lg font-semibold text-gray-700 placeholder:font-semibold placeholder:text-gray-400">
+    <div class="flex flex-col px-4 pt-6 pb-2">
+      <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg mb-2">
+      <!-- Pretty Search Bar (only, no icon button) -->
+      <div id="prettySearchBar" tabindex="0" class="flex items-center bg-white rounded-2xl shadow-lg px-4 py-3 cursor-pointer" style="box-shadow: 0 4px 16px rgba(79,195,247,0.10);">
+        <i class="fas fa-search text-gray-400 mr-2 text-lg"></i>
+        <span class="font-bold text-gray-400 text-lg select-none">Search for Notes</span>
       </div>
     </div>
     <!-- Headline & CTA -->
     <div class="px-4 mt-6">
-      <h1 class="text-2xl font-extrabold text-blue-900 leading-tight">No more last-minute panic<br> <span class="font-bold">Notes Zone has your back.</span></h1>
-      <p class="mt-1 text-base text-blue-900 font-semibold">Start your journey with Notes Zone today</p>
-      <button class="mt-3 bg-blue-800 text-white font-bold rounded-xl px-5 py-2 text-base shadow-md">Start your journey with Notes Zone today</button>
+      <h1 class="text-2xl font-extrabold text-nblue3 leading-tight">No more last-minute panic<br> <span class="font-bold">Notes Zone has your back.</span></h1>
+      <button class="mt-3 bg-nblue3 text-white font-bold rounded-xl px-5 py-2 text-base shadow-md">Start your journey with Notes Zone today</button>
     </div>
   </div>
 
   <!-- Features Section -->
   <div class="px-4 mt-8">
-    <h2 class="text-xl font-extrabold mb-3 text-black">Our Features</h2>
-    <div class="flex space-x-4 overflow-x-auto feature-scroll pb-2">
+    <h2 class="text-xl font-extrabold mb-3 text-ntext">Our Features</h2>
+    <div id="featureCarousel" class="flex space-x-4 overflow-x-auto feature-scroll pb-2 scroll-smooth">
       <!-- Feature Card 1 -->
-      <div class="min-w-[200px] bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-lg flex-shrink-0">
-        <div class="p-4 pb-2">
+      <a href="college-notes.html" class="carousel-card bg-gradient-to-b from-nblue2 to-nblue3 rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px;">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-white text-xl font-extrabold leading-tight">College<br>Notes</h3>
+              <h3 class="text-white text-lg font-extrabold leading-tight">College<br>Notes</h3>
               <p class="text-white text-xs font-medium mt-1">Concise notes to ace semester exams</p>
             </div>
-            <i class="fas fa-chevron-right text-white text-lg"></i>
+            <i class="fas fa-chevron-right text-white text-base"></i>
           </div>
         </div>
-        <img src="college notes.jpg" alt="College Notes" class="feature-card-img w-full">
-      </div>
+        <img src="college notes.jpg" alt="College Notes" class="w-full object-cover rounded-b-2xl" style="height:90px;">
+      </a>
       <!-- Feature Card 2 -->
-      <div class="min-w-[200px] bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-lg flex-shrink-0">
-        <div class="p-4 pb-2">
+      <a href="cbse notes.html" class="carousel-card bg-gradient-to-b from-nblue2 to-nblue3 rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px;">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-white text-xl font-extrabold leading-tight">CBSE<br>Notes</h3>
+              <h3 class="text-white text-lg font-extrabold leading-tight">CBSE<br>Notes</h3>
               <p class="text-white text-xs font-medium mt-1">Handwritten notes for CBSE Class 12, 11</p>
             </div>
-            <i class="fas fa-chevron-right text-white text-lg"></i>
+            <i class="fas fa-chevron-right text-white text-base"></i>
           </div>
         </div>
-        <img src="cbse notes.jpg" alt="CBSE Notes" class="feature-card-img w-full">
-      </div>
+        <img src="cbse notes.jpg" alt="CBSE Notes" class="w-full object-cover rounded-b-2xl" style="height:90px;">
+      </a>
       <!-- Feature Card 3 -->
-      <div class="min-w-[200px] bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-lg flex-shrink-0">
-        <div class="p-4 pb-2">
+      <a href="competition-notes.html" class="carousel-card bg-gradient-to-b from-nblue2 to-nblue3 rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px;">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-white text-xl font-extrabold leading-tight">Competition<br>Notes</h3>
+              <h3 class="text-white text-lg font-extrabold leading-tight">Competition<br>Notes</h3>
               <p class="text-white text-xs font-medium mt-1">PCMB Notes for Entrance Exams</p>
             </div>
-            <i class="fas fa-chevron-right text-white text-lg"></i>
+            <i class="fas fa-chevron-right text-white text-base"></i>
           </div>
         </div>
-        <img src="competition notes.jpg" alt="Competition Notes" class="feature-card-img w-full">
-      </div>
+        <img src="competition notes.jpg" alt="Competition Notes" class="w-full object-cover rounded-b-2xl" style="height:90px;">
+      </a>
     </div>
-    <!-- Dots for carousel (static for now) -->
-    <div class="flex justify-center mt-2 space-x-1">
-      <span class="w-2 h-2 bg-blue-400 rounded-full inline-block"></span>
-      <span class="w-2 h-2 bg-blue-200 rounded-full inline-block"></span>
-      <span class="w-2 h-2 bg-blue-200 rounded-full inline-block"></span>
+    <!-- Dots for carousel -->
+    <div class="flex justify-center mt-2 space-x-1" id="carouselDots">
+      <span class="nav-dot bg-nblue3"></span>
+      <span class="nav-dot bg-nblue2"></span>
+      <span class="nav-dot bg-nblue2"></span>
     </div>
   </div>
 
   <!-- Christ University Resources -->
-  <div class="px-4 mt-8">
-    <h2 class="text-xl font-extrabold mb-3 text-black">Christ University Resources</h2>
+  <div class="px-4 mt-8 pb-24">
+    <h2 class="text-xl font-extrabold mb-3 text-ntext">Christ University Resources</h2>
     <div class="space-y-4">
-      <div class="resource-card bg-gradient-to-r from-blue-100 to-blue-300 rounded-2xl px-4 py-3 flex flex-col shadow">
-        <h3 class="text-blue-800 font-extrabold">BCA (Bachelor of Computer Applications)</h3>
-        <p class="text-black text-sm font-medium">Complete Material for BCA Program, Semester-wise</p>
-      </div>
-      <div class="resource-card bg-gradient-to-r from-blue-100 to-blue-300 rounded-2xl px-4 py-3 flex flex-col shadow">
-        <h3 class="text-blue-800 font-extrabold">BBA (Finance and Marketing Analytics)</h3>
-        <p class="text-black text-sm font-medium">Complete Material for BBAFMA Program, Semester-wise</p>
-      </div>
-      <div class="resource-card bg-gradient-to-r from-blue-100 to-blue-300 rounded-2xl px-4 py-3 flex flex-col shadow">
-        <h3 class="text-blue-800 font-extrabold">BSc (Psychology/Honour)</h3>
-        <p class="text-black text-sm font-medium">Complete Material for BSc(Pschyo) Program, Semester-wise</p>
-      </div>
-      <div class="resource-card bg-gradient-to-r from-blue-100 to-blue-300 rounded-2xl px-4 py-3 flex flex-col shadow">
-        <h3 class="text-blue-800 font-extrabold">BCom (Honours)</h3>
-        <p class="text-black text-sm font-medium">Complete notes for BCom Program, Semester-wise</p>
-      </div>
+      <a href="BCA.html" class="resource-card bg-gradient-to-r from-nblue4 to-nblue2 rounded-2xl px-4 py-3 flex flex-col shadow">
+        <h3 class="text-nblue3 font-extrabold">BCA (Bachelor of Computer Applications)</h3>
+        <p class="text-ntext text-sm font-medium">Complete Material for BCA Program, Semester-wise</p>
+      </a>
+      <a href="#" class="resource-card bg-gradient-to-r from-nblue4 to-nblue2 rounded-2xl px-4 py-3 flex flex-col shadow">
+        <h3 class="text-nblue3 font-extrabold">BBA (Finance and Marketing Analytics)</h3>
+        <p class="text-ntext text-sm font-medium">Complete Material for BBAFMA Program, Semester-wise</p>
+      </a>
+      <a href="#" class="resource-card bg-gradient-to-r from-nblue4 to-nblue2 rounded-2xl px-4 py-3 flex flex-col shadow">
+        <h3 class="text-nblue3 font-extrabold">BSc (Psychology/Honour)</h3>
+        <p class="text-ntext text-sm font-medium">Complete Material for BSc(Pschyo) Program, Semester-wise</p>
+      </a>
+      <a href="#" class="resource-card bg-gradient-to-r from-nblue4 to-nblue2 rounded-2xl px-4 py-3 flex flex-col shadow">
+        <h3 class="text-nblue3 font-extrabold">BCom (Honours)</h3>
+        <p class="text-ntext text-sm font-medium">Complete notes for BCom Program, Semester-wise</p>
+      </a>
     </div>
   </div>
 
   <!-- Bottom Navigation Bar -->
   <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center h-16 z-20">
-    <a href="#" class="flex flex-col items-center nav-active">
+    <a href="homeapp.html" class="flex flex-col items-center nav-active">
       <i class="fas fa-home text-2xl"></i>
-      <span class="text-xs mt-1 font-bold">Home</span>
+      <span class="nav-label mt-1">Home</span>
     </a>
-    <a href="#" class="flex flex-col items-center">
-      <div class="w-10 h-10 bg-blue-700 text-white rounded-full flex items-center justify-center font-bold text-xs mb-1">NEW<br>ARRIVAL</div>
+    <a href="new-arrivals.html" class="flex flex-col items-center">
+      <div class="w-10 h-10 bg-nblue3 text-white rounded-full flex items-center justify-center font-bold text-xs mb-1">NEW<br>ARRIVAL</div>
     </a>
-    <a href="#" class="flex flex-col items-center">
+    <a href="Shop.html" class="flex flex-col items-center">
       <i class="fas fa-store text-2xl"></i>
-      <span class="text-xs mt-1 font-bold">Store</span>
+      <span class="nav-label mt-1">Store</span>
     </a>
-    <a href="#" class="flex flex-col items-center">
+    <a href="auth.html" class="flex flex-col items-center">
       <i class="fas fa-user text-2xl"></i>
-      <span class="text-xs mt-1 font-bold">Me</span>
+      <span class="nav-label mt-1">Me</span>
     </a>
   </nav>
+  <script>
+    // --- SEARCH SYSTEM ---
+    const notesData = [
+      { id: 1, title: 'CBSE Physics Class 12 Notes', category: 'CBSE', url: '/physics-chapters.html' },
+      { id: 2, title: 'CBSE Chemistry Class 12 Notes', category: 'CBSE', url: '/chemistry 12.html' },
+      { id: 3, title: 'DSA Assignments', category: 'Christ University 2 BCA',  url: 'https://drive.google.com/drive/folders/1Wv-CNYZvcQajVMUAU05iLkuXMwGFFNuA' },
+      { id: 4, title: 'DSA Lab Manual', category: 'Christ University 2 BCA', url: 'https://drive.google.com/drive/folders/1Wv-CNYZvcQajVMUAU05iLkuXMwGFFNuA' },
+      { id: 5, title: 'Data Structure Using C++', category: 'Christ University 2 BCA', url: 'https://drive.google.com/drive/folders/1Wv-CNYZvcQajVMUAU05iLkuXMwGFFNuA' },
+      { id: 6, title: 'Data Structure Using C++ Assignment', category: 'Christ University 2 BCA', url: 'https://drive.google.com/drive/folders/1Wv-CNYZvcQajVMUAU05iLkuXMwGFFNuA' },
+      { id: 7, title: 'Data Structure Using C++ lab Manual', category: 'Christ University 2 BCA', url: 'https://drive.google.com/drive/folders/1Wv-CNYZvcQajVMUAU05iLkuXMwGFFNuA' },
+      { id: 8, title: 'Java Programming Assignments', category: 'Christ University 2 BCA', url: 'https://drive.google.com/drive/folders/1RLV3opjhRnglVxApmkxdwwg5aOK2B1sG' },
+      { id: 9, title: 'Java Programming Notes', category: 'Christ University 2 BCA', url: 'https://drive.google.com/drive/folders/1RLV3opjhRnglVxApmkxdwwg5aOK2B1sG' },
+      { id: 10, title: 'BCA 2nd Semester', category: 'College', url: '/BCA.html' },
+      { id: 11, title: '2 BCA', category: 'College', url: '/BCA.html' },
+      { id: 12, title: 'Christ University', category: 'College', url: '/christ-university.html' },
+      { id: 13, title: 'Discrete Mathematics Assignments', category: 'Christ University 2BCA', url: 'https://drive.google.com/drive/folders/10rO32lqgK6KGM-7DUqygPureGlMVYHc6' },
+      { id: 14, title: 'Discrete Mathematics Notes', category: 'Christ University 2BCA', url: 'https://drive.google.com/file/d/1kcuj02bK5GC62sVp1t375Fx18Y7Q9-Lp/view' },
+      { id: 15, title: 'Maths Assignments', category: 'Christ University 2BCA', url: 'https://drive.google.com/drive/folders/10rO32lqgK6KGM-7DUqygPureGlMVYHc6' },
+      { id: 16, title: 'Maths Notes', category: 'Christ University 2BCA', url: 'https://drive.google.com/file/d/1kcuj02bK5GC62sVp1t375Fx18Y7Q9-Lp/view' },
+      { id: 17, title: 'Full Stack Development Assignment', category: 'Christ University 2BCA', url: 'https://drive.google.com/drive/folders/1VvgzoXh6SNU40e0i-8F-rzE09PmxdTxq' },
+      { id: 18, title: 'Full Stack Development Notes', category: 'Christ University 2BCA', url: 'https://drive.google.com/drive/folders/1VvgzoXh6SNU40e0i-8F-rzE09PmxdTxq' },
+      { id: 19, title: 'FSD Assignment', category: 'Christ University 2BCA', url: 'https://drive.google.com/drive/folders/1VvgzoXh6SNU40e0i-8F-rzE09PmxdTxq' },
+      { id: 20, title: 'FSD Notes', category: 'Christ University 2BCA', url: 'https://drive.google.com/drive/folders/1VvgzoXh6SNU40e0i-8F-rzE09PmxdTxq' },
+      { id: 21, title: 'BCA Notes', category: 'Christ University', url: '/BCA.html' },
+      { id: 22, title: 'BDA Notes', category: 'Christ University', url: '/BDA.html' },
+    ];
+    // Open search overlay from pretty bar only
+    document.getElementById('prettySearchBar').addEventListener('click', function() {
+      document.getElementById('searchOverlay').classList.add('active');
+      setTimeout(() => document.getElementById('searchInput').focus(), 100);
+    });
+    document.getElementById('prettySearchBar').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        document.getElementById('searchOverlay').classList.add('active');
+        setTimeout(() => document.getElementById('searchInput').focus(), 100);
+      }
+    });
+    // Close search overlay
+    document.getElementById('closeSearch').addEventListener('click', function() {
+      document.getElementById('searchOverlay').classList.remove('active');
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchResults').innerHTML = '';
+    });
+    // Live search
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const query = e.target.value.trim().toLowerCase();
+      const results = notesData.filter(note =>
+        note.title.toLowerCase().includes(query) ||
+        note.category.toLowerCase().includes(query)
+      );
+      displayResults(results, query);
+    });
+    function displayResults(results, query) {
+      const searchResults = document.getElementById('searchResults');
+      if (!query) { searchResults.innerHTML = ''; return; }
+      if (results.length === 0) {
+        searchResults.innerHTML = `<div class='text-center text-gray-400 py-8'><i class='fas fa-search-minus text-4xl mb-4'></i><p>No results found for "${query}"</p></div>`;
+        return;
+      }
+      searchResults.innerHTML = results.map(result => {
+        const highlightedTitle = highlightText(result.title, query);
+        return `<a href="${result.url}" class="search-result-item block"><div class="flex items-center justify-between"><div><h3 class="text-lg font-semibold text-ntext">${highlightedTitle}</h3><p class="text-xs text-nsub">${result.category}</p></div><i class="fas fa-chevron-right text-gray-400"></i></div></a>`;
+      }).join('');
+    }
+    function highlightText(text, query) {
+      if (!query) return text;
+      const regex = new RegExp(`(${query})`, 'gi');
+      return text.replace(regex, '<span class="search-highlight">$1</span>');
+    }
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('searchOverlay').classList.contains('active')) {
+        document.getElementById('closeSearch').click();
+      }
+    });
+
+    // --- FEATURE CAROUSEL AUTO-SCROLL ---
+    const carousel = document.getElementById('featureCarousel');
+    const cards = carousel.querySelectorAll('.carousel-card');
+    const dots = document.getElementById('carouselDots').children;
+    let carouselIndex = 0;
+    let carouselInterval;
+    function goToCard(idx) {
+      carouselIndex = idx;
+      const card = cards[idx];
+      card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove('bg-nblue3');
+        dots[i].classList.add('bg-nblue2');
+      }
+      dots[idx].classList.add('bg-nblue3');
+    }
+    function nextCard() {
+      carouselIndex = (carouselIndex + 1) % cards.length;
+      goToCard(carouselIndex);
+    }
+    function startCarousel() {
+      carouselInterval = setInterval(nextCard, 2500);
+    }
+    function stopCarousel() {
+      clearInterval(carouselInterval);
+    }
+    // Manual scroll: update dot based on visible card
+    carousel.addEventListener('scroll', () => {
+      let minDiff = Infinity, activeIdx = 0;
+      for (let i = 0; i < cards.length; i++) {
+        const rect = cards[i].getBoundingClientRect();
+        const diff = Math.abs(rect.left - carousel.getBoundingClientRect().left);
+        if (diff < minDiff) { minDiff = diff; activeIdx = i; }
+      }
+      carouselIndex = activeIdx;
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove('bg-nblue3');
+        dots[i].classList.add('bg-nblue2');
+      }
+      dots[activeIdx].classList.add('bg-nblue3');
+    });
+    // Dots click
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].addEventListener('click', () => {
+        goToCard(i);
+        stopCarousel();
+        startCarousel();
+      });
+    }
+    startCarousel();
+  </script>
 </body>
-</html> 
+</html>
