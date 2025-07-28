@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Accounting - Notes Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            nblue: '#2563eb',
+            nblue2: '#4fc3f7',
+            nblue3: '#1976d2',
+            nblue4: '#e3f2fd',
+            ngray: '#f5f6fa',
+            ntext: '#222b45',
+            nsub: '#6b7280',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: #f8fafc; 
+    }
+    .gradient-top {
+      background: linear-gradient(180deg, #4fc3f7 0%, #e3f2fd 100%);
+    }
+    .topic-card {
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .topic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .concept-card {
+      border-left: 4px solid #004aad;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #e3f2fd;
+      color: #004aad;
+      font-weight: 600;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    tr:hover {
+      background-color: #f0f9ff;
+    }
+    .emoji-bullet {
+      display: inline-block;
+      width: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-white font-poppins">
+  <!-- Top Gradient & Logo -->
+  <div class="gradient-top pb-4">
+    <div class="flex flex-col px-4 pt-6 pb-2">
+      <div class="flex items-center">
+        <a href="index.html">
+          <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg mb-2">
+        </a>
+        <a href="index.html" class="ml-3 text-white font-bold text-xl">Notes Zone</a>
+      </div>
+      <h1 class="text-2xl font-extrabold leading-tight mt-4" style="color: #004aad;">Financial Accounting<br><span class="font-bold text-lg">Detailed Notes & Concepts</span></h1>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-6 max-w-4xl">
+    <!-- Introduction -->
+    <div class="mb-8">
+      <p class="text-ntext">Welcome to our comprehensive guide on Financial Accounting. These notes cover the fundamental concepts, principles, and practices that form the backbone of accounting. Whether you're a student preparing for exams or a professional refreshing your knowledge, this resource will help you understand the key aspects of accounting.</p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="bg-nblue4/30 rounded-xl p-4 mb-8">
+      <h2 class="text-xl font-bold mb-3" style="color: #004aad;">Table of Contents</h2>
+      <ul class="space-y-2">
+        <li>
+          <a href="#accounting-standards" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">📌</span> Accounting Standards
+          </a>
+        </li>
+        <li>
+          <a href="#accounting-concepts" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">📚</span> Accounting Concepts and Conventions
+          </a>
+        </li>
+        <li>
+          <a href="#receipts-expenditures" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">💰</span> Receipts & Expenditures
+          </a>
+        </li>
+        <li>
+          <a href="#basic-terms" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">📘</span> Basic Accounting Terms
+          </a>
+        </li>
+        <li>
+          <a href="#types-assets" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">🏢</span> Types of Assets
+          </a>
+        </li>
+        <li>
+          <a href="#profit-gain" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">💼</span> Profit vs Gain
+          </a>
+        </li>
+        <li>
+          <a href="#double-entry" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">🔁</span> Double Entry & Accounting Equation
+          </a>
+        </li>
+        <li>
+          <a href="#key-formulas" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">📌</span> Key Formulas to Remember
+          </a>
+        </li>
+        <li>
+          <a href="#exam-tips" class="flex items-center text-ntext hover:text-nblue3">
+            <span class="emoji-bullet">📝</span> Tips for Exam
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 1. Accounting Standards -->
+    <section id="accounting-standards" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h2 class="text-xl font-bold mb-4" style="color: #004aad;">📘 Detailed Notes: Process of Accounting</h2>
+        
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">🧾 1. Accounting Standards (L-3)</h3>
+          
+          <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+            <h4 class="font-semibold mb-2">📌 Purpose:</h4>
+            <p>To ensure <span class="font-medium">uniformity</span>, <span class="font-medium">transparency</span>, and <span class="font-medium">comparability</span> of financial statements.</p>
+          </div>
+          
+          <div class="mb-4">
+            <h4 class="font-semibold mb-2">📋 Key Bodies and Regulations:</h4>
+            <div class="overflow-x-auto">
+              <table class="min-w-full border border-gray-200 rounded-lg">
+                <thead>
+                  <tr>
+                    <th class="border border-gray-200">Authority</th>
+                    <th class="border border-gray-200">Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-200 font-medium">IFRS (International Financial Reporting Standards)</td>
+                    <td class="border border-gray-200">Global accounting standards set by IASB</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-200 font-medium">IASB (International Accounting Standards Board)</td>
+                    <td class="border border-gray-200">Issues IFRS</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-200 font-medium">Ind-AS (Indian Accounting Standards)</td>
+                    <td class="border border-gray-200">Indian version of IFRS</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-200 font-medium">ICAI (Institute of Chartered Accountants of India)</td>
+                    <td class="border border-gray-200">Issues and regulates Ind-AS</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-200 font-medium">Companies Act, 2013</td>
+                    <td class="border border-gray-200">Legal framework for financial reporting in India</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="bg-nblue4/30 p-3 rounded-lg">
+            <p class="font-medium">📍 Mandatory for: Companies listed on BSE/NSE with ₹250+ crore net worth</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Accounting Concepts and Conventions -->
+    <section id="accounting-concepts" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">📚 2. Accounting Concepts and Conventions</h3>
+        <p class="mb-4">These are the fundamental rules that form the base of accounting.</p>
+        
+        <!-- 2.1 Going Concern -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.1 Going Concern Assumption</h4>
+          <ul class="space-y-1">
+            <li>Business will continue to operate <span class="font-medium">indefinitely</span>.</li>
+            <li>Enables long-term planning like taking loans or buying assets.</li>
+            <li>No intention to <span class="font-medium">liquidate</span> or shut down.</li>
+          </ul>
+        </div>
+        
+        <!-- 2.2 Accrual Assumption -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.2 Accrual Assumption</h4>
+          <p>Transactions are recorded when they <span class="font-medium">occur</span>, not when cash is exchanged.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <ul class="space-y-1">
+            <li>Credit sales are recorded even if cash is not yet received.</li>
+            <li>Salaries due are recorded as expenses even if unpaid.</li>
+          </ul>
+        </div>
+        
+        <!-- 2.3 Consistency Principle -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.3 Consistency Principle</h4>
+          <p>Use the same accounting methods year after year.</p>
+          <p>Allows meaningful comparison of financial data over time.</p>
+          <p class="mt-2">Example: Using the same <span class="font-medium">depreciation method</span> for assets.</p>
+        </div>
+        
+        <!-- 2.4 Business Entity Concept -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.4 Business Entity Concept</h4>
+          <p>Business is <span class="font-medium">separate</span> from its owner.</p>
+          <p>All transactions are recorded only for the business, not the personal activities of the owner.</p>
+          <p class="mt-2">Example: Owner's withdrawals are recorded as <span class="font-medium">drawings</span>, not expenses.</p>
+        </div>
+        
+        <!-- 2.5 Money Measurement Concept -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.5 Money Measurement Concept</h4>
+          <p>Only transactions measurable in money are recorded.</p>
+          <p>Non-quantifiable factors like employee skill or reputation are not recorded.</p>
+          <p class="mt-2 font-medium">Example:</p>
+          <ul class="space-y-1">
+            <li>Record "Machinery purchased for ₹5 lakh"</li>
+            <li>Ignore: "Owner's experience = 10 years"</li>
+          </ul>
+        </div>
+        
+        <!-- 2.6 Accounting Period Concept -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.6 Accounting Period Concept</h4>
+          <p>Business life is divided into fixed time periods for reporting.</p>
+          <p class="mt-2 font-medium">Usually:</p>
+          <ul class="space-y-1">
+            <li>Financial Year: 1 April – 31 March</li>
+            <li>Calendar Year: 1 Jan – 31 Dec</li>
+          </ul>
+        </div>
+        
+        <!-- 2.7 Full Disclosure Principle -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.7 Full Disclosure Principle</h4>
+          <p>All relevant and significant financial information must be disclosed.</p>
+          <p>Ensures <span class="font-medium">transparency</span>, <span class="font-medium">trust</span>, and better <span class="font-medium">decision-making</span>.</p>
+          <p>Includes footnotes, contingencies, etc.</p>
+        </div>
+        
+        <!-- 2.8 Materiality Principle -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.8 Materiality Principle</h4>
+          <p>Record only information that is important enough to influence decisions.</p>
+          <p>Minor errors that don't impact decisions can be ignored.</p>
+        </div>
+        
+        <!-- 2.9 Prudence Principle -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.9 Prudence (Conservatism) Principle</h4>
+          <ul class="space-y-1">
+            <li>Do not overstate assets or income.</li>
+            <li>Record possible <span class="font-medium">losses</span> but not unrealized <span class="font-medium">gains</span>.</li>
+            <li>Be cautious to avoid misleading financial position.</li>
+          </ul>
+        </div>
+        
+        <!-- 2.10 Dual Aspect Concept -->
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">🔸 2.10 Dual Aspect Concept</h4>
+          <ul class="space-y-1">
+            <li>Every transaction affects at least <span class="font-medium">two accounts</span>.</li>
+            <li>Basis of <span class="font-medium">double-entry system</span>.</li>
+            <li>Total debits = total credits</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Receipts & Expenditures -->
+    <section id="receipts-expenditures" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">💰 3. Receipts & Expenditures</h3>
+        
+        <div class="overflow-x-auto">
+          <table class="min-w-full border border-gray-200 rounded-lg">
+            <thead>
+              <tr>
+                <th class="border border-gray-200">Type</th>
+                <th class="border border-gray-200">Revenue</th>
+                <th class="border border-gray-200">Capital</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-gray-200 font-medium">Receipts</td>
+                <td class="border border-gray-200">Operating income (e.g., sales)</td>
+                <td class="border border-gray-200">Loans, owner's capital</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Expenditure</td>
+                <td class="border border-gray-200">Daily expenses (e.g., rent, salary)</td>
+                <td class="border border-gray-200">Buying machinery, building</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="mt-4 flex flex-col sm:flex-row gap-4">
+          <div class="bg-nblue4/30 p-3 rounded-lg flex-1">
+            <p>Revenue items are short-term (< 1 year)</p>
+          </div>
+          <div class="bg-nblue4/30 p-3 rounded-lg flex-1">
+            <p>Capital items are long-term (> 1 year)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Basic Accounting Terms -->
+    <section id="basic-terms" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">📘 4. Basic Accounting Terms</h3>
+        
+        <div class="overflow-x-auto">
+          <table class="min-w-full border border-gray-200 rounded-lg">
+            <thead>
+              <tr>
+                <th class="border border-gray-200">Term</th>
+                <th class="border border-gray-200">Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-gray-200 font-medium">Proprietor</td>
+                <td class="border border-gray-200">Owner of the business</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Entity</td>
+                <td class="border border-gray-200">The business unit</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Debtor</td>
+                <td class="border border-gray-200">Customer who owes money to the business</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Creditor</td>
+                <td class="border border-gray-200">Person to whom the business owes money</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Bill Receivable (B/R)</td>
+                <td class="border border-gray-200">A written promise to receive money later</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Bill Payable (B/P)</td>
+                <td class="border border-gray-200">A written promise to pay money later</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Trade Receivables</td>
+                <td class="border border-gray-200">Debtors + B/R</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Trade Payables</td>
+                <td class="border border-gray-200">Creditors + B/P</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Bad Debts</td>
+                <td class="border border-gray-200">Amount that cannot be recovered from debtor</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Types of Assets -->
+    <section id="types-assets" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">🏢 5. Types of Assets</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-nblue4/30 p-4 rounded-lg">
+            <h4 class="font-semibold mb-2">Fixed Assets</h4>
+            <ul class="space-y-1">
+              <li>Long-term use</li>
+              <li>Examples: Furniture, Machinery</li>
+            </ul>
+          </div>
+          
+          <div class="bg-nblue4/30 p-4 rounded-lg">
+            <h4 class="font-semibold mb-2">Current Assets</h4>
+            <ul class="space-y-1">
+              <li>Used within a year</li>
+              <li>Examples: Cash, Inventory, Debtors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Profit vs Gain -->
+    <section id="profit-gain" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">💼 6. Profit vs Gain</h3>
+        
+        <div class="overflow-x-auto">
+          <table class="min-w-full border border-gray-200 rounded-lg">
+            <thead>
+              <tr>
+                <th class="border border-gray-200">Type</th>
+                <th class="border border-gray-200">Description</th>
+                <th class="border border-gray-200">Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-gray-200 font-medium">Profit</td>
+                <td class="border border-gray-200">From normal business activity</td>
+                <td class="border border-gray-200">Selling ice-cream</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-200 font-medium">Gain</td>
+                <td class="border border-gray-200">From extra/non-core activity</td>
+                <td class="border border-gray-200">Selling old laptop</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Double Entry & Accounting Equation -->
+    <section id="double-entry" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">🔁 7. Double Entry & Accounting Equation (L-5)</h3>
+        
+        <div class="concept-card bg-gray-50 p-4 rounded-r-lg mb-4">
+          <h4 class="font-semibold mb-2">📌 Equation:</h4>
+          <p class="text-lg font-bold text-center my-3">Assets = Liabilities + Capital</p>
+        </div>
+        
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">🧮 Examples:</h4>
+          <ul class="space-y-3">
+            <li class="p-2 bg-gray-50 rounded-lg">
+              Start business with ₹20,000 →
+              <span class="block mt-1 font-medium">➤ Assets ↑, Capital ↑</span>
+            </li>
+            <li class="p-2 bg-gray-50 rounded-lg">
+              Buy furniture for ₹500 (cash) →
+              <span class="block mt-1 font-medium">➤ Furniture ↑, Cash ↓</span>
+            </li>
+            <li class="p-2 bg-gray-50 rounded-lg">
+              Purchase goods on credit ₹2,000 →
+              <span class="block mt-1 font-medium">➤ Inventory ↑, Liability ↑</span>
+            </li>
+            <li class="p-2 bg-gray-50 rounded-lg">
+              Sell goods costing ₹2,500 on credit for ₹4,000 →
+              <span class="block mt-1 font-medium">➤ Debtor ↑, Profit ↑</span>
+            </li>
+            <li class="p-2 bg-gray-50 rounded-lg">
+              Pay Rent ₹1,000, Salary ₹5,000 →
+              <span class="block mt-1 font-medium">➤ Cash ↓, Capital ↓ (expense)</span>
+            </li>
+            <li class="p-2 bg-gray-50 rounded-lg">
+              Owner withdraws ₹2,000 →
+              <span class="block mt-1 font-medium">➤ Cash ↓, Capital ↓</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Formulas to Remember -->
+    <section id="key-formulas" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">📌 KEY FORMULAS TO REMEMBER</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-3 bg-nblue4/30 rounded-lg">
+            <p class="font-medium">Accounting Equation</p>
+            <p class="mt-1">👉 Assets = Liabilities + Capital</p>
+          </div>
+          
+          <div class="p-3 bg-nblue4/30 rounded-lg">
+            <p class="font-medium">Profit Calculation</p>
+            <p class="mt-1">👉 Profit = Sales – Cost</p>
+          </div>
+          
+          <div class="p-3 bg-nblue4/30 rounded-lg">
+            <p class="font-medium">Trade Receivables</p>
+            <p class="mt-1">👉 Debtors + Bills Receivable</p>
+          </div>
+          
+          <div class="p-3 bg-nblue4/30 rounded-lg">
+            <p class="font-medium">Trade Payables</p>
+            <p class="mt-1">👉 Creditors + Bills Payable</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tips for Exam -->
+    <section id="exam-tips" class="mb-10">
+      <div class="topic-card bg-white p-6">
+        <h3 class="text-lg font-semibold mb-3" style="color: #004aad;">📝 TIPS FOR EXAM</h3>
+        
+        <ul class="space-y-2">
+          <li class="flex items-start">
+            <span class="text-green-500 mr-2">✅</span>
+            <span>Understand each concept with real-life examples</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-500 mr-2">✅</span>
+            <span>Remember classification of receipts & expenditures</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-500 mr-2">✅</span>
+            <span>Practice journal entries based on accounting equation</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-500 mr-2">✅</span>
+            <span>Don't confuse profit with gain</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-green-500 mr-2">✅</span>
+            <span>Learn key differences: revenue vs capital, assets vs liabilities</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center h-16 z-20">
+    <a href="homeapp.html" class="flex flex-col items-center">
+      <i class="fas fa-home text-2xl"></i>
+      <span class="nav-label mt-1">Home</span>
+    </a>
+    <a href="newarriapp.html" class="flex flex-col items-center">
+      <div class="w-12 h-12 text-white rounded-full flex flex-col items-center justify-center font-bold text-[0.55rem] leading-none mb-1" style="background-color: #004aad;">
+        <span>NEW</span>
+        <span>ARRIVAL</span>
+      </div>
+    </a>
+    <a href="Shop.html" class="flex flex-col items-center">
+      <i class="fas fa-store text-2xl"></i>
+      <span class="nav-label mt-1">Store</span>
+    </a>
+    <a href="auth.html" class="flex flex-col items-center">
+      <i class="fas fa-user text-2xl"></i>
+      <span class="nav-label mt-1">Me</span>
+    </a>
+  </nav>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80, // Offset for fixed header
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
