@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+a<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -69,10 +69,18 @@
   <div class="gradient-top pb-4">
     <div class="flex flex-col px-4 pt-6 pb-2">
       <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg mb-2">
-      <!-- Pretty Search Bar (only, no icon button) -->
-      <div id="prettySearchBar" tabindex="0" class="flex items-center bg-white rounded-2xl shadow-lg px-4 py-3 cursor-pointer" style="box-shadow: 0 4px 16px rgba(79,195,247,0.10);">
+      <!-- Dynamic Search Bar with Animation -->
+      <div id="prettySearchBar" tabindex="0" class="flex items-center bg-white rounded-2xl shadow-lg px-4 py-3 cursor-pointer relative overflow-hidden" style="box-shadow: 0 4px 16px rgba(79,195,247,0.10);">
         <i class="fas fa-search text-gray-400 mr-2 text-lg"></i>
-        <span class="font-bold text-gray-400 text-lg select-none">Search for Notes</span>
+        <div id="searchTextContainer" class="flex-1 relative flex items-center">
+          <span id="searchText1" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out">Search for Notes</span>
+          <span id="searchText2" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Previous Papers</span>
+          <span id="searchText3" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Assignments</span>
+          <span id="searchText4" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for BBA Notes</span>
+          <span id="searchText5" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Faculty Location</span>
+          <span id="searchText6" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Lab Manuals</span>
+          <span id="searchText7" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Study Material</span>
+        </div>
       </div>
     </div>
     <!-- Headline & CTA -->
@@ -157,13 +165,15 @@
     </div>
   </div>
 
- <!-- Bottom Navigation Bar -->
+  
+
+  <!-- Bottom Navigation Bar -->
   <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center h-16 z-20">
-    <a href="index.html" class="flex flex-col items-center nav-active">
+    <a href="homeapp.html" class="flex flex-col items-center nav-active">
       <i class="fas fa-home text-2xl"></i>
       <span class="nav-label mt-1">Home</span>
     </a>
-    <a href="new-arrivals.html" class="flex flex-col items-center">
+    <a href="newarriapp.html" class="flex flex-col items-center">
       <div class="w-12 h-12 text-white rounded-full flex flex-col items-center justify-center font-bold text-[0.55rem] leading-none mb-1" style="background-color: #004aad;">
         <span>NEW</span>
         <span>ARRIVAL</span>
@@ -179,6 +189,55 @@
     </a>
   </nav>
   <script>
+    // --- DYNAMIC SEARCH BAR ANIMATION ---
+    const searchTexts = [
+      'Search for Notes',
+      'Search for Previous Papers', 
+      'Search for Assignments',
+      'Search for BBA Notes',
+      'Search for Faculty Location',
+      'Search for Lab Manuals',
+      'Search for Study Material'
+    ];
+    
+    let currentSearchIndex = 0;
+    let searchAnimationInterval;
+    
+    function animateSearchText() {
+      const currentText = document.getElementById(`searchText${currentSearchIndex + 1}`);
+      const nextIndex = (currentSearchIndex + 1) % searchTexts.length;
+      const nextText = document.getElementById(`searchText${nextIndex + 1}`);
+      
+      // Animate current text out (slide up and fade out)
+      currentText.style.transform = 'translateY(-8px)';
+      currentText.style.opacity = '0';
+      
+      // Animate next text in (slide up from bottom and fade in)
+      nextText.style.transform = 'translateY(0)';
+      nextText.style.opacity = '1';
+      
+      currentSearchIndex = nextIndex;
+    }
+    
+    function startSearchAnimation() {
+      searchAnimationInterval = setInterval(animateSearchText, 3000); // Change every 3 seconds
+    }
+    
+    function stopSearchAnimation() {
+      clearInterval(searchAnimationInterval);
+    }
+    
+    // Start animation when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      startSearchAnimation();
+    });
+    
+    // Pause animation when user interacts with search bar
+    document.getElementById('prettySearchBar').addEventListener('mouseenter', stopSearchAnimation);
+    document.getElementById('prettySearchBar').addEventListener('mouseleave', startSearchAnimation);
+    document.getElementById('prettySearchBar').addEventListener('focus', stopSearchAnimation);
+    document.getElementById('prettySearchBar').addEventListener('blur', startSearchAnimation);
+    
     // --- SEARCH SYSTEM ---
     const notesData = [
       { id: 1, title: 'CBSE Physics Class 12 Notes', category: 'CBSE', url: '/physics-chapters.html' },
@@ -207,6 +266,9 @@
     // Open search overlay from pretty bar only
     document.getElementById('prettySearchBar').addEventListener('click', function() {
       document.getElementById('searchOverlay').classList.add('active');
+      // Set the current search text as placeholder
+      const currentSearchText = searchTexts[currentSearchIndex];
+      document.getElementById('searchInput').placeholder = currentSearchText;
       setTimeout(() => document.getElementById('searchInput').focus(), 100);
     });
     document.getElementById('prettySearchBar').addEventListener('keydown', function(e) {
