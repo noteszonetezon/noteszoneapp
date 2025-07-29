@@ -1,4 +1,4 @@
-a<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -30,9 +30,21 @@ a<!DOCTYPE html>
     }
   </script>
   <style>
-    body { font-family: 'Poppins', sans-serif; background: #f8fafc; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: #f8fafc; 
+      margin: 0;
+      padding: 0;
+    }
     .gradient-top {
       background: linear-gradient(180deg, #4fc3f7 0%, #e3f2fd 100%);
+      margin-top: 0;
+      padding-top: 0;
     }
     .feature-scroll::-webkit-scrollbar { display: none; }
     .feature-scroll { -ms-overflow-style: none; scrollbar-width: none; }
@@ -66,7 +78,7 @@ a<!DOCTYPE html>
   </div>
 
   <!-- Top Gradient & Logo -->
-  <div class="gradient-top pb-4">
+  <div class="gradient-top pb-4" style="margin-top: 0; padding-top: 0;">
     <div class="flex flex-col px-4 pt-6 pb-2">
       <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg mb-2">
       <!-- Dynamic Search Bar with Animation -->
