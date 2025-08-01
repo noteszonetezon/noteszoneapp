@@ -415,9 +415,9 @@
     <!-- Enhanced Grid Overlay -->
     <div class="fixed inset-0 pointer-events-none">
         <!-- Primary Grid -->
-        <div class="hero-grid absolute inset-0 opacity-30 dark:opacity-20"></div>
+        <div class="absolute inset-0 opacity-30 dark:opacity-20"></div>
         <!-- Secondary Grid -->
-        <div class="hero-grid-secondary absolute inset-0 opacity-15 dark:opacity-10"></div>
+        <div class="absolute inset-0 opacity-15 dark:opacity-10"></div>
     </div>
     
     <!-- Loading Logo -->
@@ -430,81 +430,106 @@
         </video>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-16 sm:py-24 fade-in">
-        <!-- Background Image -->
-        <img src="Christunibanner.webp" alt="Christ University Banner" class="background-video" />
-        <!-- Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-t from-yellow-400/60 via-blue-900/70 to-transparent z-10"></div>
-        <!-- Animated Floating Elements -->
-        <div class="floating-elements absolute inset-0 z-20 pointer-events-none">
-            <i class="fas fa-book floating-icon" style="top: 8%; left: 15%; animation-delay: 0s;"></i>
-            <i class="fas fa-lightbulb floating-icon" style="top: 12%; left: 75%; animation-delay: 1s;"></i>
-            <i class="fas fa-graduation-cap floating-icon" style="top: 35%; left: 28%; animation-delay: 2s;"></i>
-            <i class="fas fa-atom floating-icon" style="top: 20%; right: 25%; animation-delay: 1.5s;"></i>
-            <i class="fas fa-flask floating-icon" style="bottom: 25%; left: 40%; animation-delay: 2.5s;"></i>
-            <i class="fas fa-microscope floating-icon" style="top: 45%; right: 15%; animation-delay: 0.5s;"></i>
-            <span class="math-symbol" style="top: 30%; left: 65%; animation-delay: 0.5s;">π</span>
-            <span class="math-symbol" style="bottom: 40%; right: 35%; animation-delay: 1.2s;">∑</span>
-            <span class="math-symbol" style="top: 60%; left: 20%; animation-delay: 2s;">∞</span>
-            <div class="floating-dot" style="top: 15%; left: 45%; animation-delay: 0.7s;"></div>
-            <div class="floating-dot" style="top: 55%; right: 25%; animation-delay: 1.3s;"></div>
-            <div class="floating-dot" style="bottom: 35%; left: 30%; animation-delay: 2.1s;"></div>
+    <!-- Navigation Bar -->
+    <header class="py-1 px-8 sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-lg dark:bg-gray-800/80 dark:text-gray-100 transition-all">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html">
+                <img src="logo.png" alt="Notes Zone Logo" class="h-12 w-auto">
+            </a>
+            <!-- Navigation Links -->
+            <nav id="navLinks" class="hidden sm:flex space-x-8 text-lg font-medium">
+                <a href="#features" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                    Features
+                </a>
+                <a href="#bca-program" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                    BCA Resources
+                </a>
+                <a href="contact.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                    Contact
+                </a>
+                <a href="developer.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                    Developer
+                </a>
+                <a href="contribute.html" class="nav-link text-gray-800 dark:text-gray-200 hover:text-yellow-500 transition">
+                    Contribute
+                    <!-- NEW Sticker -->
+                    <span class="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                        NEW
+                    </span>
+                </a>
+            </nav>
+            <!-- Mobile Menu Icon -->
+            <button id="menuToggle" class="sm:hidden text-2xl text-gray-800 dark:text-gray-200 focus:outline-none">
+                ☰
+            </button>
+            <!-- Dark Mode Toggle -->
+            <button id="darkModeToggle" class="ml-6 text-xl sm:text-2xl focus:outline-none">
+                🌙
+            </button>
         </div>
-        <!-- Hero Content -->
-        <div class="relative z-30 text-center px-4 sm:px-6 lg:px-8">
-            <h1 class="text-5xl sm:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-amber-500 to-blue-600 drop-shadow-lg">
+        <!-- Mobile Dropdown Menu -->
+        <nav id="mobileMenu" class="hidden sm:hidden absolute left-0 top-16 w-full bg-white/80 backdrop-blur-md dark:bg-gray-800/80 text-gray-800 dark:text-gray-200 shadow-lg rounded-lg transition-all">
+            <ul class="flex flex-col space-y-4 p-6">
+                <li><a href="#features" class="block nav-link hover:text-yellow-500 transition">Features</a></li>
+                <li><a href="#bca-program" class="block nav-link hover:text-yellow-500 transition">BCA Resources</a></li>
+                <li><a href="contact.html" class="block nav-link hover:text-yellow-500 transition">Contact</a></li>
+                <li><a href="developer.html" class="block nav-link hover:text-yellow-500 transition">Developer</a></li>
+                <li><a href="contribute.html" class="block nav-link hover:text-yellow-500 transition">Contribute
+                    <!-- NEW Sticker -->
+                    <span class="absolute top-0 right-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.25 rounded-full">
+                        NEW
+                    </span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Video Background -->
+    <div class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image instead of Video -->
+        <img src="Christunibanner.webp" alt="Christ University Banner" class="background-video" />
+        
+        <!-- Enhanced Floating Elements -->
+        <div class="floating-elements absolute inset-0">
+            <!-- Educational Icons -->
+            <i class="fas fa-book floating-icon" style="top: 8%; left: 15%;"></i>
+            <i class="fas fa-lightbulb floating-icon" style="top: 12%; left: 75%;"></i>
+            <i class="fas fa-graduation-cap floating-icon" style="top: 35%; left: 28%;"></i>
+            <i class="fas fa-atom floating-icon" style="top: 20%; right: 25%;"></i>
+            <i class="fas fa-flask floating-icon" style="bottom: 25%; left: 40%;"></i>
+            <i class="fas fa-microscope floating-icon" style="top: 45%; right: 15%;"></i>
+            
+            <!-- Mathematical Symbols -->
+            <span class="math-symbol" style="top: 30%; left: 65%;">π</span>
+            <span class="math-symbol" style="bottom: 40%; right: 35%;">∑</span>
+            <span class="math-symbol" style="top: 60%; left: 20%;">∞</span>
+            
+            <!-- Decorative Dots -->
+            <div class="floating-dot" style="top: 15%; left: 45%;"></div>
+            <div class="floating-dot" style="top: 55%; right: 25%;"></div>
+            <div class="floating-dot" style="bottom: 35%; left: 30%;"></div>
+        </div>
+        
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
+        
+        <!-- Content Overlay -->
+        <div class="relative z-20 text-center px-4 sm:px-6 lg:px-8 fade-in">
+            <h1 class="text-5xl sm:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-amber-600 drop-shadow-lg">
                 Christ University Delhi NCR
             </h1>
-            <p class="text-lg sm:text-xl text-gray-100 font-medium mb-8 drop-shadow max-w-2xl mx-auto">
+            <p class="text-lg sm:text-xl text-gray-200 font-medium mb-8 drop-shadow-sm max-w-3xl mx-auto">
                 Access quality handwritten notes and study materials for all Christ University Delhi NCR programs.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-                <a href="#quick-access" class="learn-more-btn bg-gradient-to-r from-yellow-500 to-amber-600 text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg transition-all inline-flex items-center hover:scale-105">
-                    <i class="fas fa-book-open mr-2"></i> Explore Resources
-                </a>
-                <a href="contact.html" class="learn-more-btn bg-gradient-to-r from-blue-600 to-sky-500 text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg transition-all inline-flex items-center hover:scale-105">
-                    <i class="fas fa-envelope mr-2"></i> Contact Us
-                </a>
-            </div>
-            <!-- Search Bar -->
-            <div class="max-w-lg mx-auto mb-8">
-                <div class="relative">
-                    <input type="text" id="searchNotes" placeholder="Search for notes, resources..." class="search-bar w-full py-3 px-6 rounded-full border-2 border-yellow-400 dark:border-blue-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all">
-                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-yellow-500 hover:text-yellow-700 dark:hover:text-blue-300 transition-colors">
-                        <i class="fas fa-search text-xl"></i>
-                    </button>
-                </div>
-            </div>
+            <a href="#features" class="learn-more-btn bg-gradient-to-r from-yellow-500 to-amber-600 text-white py-3 px-8 rounded-full text-lg font-semibold shadow-lg transition-all inline-flex items-center">
+                Explore Resources
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
         </div>
-    </section>
-
-    <!-- Quick Access Cards Section -->
-    <section id="quick-access" class="container mx-auto py-12 px-4 fade-in">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Card 1: BCA Notes -->
-            <div class="feature-card bg-white/90 dark:bg-gray-800/90 shadow-xl rounded-2xl p-8 flex flex-col items-center text-center hover:scale-105 transition-all border-t-4 border-yellow-400 dark:border-blue-500">
-                <i class="fas fa-laptop-code text-4xl text-yellow-500 dark:text-blue-400 mb-4"></i>
-                <h3 class="text-2xl font-bold mb-2 text-blue-800 dark:text-yellow-300">BCA Notes</h3>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">Comprehensive notes, previous year papers, and guides for BCA students.</p>
-                <a href="school-of-sciences.html" class="inline-block bg-gradient-to-r from-blue-600 to-sky-500 text-white py-2 px-6 rounded-full shadow-md hover:from-blue-700 hover:to-sky-600 transition-all font-semibold">Access BCA</a>
-            </div>
-            <!-- Card 2: Business & Management -->
-            <div class="feature-card bg-white/90 dark:bg-gray-800/90 shadow-xl rounded-2xl p-8 flex flex-col items-center text-center hover:scale-105 transition-all border-t-4 border-blue-400 dark:border-yellow-400">
-                <i class="fas fa-briefcase text-4xl text-blue-500 dark:text-yellow-400 mb-4"></i>
-                <h3 class="text-2xl font-bold mb-2 text-blue-800 dark:text-yellow-300">Business & Management</h3>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">Resources for BBA, MBA, and management courses to boost your leadership skills.</p>
-                <a href="School of Business and Management.html" class="inline-block bg-gradient-to-r from-yellow-500 to-amber-600 text-white py-2 px-6 rounded-full shadow-md hover:from-yellow-600 hover:to-amber-700 transition-all font-semibold">Access Business</a>
-            </div>
-            <!-- Card 3: Commerce & Finance -->
-            <div class="feature-card bg-white/90 dark:bg-gray-800/90 shadow-xl rounded-2xl p-8 flex flex-col items-center text-center hover:scale-105 transition-all border-t-4 border-amber-400 dark:border-blue-400">
-                <i class="fas fa-coins text-4xl text-amber-500 dark:text-blue-400 mb-4"></i>
-                <h3 class="text-2xl font-bold mb-2 text-blue-800 dark:text-yellow-300">Commerce & Finance</h3>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">Study materials for BCom, MCom, and finance courses, all in one place.</p>
-                <a href="school-of-commerce.html" class="inline-block bg-gradient-to-r from-amber-500 to-yellow-400 text-white py-2 px-6 rounded-full shadow-md hover:from-amber-600 hover:to-yellow-500 transition-all font-semibold">Access Commerce</a>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Features Section -->
     <section id="features" class="py-16 bg-gradient-to-b from-sky-50 to-white dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-100">
