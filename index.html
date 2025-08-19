@@ -143,9 +143,7 @@
             <span id="searchText2" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Previous Papers</span>
             <span id="searchText3" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Assignments</span>
             <span id="searchText4" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for BBA Notes</span>
-            <span id="searchText5" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Faculty Location</span>
-            <span id="searchText6" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Lab Manuals</span>
-            <span id="searchText7" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Study Material</span>
+
           </div>
         </div>
         
@@ -215,7 +213,7 @@
 
   <!-- Christ University Resources -->
   <div class="px-4 mt-8 pb-24">
-    <h2 class="text-xl font-extrabold mb-3" style="color: #000000;">Christ University Resources</h2>
+    <h2 class="text-xl font-extrabold mb-3 text-black dark:text-white">Christ University Resources</h2>
     <div class="space-y-4">
       <a href="BCA.html" class="resource-card bg-gradient-to-r from-nblue4 to-nblue2 rounded-2xl px-4 py-3 flex flex-col shadow">
         <h3 class="font-extrabold" style="color: #004aad;">BCA (Bachelor of Computer Applications)</h3>
@@ -418,7 +416,8 @@
         }
       }
       document.addEventListener('DOMContentLoaded', () => {
-        applyTheme(currentSetting() || preferredScheme());
+        // Set light mode as default instead of using system preference
+        applyTheme(currentSetting() || 'light');
         const btn = document.getElementById('themeToggle');
         if (btn) {
           btn.addEventListener('click', () => {
