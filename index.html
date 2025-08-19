@@ -11,6 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
@@ -42,9 +43,25 @@
       padding: 0;
     }
     .gradient-top {
-      background: linear-gradient(180deg, #4fc3f7 0%, #e3f2fd 100%);
+      position: relative;
+      /* Removed the gradient background */
       margin-top: 0;
       padding-top: 0;
+      overflow: hidden;
+    }
+    .gradient-top video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 1; /* Changed from 0.7 to 1 for full opacity */
+    }
+    .gradient-top .content {
+      position: relative;
+      z-index: 1;
     }
     .feature-scroll::-webkit-scrollbar { display: none; }
     .feature-scroll { -ms-overflow-style: none; scrollbar-width: none; }
@@ -63,15 +80,33 @@
     .search-result-item { background: #f5f6fa; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.5rem; transition: background 0.2s; cursor: pointer; }
     .search-result-item:hover { background: #e3f2fd; }
     .search-highlight { background: #4fc3f7; color: #1976d2; border-radius: 0.2em; padding: 0 0.2em; }
+
+    /* Dark mode overrides */
+    .dark body { background: #0b1220; color: #e5e7eb; }
+    .dark .gradient-top { background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%); }
+    .dark #prettySearchBar { background: rgba(255,255,255,0.06) !important; color: #e5e7eb; }
+    .dark #searchOverlay { background: rgba(2,6,23,0.98); }
+    .dark .search-result-item { background: #0f172a; }
+    .dark .search-result-item:hover { background: #1e293b; }
+    .dark .resource-card { background: linear-gradient(90deg, #0b1220 0%, #0f172a 100%) !important; box-shadow: 0 2px 8px rgba(2,6,23,0.35); }
+    .dark .resource-card h3 { color: #e5e7eb !important; }
+    .dark .resource-card p { color: #94a3b8 !important; }
+    .dark .bottom-nav { background: #0b1220 !important; border-color: #1f2937 !important; }
+    .dark .bottom-nav a { color: #cbd5e1; }
+
+    /* Mobile tweaks */
+    @media (max-width: 640px) {
+      .carousel-card { scroll-snap-align: start; }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col bg-ngrays font-poppins">
   <!-- Search Overlay -->
   <div id="searchOverlay">
     <div class="flex flex-col h-full">
-      <div class="flex items-center px-4 py-4 border-b border-gray-200">
-        <input id="searchInput" type="text" placeholder="Search for notes..." class="flex-1 bg-gray-100 rounded-lg px-4 py-2 text-lg focus:outline-none" autofocus>
-        <button id="closeSearch" class="ml-3 text-2xl text-gray-500 hover:text-nblue3"><i class="fas fa-times"></i></button>
+      <div class="flex items-center px-4 py-4 border-b border-gray-200 dark:border-gray-700">
+        <input id="searchInput" type="text" placeholder="Search for notes..." class="flex-1 bg-gray-100 dark:bg-slate-800 rounded-lg px-4 py-2 text-lg focus:outline-none text-ntext dark:text-gray-100" autofocus>
+        <button id="closeSearch" class="ml-3 text-2xl text-gray-500 hover:text-nblue3 dark:text-gray-300 dark:hover:text-gray-100"><i class="fas fa-times"></i></button>
       </div>
       <div id="searchResults" class="p-4 flex-1 overflow-y-auto"></div>
     </div>
@@ -79,32 +114,56 @@
 
   <!-- Top Gradient & Logo -->
   <div class="gradient-top pb-4" style="margin-top: 0; padding-top: 0;">
-    <div class="flex flex-col px-4 pt-6 pb-2">
-      <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg mb-2">
-      <!-- Dynamic Search Bar with Animation -->
-      <div id="prettySearchBar" tabindex="0" class="flex items-center bg-white rounded-2xl shadow-lg px-4 py-3 cursor-pointer relative overflow-hidden" style="box-shadow: 0 4px 16px rgba(79,195,247,0.10);">
-        <i class="fas fa-search text-gray-400 mr-2 text-lg"></i>
-        <div id="searchTextContainer" class="flex-1 relative flex items-center">
-          <span id="searchText1" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out">Search for Notes</span>
-          <span id="searchText2" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Previous Papers</span>
-          <span id="searchText3" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Assignments</span>
-          <span id="searchText4" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for BBA Notes</span>
-          <span id="searchText5" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Faculty Location</span>
-          <span id="searchText6" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Lab Manuals</span>
-          <span id="searchText7" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Study Material</span>
-        </div>
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline>
+      <source src="bg video.mp4" type="video/mp4">
+    </video>
+    
+    <div class="content">
+      <!-- Add logo to top-left corner -->
+      <div class="absolute top-4 left-4 z-10">
+        <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg">
       </div>
-    </div>
-    <!-- Headline & CTA -->
-    <div class="px-4 mt-6">
-      <h1 class="text-2xl font-extrabold leading-tight" style="color: #004aad;">No more last-minute panic<br> <span class="font-bold">Notes Zone has your back.</span></h1>
-      <button class="mt-3 text-white font-bold rounded-xl px-5 py-2 text-base shadow-md" style="background-color: #004aad;">Start your journey with Notes Zone today</button>
+      
+      <div class="flex flex-col px-4 pt-6 pb-2">
+        <!-- Theme Toggle Button moved to top right -->
+        <div class="flex justify-end mb-2">
+          <button id="themeToggle" class="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-white/90 hover:bg-white dark:bg-slate-800 dark:text-gray-200 dark:hover:bg-slate-700 shadow">
+            <i id="sunIcon" class="fas fa-sun text-amber-400 hidden"></i>
+            <i id="moonIcon" class="fas fa-moon text-slate-700 dark:text-gray-200"></i>
+            <span class="hidden sm:inline">Theme</span>
+          </button>
+        </div>
+        
+        <!-- Dynamic Search Bar with Animation -->
+        <div id="prettySearchBar" tabindex="0" class="flex items-center bg-white dark:bg-slate-900 rounded-2xl shadow-lg px-4 py-2 cursor-pointer relative overflow-hidden" style="box-shadow: 0 4px 16px rgba(79,195,247,0.10);">
+          <i class="fas fa-search text-gray-400 mr-2 text-lg"></i>
+          <div id="searchTextContainer" class="flex-1 relative flex items-center">
+            <span id="searchText1" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out">Search for Notes</span>
+            <span id="searchText2" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Previous Papers</span>
+            <span id="searchText3" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Assignments</span>
+            <span id="searchText4" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for BBA Notes</span>
+            <span id="searchText5" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Faculty Location</span>
+            <span id="searchText6" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Lab Manuals</span>
+            <span id="searchText7" class="font-bold text-gray-400 text-lg select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for Study Material</span>
+          </div>
+        </div>
+        
+        <!-- Remove the centered logo since we've added it to the top-left -->
+        <div class="h-16 mt-6 mb-2"><!-- Empty spacer to maintain layout height --></div>
+      </div>
+      
+      <!-- Headline & CTA -->
+      <div class="px-4 mt-6">
+        <!-- Removed headline and button text but kept the container div for spacing -->
+        <div class="h-24"><!-- Empty spacer to maintain layout height --></div>
+      </div>
     </div>
   </div>
 
-  <!-- Features Section -->
-  <div class="px-4 mt-8">
-    <h2 class="text-xl font-extrabold mb-3 text-ntext">Our Features</h2>
+  <!-- Features Section - Moved up to overlap with gradient background -->
+  <div class="px-4 -mt-16 relative z-10"> <!-- Negative margin to move it up and z-10 to place it above -->
+    <h2 class="text-xl font-extrabold mb-3 text-ntext dark:text-gray-100">Our Features</h2>
     <div id="featureCarousel" class="flex space-x-4 overflow-x-auto feature-scroll pb-2 scroll-smooth">
       <!-- Feature Card 1 -->
       <a href="college-notes.html" class="carousel-card rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px; background: linear-gradient(180deg, #004aad, #ffffff);">
@@ -178,14 +237,14 @@
   </div>
 
   
-
+  
   <!-- Bottom Navigation Bar -->
-  <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center h-16 z-20">
-    <a href="index.html" class="flex flex-col items-center nav-active">
+  <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t dark:border-slate-700 flex justify-around items-center h-16 z-20">
+    <a href="homeapp.html" class="flex flex-col items-center nav-active">
       <i class="fas fa-home text-2xl"></i>
       <span class="nav-label mt-1">Home</span>
     </a>
-    <a href="new-arrivals.html" class="flex flex-col items-center">
+    <a href="newarriapp.html" class="flex flex-col items-center">
       <div class="w-12 h-12 text-white rounded-full flex flex-col items-center justify-center font-bold text-[0.55rem] leading-none mb-1" style="background-color: #004aad;">
         <span>NEW</span>
         <span>ARRIVAL</span>
@@ -313,7 +372,7 @@
       }
       searchResults.innerHTML = results.map(result => {
         const highlightedTitle = highlightText(result.title, query);
-        return `<a href="${result.url}" class="search-result-item block"><div class="flex items-center justify-between"><div><h3 class="text-lg font-semibold text-ntext">${highlightedTitle}</h3><p class="text-xs text-nsub">${result.category}</p></div><i class="fas fa-chevron-right text-gray-400"></i></div></a>`;
+        return `<a href="${result.url}" class="search-result-item block"><div class="flex items-center justify-between"><div><h3 class="text-lg font-semibold text-ntext dark:text-gray-100">${highlightedTitle}</h3><p class="text-xs text-nsub">${result.category}</p></div><i class="fas fa-chevron-right text-gray-400"></i></div></a>`;
       }).join('');
     }
     function highlightText(text, query) {
@@ -327,6 +386,55 @@
         document.getElementById('closeSearch').click();
       }
     });
+
+    // --- THEME TOGGLER (dark/light) ---
+    (function() {
+      const root = document.documentElement;
+      const STORAGE_KEY = 'theme';
+      function applyTheme(mode) {
+        if (mode === 'dark') {
+          root.classList.add('dark');
+        } else {
+          root.classList.remove('dark');
+        }
+        updateToggle(mode);
+      }
+      function preferredScheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      function currentSetting() {
+        return localStorage.getItem(STORAGE_KEY);
+      }
+      function updateToggle(mode) {
+        const sun = document.getElementById('sunIcon');
+        const moon = document.getElementById('moonIcon');
+        if (!sun || !moon) return;
+        if (mode === 'dark') {
+          sun.classList.remove('hidden');
+          moon.classList.add('hidden');
+        } else {
+          sun.classList.add('hidden');
+          moon.classList.remove('hidden');
+        }
+      }
+      document.addEventListener('DOMContentLoaded', () => {
+        applyTheme(currentSetting() || preferredScheme());
+        const btn = document.getElementById('themeToggle');
+        if (btn) {
+          btn.addEventListener('click', () => {
+            const next = root.classList.contains('dark') ? 'light' : 'dark';
+            applyTheme(next);
+            localStorage.setItem(STORAGE_KEY, next);
+          });
+        }
+        // If user hasn't explicitly chosen, follow system changes live
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!currentSetting()) {
+            applyTheme(e.matches ? 'dark' : 'light');
+          }
+        });
+      });
+    })();
 
     // --- FEATURE CAROUSEL AUTO-SCROLL ---
     const carousel = document.getElementById('featureCarousel');
