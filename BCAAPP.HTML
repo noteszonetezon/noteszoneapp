@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCA Notes App - Notes Zone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            nblue: '#2563eb',
+            nblue2: '#4fc3f7',
+            nblue3: '#1976d2',
+            nblue4: '#e3f2fd',
+            ngray: '#f5f6fa',
+            ntext: '#222b45',
+            nsub: '#6b7280',
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: #f8fafc; 
+      margin: 0;
+      padding: 0;
+    }
+    .gradient-top {
+      position: relative;
+      margin-top: 0;
+      padding-top: 0;
+      overflow: hidden;
+    }
+    .gradient-top video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 1;
+    }
+    .gradient-top .content {
+      position: relative;
+      z-index: 1;
+    }
+    .feature-scroll::-webkit-scrollbar { display: none; }
+    .feature-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+    .nav-active { color: #2563eb; }
+    .nav-label { font-size: 0.78rem; font-weight: 700; }
+    .nav-dot { width: 8px; height: 8px; border-radius: 9999px; display: inline-block; }
+    
+    /* Dark mode overrides */
+    .dark body { background: #0b1220; color: #e5e7eb; }
+    .dark .gradient-top { background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%); }
+    .dark #prettySearchBar { background: rgba(255,255,255,0.06) !important; color: #e5e7eb; }
+    .dark .bottom-nav { background: #0b1220 !important; border-color: #1f2937 !important; }
+    .dark .bottom-nav a { color: #cbd5e1; }
+    
+    /* Subject card styling */
+    .subject-card {
+      transition: all 0.3s ease;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .subject-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark .subject-card {
+      background: #1e293b;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark .subject-card:hover {
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    /* Mobile tweaks */
+    @media (max-width: 640px) {
+      .carousel-card { scroll-snap-align: start; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-ngrays font-poppins dark:bg-gray-900">
+  <!-- Top Gradient & Logo -->
+  <div class="gradient-top pb-4" style="margin-top: 0; padding-top: 0;">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline>
+      <source src="bg video.mp4" type="video/mp4">
+    </video>
+    
+    <div class="content">
+      <!-- Add logo to top-left corner -->
+      <div class="absolute top-4 left-4 z-10">
+        <img src="logo.png" alt="Notes Zone Logo" class="w-12 h-12 rounded-lg">
+      </div>
+      
+      <div class="flex flex-col px-4 pt-6 pb-2">
+        <!-- Theme Toggle Button moved to top right -->
+        <div class="flex justify-end mb-2">
+          <button id="themeToggle" class="flex items-center gap-2 text-sm font-semibold px-3 py-2 rounded-lg bg-white/90 hover:bg-white dark:bg-slate-800 dark:text-gray-200 dark:hover:bg-slate-700 shadow">
+            <i id="sunIcon" class="fas fa-sun text-amber-400 hidden"></i>
+            <i id="moonIcon" class="fas fa-moon text-slate-700 dark:text-gray-200"></i>
+            <span class="hidden sm:inline">Theme</span>
+          </button>
+        </div>
+        
+        <!-- Dynamic Search Bar with Animation -->
+        <div id="prettySearchBar" tabindex="0" class="flex items-center bg-white/50 dark:bg-slate-900/50 rounded-2xl shadow-lg px-4 py-2 cursor-pointer relative overflow-hidden" style="box-shadow: 0 4px 16px rgba(79,195,247,0.10);">
+          <i class="fas fa-search text-gray-400 mr-2 text-lg"></i>
+          <div id="searchTextContainer" class="flex-1 relative flex items-center">
+            <span id="searchText1" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out">Search for BCA Notes</span>
+            <span id="searchText2" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for BCA Assignments</span>
+            <span id="searchText3" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for BCA Lab Manuals</span>
+            <span id="searchText4" class="font-bold text-gray-400 text-sm select-none absolute left-0 transition-all duration-700 ease-in-out opacity-0 transform translate-y-8">Search for BCA Previous Papers</span>
+          </div>
+        </div>
+        
+        <!-- Title -->
+        <div class="mt-8 text-center">
+          <h1 class="text-4xl font-extrabold text-white">BCA Programme</h1>
+          <p class="text-lg text-white/80 mt-2">Access comprehensive study materials for your BCA journey 📚</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container mx-auto py-8 px-4 pb-24">
+    <!-- Semester Selection -->
+    <div class="mb-8">
+      <label for="semesterSelect" class="block text-lg font-medium mb-2 text-gray-800 dark:text-gray-200">Choose Semester:</label>
+      <select id="semesterSelect" class="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+        <option value="">Select a Semester</option>
+        <option value="semester1">Semester 1</option>
+        <option value="semester2">Semester 2</option>
+        <option value="semester3">Semester 3</option>
+        <option value="semester4">Semester 4</option>
+        <option value="semester5">Semester 5</option>
+        <option value="semester6">Semester 6</option>
+      </select>
+    </div>
+
+    <!-- Subject Cards Container -->
+    <div id="subjectsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+  </main>
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="bottom-nav fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t dark:border-slate-700 flex justify-around items-center h-16 z-20">
+    <a href="homeapp.html" class="flex flex-col items-center">
+      <i class="fas fa-home text-2xl"></i>
+      <span class="nav-label mt-1">Home</span>
+    </a>
+    <a href="newarriapp.html" class="flex flex-col items-center">
+      <div class="w-12 h-12 text-white rounded-full flex flex-col items-center justify-center font-bold text-[0.55rem] leading-none mb-1" style="background-color: #004aad;">
+        <span>NEW</span>
+        <span>ARRIVAL</span>
+      </div>
+    </a>
+    <a href="Shop.html" class="flex flex-col items-center">
+      <i class="fas fa-store text-2xl"></i>
+      <span class="nav-label mt-1">Store</span>
+    </a>
+    <a href="auth.html" class="flex flex-col items-center">
+      <i class="fas fa-user text-2xl"></i>
+      <span class="nav-label mt-1">Me</span>
+    </a>
+  </nav>
+
+  <!-- JavaScript -->
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+    
+    // Check for saved theme preference or use device preference
+    if (localStorage.getItem('color-theme') === 'dark' || 
+        (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+    } else {
+      document.documentElement.classList.remove('dark');
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    }
+    
+    // Toggle theme when button is clicked
+    themeToggle.addEventListener('click', function() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      }
+    });
+    
+    // --- DYNAMIC SEARCH BAR ANIMATION ---
+    const searchTexts = [
+      'Search for BCA Notes',
+      'Search for BCA Assignments', 
+      'Search for BCA Lab Manuals',
+      'Search for BCA Previous Papers'
+    ];
+    
+    let currentSearchIndex = 0;
+    let searchAnimationInterval;
+    
+    function animateSearchText() {
+      const currentText = document.getElementById(`searchText${currentSearchIndex + 1}`);
+      const nextIndex = (currentSearchIndex + 1) % searchTexts.length;
+      const nextText = document.getElementById(`searchText${nextIndex + 1}`);
+      
+      // Animate current text out (slide up and fade out)
+      currentText.style.transform = 'translateY(-8px)';
+      currentText.style.opacity = '0';
+      
+      // Animate next text in (slide up from bottom and fade in)
+      nextText.style.transform = 'translateY(0)';
+      nextText.style.opacity = '1';
+      
+      currentSearchIndex = nextIndex;
+    }
+    
+    function startSearchAnimation() {
+      searchAnimationInterval = setInterval(animateSearchText, 3000); // Change every 3 seconds
+    }
+    
+    function stopSearchAnimation() {
+      clearInterval(searchAnimationInterval);
+    }
+    
+    // Start animation when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      startSearchAnimation();
+    });
+    
+    // Pause animation when user interacts with search bar
+    document.getElementById('prettySearchBar').addEventListener('mouseenter', stopSearchAnimation);
+    document.getElementById('prettySearchBar').addEventListener('mouseleave', startSearchAnimation);
+    document.getElementById('prettySearchBar').addEventListener('focus', stopSearchAnimation);
+    document.getElementById('prettySearchBar').addEventListener('blur', startSearchAnimation);
+    
+    // Subjects data
+    const subjectsData = {
+      semester1: [
+        { name: "Foundational Mathematics", link: "https://noteszone.online/foundationalMathematics.html" },
+        { name: "Object Oriented Programming Using C++", link: "https://drive.google.com/folder2" },
+        { name: "DBMS (Database Management System)", link: "https://drive.google.com/folder2" },
+        { name: "Software Engineering", link: "https://drive.google.com/folder2" },
+        { name: "Academic Writing", link: "https://drive.google.com/folder2" },
+        {
+          name: "Introduction To Web Technology",
+          options: {
+            theory: "https://drive.google.com/drive/folders/15JoBjxO_tIPO0mjrc2hpXexeyI8RBuLx",
+            practicals: "https://drive.google.com/drive/folders/1sPvL24QGpZf10lSWxRAMLvBzVYIeg3Xb"
+          }
+        },
+      ],
+      semester2: [
+        {
+          name: "Data Structures Using C++",
+          options: {
+            notes: "https://stellar-mooncake-27c82d.netlify.app/", 
+            classroom: "https://drive.google.com/drive/folders/1Wv-CNYZvcQajVMUAU05iLkuXMwGFFNuA",
+          },
+        },
+        {
+          name: "Java Programming",
+          options: {
+            notes: "https://stellar-mooncake-27c82d.netlify.app/",
+            classroom: "https://drive.google.com/drive/folders/1RLV3opjhRnglVxApmkxdwwg5aOK2B1sG",
+          },
+        },
+        {
+          name: "Discrete Mathematics",
+          options: {
+            notes: "https://drive.google.com/drive/folders/17b6O3NQzDE1STUMccX0ldyzgNprmzL1p",
+            classroom: "https://drive.google.com/drive/folders/10rO32lqgK6KGM-7DUqygPureGlMVYHc6",
+          },
+        },
+        {
+          name: "Full Stack Development",
+          options: {
+            notes: "https://stellar-mooncake-27c82d.netlify.app/",
+            classroom: "https://drive.google.com/drive/folders/1VvgzoXh6SNU40e0i-8F-rzE09PmxdTxq",
+          },
+        },
+        {
+          name: "Professional English",
+          options: {
+            notes: "https://stellar-mooncake-27c82d.netlify.app/",
+            classroom: "https://classroom.google.com/folder_dm",
+          },
+        },
+      ],
+      semester3: [
+        { name: "Computer Networks", link: "https://drive.google.com/folder_os" },
+        { name: "Operating System", link: "https://drive.google.com/folder_os" },
+        { name: "Financial Accounting", link: "https://drive.google.com/folder_os" },
+        { name: "Mobile Applications", link: "https://drive.google.com/folder_os" },
+        { name: "French & German", link: "https://drive.google.com/folder_os" },
+        { name: "Introduction To Python", link: "https://drive.google.com/folder_os" },
+      ],
+      semester4: [
+        { name: "Graph Theory", link: "https://drive.google.com/folder_webtech" },
+        { name: "Dot Theory", link: "https://drive.google.com/folder_webtech" },
+        { name: "Principles Of Software Development", link: "https://drive.google.com/folder_webtech" },
+        { name: "Internet Of Things", link: "https://drive.google.com/folder_webtech" },
+        { name: "Data Processing With Spreadsheet", link: "https://drive.google.com/folder_webtech" },
+        { name: "French & German", link: "https://drive.google.com/folder_webtech" },
+      ],
+      semester5: [
+        { name: "Artificial Intelligence & Machine Learning", link: "https://drive.google.com/folder_ds" },
+        { name: "Cloud Computing", link: "https://drive.google.com/folder_ds" },
+        { name: "Advanced Python", link: "https://drive.google.com/folder_ds" },
+        { name: "Mini Project", link: "https://drive.google.com/folder_ds" },
+      ],
+      semester6: [
+        { name: "Advanced Java", link: "https://drive.google.com/folder_cloud" },
+        { name: "Principles Of Data Science", link: "https://drive.google.com/folder_cloud" },
+        { name: "Design And Analysis Of Algorithm", link: "https://drive.google.com/folder_cloud" },
+        { name: "Cyber Security", link: "https://drive.google.com/folder_cloud" },
+        { name: "Major Project", link: "https://drive.google.com/folder_cloud" },
+      ],
+    };
+
+    // Handle semester selection
+    const semesterSelect = document.getElementById("semesterSelect");
+    const subjectsContainer = document.getElementById("subjectsContainer");
+
+    semesterSelect.addEventListener("change", () => {
+      const selectedSemester = semesterSelect.value;
+      subjectsContainer.innerHTML = "";
+
+      if (subjectsData[selectedSemester]) {
+        subjectsContainer.classList.remove("hidden");
+
+        subjectsData[selectedSemester].forEach(subject => {
+          const subjectCard = document.createElement("div");
+          subjectCard.className = "subject-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg";
+
+          if (subject.options) {
+            subjectCard.innerHTML = `
+              <div class="p-5">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">${subject.name}</h3>
+                  <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">NEW</span>
+                </div>
+                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-white subject-dropdown mb-4">
+                  <option value="">Select Option</option>
+                  ${Object.keys(subject.options).map(key => 
+                    `<option value="${key}">${key.charAt(0).toUpperCase() + key.slice(1)}</option>`
+                  ).join('')}
+                </select>
+                <a href="#" target="_blank" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow hover:shadow-lg transition-all view-link hidden w-full justify-center">
+                  <span>View Content</span>
+                  <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            `;
+
+            const dropdown = subjectCard.querySelector(".subject-dropdown");
+            const viewLink = subjectCard.querySelector(".view-link");
+
+            dropdown.addEventListener("change", () => {
+              const selectedOption = dropdown.value;
+              if (selectedOption && subject.options[selectedOption]) {
+                viewLink.href = subject.options[selectedOption];
+                viewLink.classList.remove("hidden");
+              } else {
+                viewLink.classList.add("hidden");
+              }
+            });
+          } else {
+            subjectCard.innerHTML = `
+              <div class="p-5">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">${subject.name}</h3>
+                <a href="${subject.link}" target="_blank" class="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow hover:shadow-lg transition-all w-full justify-center">
+                  <span>View Content</span>
+                  <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+              </div>
+            `;
+          }
+
+          subjectsContainer.appendChild(subjectCard);
+        });
+      } else {
+        subjectsContainer.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+</html>
