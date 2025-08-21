@@ -27,6 +27,24 @@
             nsub: '#6b7280',
             nyellow: '#FFEB3B',
           },
+          animation: {
+            pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            slide: 'slide 20s linear infinite',
+          },
+          keyframes: {
+            pulse: {
+              '0%, 100%': { opacity: 1 },
+              '50%': { opacity: 0.5 },
+            },
+            slide: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+          },
+          transitionDelay: {
+            '100': '100ms',
+            '200': '200ms',
+          },
         },
       },
     }
@@ -84,21 +102,163 @@
       position: relative;
     }
     
-    /* Semester button styling */
-    .semester-btn {
-      background-color: #FFEB3B;
-      border-radius: 1rem;
-      padding: 0.75rem 1.5rem;
-      font-weight: bold;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Semester card styling */
+    .semester-card {
+      position: relative;
+      overflow: hidden;
       transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      opacity: 0; /* Start hidden for entrance animation */
+      transform: translateY(20px); /* Start below for entrance animation */
+    }
+    
+    .semester-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .semester-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.13) 77%, rgba(255,255,255,0.5) 92%, rgba(255,255,255,0) 100%);
+      transform: rotate(-45deg);
+      z-index: 1;
+      transition: all 0.6s ease;
+      opacity: 0;
+    }
+    
+    .semester-card:hover::after {
+      animation: shine 1.5s ease-out;
+    }
+    
+    @keyframes shine {
+      0% { opacity: 0; transform: translateX(-100%) rotate(-45deg); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(100%) rotate(-45deg); }
+    }
+    
+    /* Keep old semester button styling for backward compatibility */
+    .semester-btn {
+      background: linear-gradient(135deg, #FFEB3B 0%, #FFC107 100%);
+      border-radius: 1.2rem;
+      padding: 0.85rem 1.7rem;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       border: 2px solid #000;
       display: inline-block;
+      position: relative;
+      overflow: hidden;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+      transform: perspective(1px) translateZ(0);
+    }
+    
+    .semester-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.4s ease;
+      z-index: -1;
     }
     
     .semester-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.1), inset 0 -3px 0 rgba(0, 0, 0, 0.3);
+      color: #000;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+    
+    .semester-btn:hover::before {
+      left: 100%;
+    }
+    
+    .semester-btn:active {
+      transform: translateY(-2px) scale(0.98);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .semester-container {
+      position: relative;
+      margin-top: -60px;
+      z-index: 10;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    .semester-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding: 0.5rem 0;
+      position: relative;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+    }
+    
+    .semester-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .semester-card {
+      scroll-snap-align: start;
+    }
+    
+    /* Auto-slider styles */
+    .slider-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .slider-section {
+      display: flex;
+      gap: 1rem;
+      animation: slide 20s linear infinite;
+      animation-play-state: paused; /* Start paused */
+    }
+    
+    .slider-section:hover {
+      animation-play-state: running; /* Resume on hover */
+    }
+    
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    
+    .slider-control-btn {
+      background: rgba(37, 99, 235, 0.1);
+      color: #2563eb;
+      border: none;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .slider-control-btn:hover {
+      background: rgba(37, 99, 235, 0.2);
     }
     
     .logo-text {
@@ -116,6 +276,33 @@
     .search-result-item { background: #f5f6fa; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.5rem; transition: background 0.2s; cursor: pointer; }
     .search-result-item:hover { background: #e3f2fd; }
     
+    /* Ripple effect for semester cards */
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.7);
+      width: 100px;
+      height: 100px;
+      margin-top: -50px;
+      margin-left: -50px;
+      animation: ripple 0.6s ease-out;
+      transform: scale(0);
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    @keyframes ripple {
+      to {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+    
+    /* Touch effect for mobile */
+    .touch-active {
+      transform: scale(0.98);
+    }
+    
     /* Mobile tweaks */
     @media (max-width: 640px) {
       .semester-scroll {
@@ -123,9 +310,8 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
       }
-      .semester-btn {
+      .semester-card {
         scroll-snap-align: start;
-        flex-shrink: 0;
       }
     }
   </style>
@@ -177,31 +363,117 @@
   </div>
 
   <!-- Semester Selection -->
-  <div class="px-4 mb-8">
+  <div class="semester-container px-4 mb-8">
+    <h2 class="text-xl font-extrabold mb-4 text-center text-ntext">Choose Your Semester</h2>
     <div class="semester-scroll flex space-x-4 overflow-x-auto pb-4">
-      <a href="sem1support.html" class="semester-btn flex items-center justify-center">
-        <span>SEM 1</span>
+      <!-- Duplicated cards for continuous scrolling -->
+      <!-- Semester Card 1 -->
+      <a href="sem1support.html" class="semester-card rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px; background: linear-gradient(180deg, #FFEB3B, #ffffff);">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-ntext text-lg font-extrabold leading-tight">SEM 1</h3>
+              <p class="text-ntext text-xs font-medium mt-1">Foundation courses & programming basics</p>
+            </div>
+            <i class="fas fa-chevron-right text-ntext text-base"></i>
+          </div>
+        </div>
+        <div class="w-full h-[90px] bg-amber-50 rounded-b-2xl flex items-center justify-center">
+          <i class="fas fa-book-open text-4xl text-amber-600"></i>
+        </div>
       </a>
-      <a href="Sem2support.html" class="semester-btn flex items-center justify-center">
-        <span>SEM 2</span>
+
+      <!-- Semester Card 2 -->
+      <a href="Sem2support.html" class="semester-card rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px; background: linear-gradient(180deg, #FFEB3B, #ffffff);">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-ntext text-lg font-extrabold leading-tight">SEM 2</h3>
+              <p class="text-ntext text-xs font-medium mt-1">Advanced programming & data structures</p>
+            </div>
+            <i class="fas fa-chevron-right text-ntext text-base"></i>
+          </div>
+        </div>
+        <div class="w-full h-[90px] bg-amber-50 rounded-b-2xl flex items-center justify-center">
+          <i class="fas fa-laptop-code text-4xl text-amber-600"></i>
+        </div>
       </a>
-      <a href="#" class="semester-btn flex items-center justify-center" onclick="alert('Coming soon!')">
-        <span>SEM 3</span>
+
+      <!-- Semester Card 3 -->
+      <a href="#" onclick="alert('Coming soon!')" class="semester-card rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px; background: linear-gradient(180deg, #FFEB3B, #ffffff);">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-ntext text-lg font-extrabold leading-tight">SEM 3</h3>
+              <p class="text-ntext text-xs font-medium mt-1">Networks & operating systems</p>
+            </div>
+            <i class="fas fa-chevron-right text-ntext text-base"></i>
+          </div>
+        </div>
+        <div class="w-full h-[90px] bg-amber-50 rounded-b-2xl flex items-center justify-center">
+          <i class="fas fa-network-wired text-4xl text-amber-600"></i>
+        </div>
       </a>
-      <a href="#" class="semester-btn flex items-center justify-center" onclick="alert('Coming soon!')">
-        <span>SEM 4</span>
+
+      <!-- Semester Card 4 -->
+      <a href="#" onclick="alert('Coming soon!')" class="semester-card rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px; background: linear-gradient(180deg, #FFEB3B, #ffffff);">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-ntext text-lg font-extrabold leading-tight">SEM 4</h3>
+              <p class="text-ntext text-xs font-medium mt-1">Database systems & web development</p>
+            </div>
+            <i class="fas fa-chevron-right text-ntext text-base"></i>
+          </div>
+        </div>
+        <div class="w-full h-[90px] bg-amber-50 rounded-b-2xl flex items-center justify-center">
+          <i class="fas fa-database text-4xl text-amber-600"></i>
+        </div>
       </a>
-      <a href="#" class="semester-btn flex items-center justify-center" onclick="alert('Coming soon!')">
-        <span>SEM 5</span>
+
+      <!-- Semester Card 5 -->
+      <a href="#" onclick="alert('Coming soon!')" class="semester-card rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px; background: linear-gradient(180deg, #FFEB3B, #ffffff);">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-ntext text-lg font-extrabold leading-tight">SEM 5</h3>
+              <p class="text-ntext text-xs font-medium mt-1">AI & machine learning fundamentals</p>
+            </div>
+            <i class="fas fa-chevron-right text-ntext text-base"></i>
+          </div>
+        </div>
+        <div class="w-full h-[90px] bg-amber-50 rounded-b-2xl flex items-center justify-center">
+          <i class="fas fa-robot text-4xl text-amber-600"></i>
+        </div>
       </a>
-      <a href="#" class="semester-btn flex items-center justify-center" onclick="alert('Coming soon!')">
-        <span>SEM 6</span>
+
+      <!-- Semester Card 6 -->
+      <a href="#" onclick="alert('Coming soon!')" class="semester-card rounded-2xl shadow-lg flex-shrink-0 transition-transform duration-500 flex flex-col justify-between" style="width:159px; height:197px; min-width:159px; max-width:159px; background: linear-gradient(180deg, #FFEB3B, #ffffff);">
+        <div class="p-3 pb-1 flex-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-ntext text-lg font-extrabold leading-tight">SEM 6</h3>
+              <p class="text-ntext text-xs font-medium mt-1">Advanced projects & specializations</p>
+            </div>
+            <i class="fas fa-chevron-right text-ntext text-base"></i>
+          </div>
+        </div>
+        <div class="w-full h-[90px] bg-amber-50 rounded-b-2xl flex items-center justify-center">
+          <i class="fas fa-project-diagram text-4xl text-amber-600"></i>
+        </div>
       </a>
     </div>
     
     <!-- Dots indicator for scrolling -->
-    <div class="flex justify-center mt-2">
-      <div class="text-3xl">...</div>
+    <div class="flex justify-center mt-3">
+      <div id="semesterDots" class="flex space-x-2">
+        <span class="w-2 h-2 bg-amber-500 rounded-full cursor-pointer"></span>
+        <span class="w-2 h-2 bg-amber-300 rounded-full cursor-pointer"></span>
+        <span class="w-2 h-2 bg-amber-300 rounded-full cursor-pointer"></span>
+        <span class="w-2 h-2 bg-amber-300 rounded-full cursor-pointer"></span>
+        <span class="w-2 h-2 bg-amber-300 rounded-full cursor-pointer"></span>
+        <span class="w-2 h-2 bg-amber-300 rounded-full cursor-pointer"></span>
+      </div>
     </div>
   </div>
 
@@ -264,9 +536,125 @@
       clearInterval(searchAnimationInterval);
     }
     
+    // Semester card animation effects
+    function initSemesterButtonEffects() {
+      const semesterCards = document.querySelectorAll('.semester-card');
+      
+      semesterCards.forEach((card, index) => {
+        // Add staggered entrance animation
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 100 * index);
+        
+        // Add click effect for cards with '#' href
+        card.addEventListener('click', function(e) {
+          if (this.getAttribute('href') === '#') {
+            e.preventDefault();
+            
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
+            
+            // Position the ripple where clicked
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            
+            this.appendChild(ripple);
+            
+            // Remove ripple after animation completes
+            setTimeout(() => {
+              ripple.remove();
+              alert('Coming soon!');
+            }, 600);
+          }
+        });
+      });
+      
+      // Add hover effect to show description on mobile
+      if (window.innerWidth <= 640) {
+        semesterCards.forEach(card => {
+          card.addEventListener('touchstart', function() {
+            this.classList.add('touch-active');
+          });
+          
+          card.addEventListener('touchend', function() {
+            this.classList.remove('touch-active');
+          });
+        });
+      }
+    }
+    
+    // --- SEMESTER CAROUSEL AUTO-SCROLL ---
+    const semesterCarousel = document.querySelector('.semester-scroll');
+    const semesterCards = semesterCarousel.querySelectorAll('.semester-card');
+    const semesterDots = document.getElementById('semesterDots').children;
+    let semesterIndex = 0;
+    let semesterInterval;
+    
+    function goToSemesterCard(idx) {
+      semesterIndex = idx;
+      const card = semesterCards[idx];
+      card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      
+      // Update dots
+      for (let i = 0; i < semesterDots.length; i++) {
+        semesterDots[i].classList.remove('bg-amber-500');
+        semesterDots[i].classList.add('bg-amber-300');
+      }
+      semesterDots[idx].classList.remove('bg-amber-300');
+      semesterDots[idx].classList.add('bg-amber-500');
+    }
+    
+    function nextSemesterCard() {
+      semesterIndex = (semesterIndex + 1) % semesterCards.length;
+      goToSemesterCard(semesterIndex);
+    }
+    
+    function startSemesterCarousel() {
+      semesterInterval = setInterval(nextSemesterCard, 3000);
+    }
+    
+    function stopSemesterCarousel() {
+      clearInterval(semesterInterval);
+    }
+    
+    // Manual scroll: update dot based on visible card
+    semesterCarousel.addEventListener('scroll', () => {
+      let minDiff = Infinity, activeIdx = 0;
+      for (let i = 0; i < semesterCards.length; i++) {
+        const rect = semesterCards[i].getBoundingClientRect();
+        const diff = Math.abs(rect.left - semesterCarousel.getBoundingClientRect().left);
+        if (diff < minDiff) { minDiff = diff; activeIdx = i; }
+      }
+      
+      semesterIndex = activeIdx;
+      for (let i = 0; i < semesterDots.length; i++) {
+        semesterDots[i].classList.remove('bg-amber-500');
+        semesterDots[i].classList.add('bg-amber-300');
+      }
+      semesterDots[activeIdx].classList.remove('bg-amber-300');
+      semesterDots[activeIdx].classList.add('bg-amber-500');
+    });
+    
+    // Dots click
+    for (let i = 0; i < semesterDots.length; i++) {
+      semesterDots[i].addEventListener('click', () => {
+        goToSemesterCard(i);
+        stopSemesterCarousel();
+        startSemesterCarousel();
+      });
+    }
+    
     // Start animation when page loads
     document.addEventListener('DOMContentLoaded', function() {
       startSearchAnimation();
+      initSemesterButtonEffects();
+      startSemesterCarousel();
       
       // Open search overlay from pretty bar
       document.getElementById('prettySearchBar').addEventListener('click', function() {
@@ -281,6 +669,10 @@
         document.getElementById('searchResults').innerHTML = '';
       });
     });
+    
+    // Pause carousel when hovering over semester cards
+    semesterCarousel.addEventListener('mouseenter', stopSemesterCarousel);
+    semesterCarousel.addEventListener('mouseleave', startSemesterCarousel);
     
     // Pause animation when user interacts with search bar
     document.getElementById('prettySearchBar').addEventListener('mouseenter', stopSearchAnimation);
